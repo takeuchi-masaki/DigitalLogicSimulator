@@ -20,14 +20,14 @@ public class PaletteComponent {
 
     public void draw(Graphics g) {
         if (hover) {
-            g.setColor(new Color(220, 220, 220)); // Lighter color for depth effect
+            // Light color for depth effect
+            g.setColor(new Color(220, 220, 220));
         } else {
-            g.setColor(Color.WHITE); // Normal state
+            g.setColor(Color.WHITE);
         }
-        g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-        // Draw the border
+        g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the background
         g.setColor(Color.BLACK);
-        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the border
         logicGate.draw(g, scale, new Point(bounds.x + (int) (scale * 1.5), bounds.y + scale / 2));
     }
 

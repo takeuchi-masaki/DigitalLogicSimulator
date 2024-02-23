@@ -1,0 +1,55 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>360</x><y>0</y><w>210</w><h>190</h></coordinates><panel_attributes>App
+extends JFrame
+--
+-palettePanel
+-gridPanel
+-topMenuBarPanel
+
+--
+main()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>140</y><w>210</w><h>190</h></coordinates><panel_attributes>TopMenuBarPanel
+extends JPanel
+--
+-dropdown
+-mouseHandler
+
+--
+save()
+load()
+undo()
+settings()
+about()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>90</y><w>220</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;50;200;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>230</y><w>210</w><h>190</h></coordinates><panel_attributes>GridPanel
+extends JPanel
+--
+-mouseHandler
+-gridLogicHandler
+-List&lt;gridLogicComponent&gt;
+-List&lt;gridWireComponent&gt;
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>180</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>80</y><w>200</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>180;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>150</y><w>210</w><h>190</h></coordinates><panel_attributes>PalettePanel
+extends JPanel
+--
+-mouseHandler
+-List&lt;paletteComponents&gt;
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>410</y><w>80</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;60;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>450</y><w>210</w><h>190</h></coordinates><panel_attributes>GridLogicHandler
+--
+-mouseHandler
+-gridLogic
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>330</y><w>60</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>40;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>380</y><w>210</w><h>190</h></coordinates><panel_attributes>PaletteComponent
+--
+-logicGate
+-bounds: Rectangle
+
+--
+draw()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>600</y><w>210</w><h>190</h></coordinates><panel_attributes>LogicGate
+--
+
+
+--
+draw()
+contains()
+output()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>560</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;10;10</additional_attributes></element></diagram>
