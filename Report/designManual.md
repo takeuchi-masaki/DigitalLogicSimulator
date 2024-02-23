@@ -48,7 +48,7 @@ Logic Gates are currently implemented as an abstract class which is extended by 
 
 ## Diagrams
 
-<!-- pagebreak -->
+![UML Diagram](/Report/UML%20diagram.png)
 
 ## Standards and Conventions
 
