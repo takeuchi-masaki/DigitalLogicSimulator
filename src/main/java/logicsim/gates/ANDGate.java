@@ -26,4 +26,19 @@ public class ANDGate extends LogicGate {
         g.fillRect(x, y, gridScale, (int) (3 * gridScale)); // Rectangle takes 1 grid unit width and 3 grid units height
         g.fillArc((int) (x + gridScale / 4.0), y, (int) (gridScale * 1.5), 3 * gridScale, 90, -180);
     }
+
+    // move: pixel coordinates
+    @Override
+    public void draw_move(Graphics g) {
+        int gridScale = 50;
+        Point move = topLeft;
+        g.setColor(Color.GREEN);
+        g.fillRect(move.x, move.y, gridScale, (int) (3 * gridScale));
+        g.fillArc((int) (move.x + gridScale / 4.0), move.y, (int) (gridScale * 1.5), 3 * gridScale, 90, -180);
+    }
+
+    @Override
+    public GateType getType() {
+        return GateType.AND;
+    }
 }

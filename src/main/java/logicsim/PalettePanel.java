@@ -4,9 +4,9 @@ import logicsim.gates.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +14,7 @@ public class PalettePanel extends JPanel {
     int panelWidth = 300;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;
+    private LogicGate selected;
 
     public PalettePanel() {
         setPreferredSize(new Dimension(panelWidth, getHeight()));
@@ -23,18 +24,19 @@ public class PalettePanel extends JPanel {
     }
 
     private void setupMouseEvents() {
-        addMouseListener(new MouseAdapter() {
+        TransferHandler handler = new TransferHandler() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                for (PaletteComponent component : paletteComponents) {
-                    if (component.contains(e.getPoint())) {
-                        // TODO: Perform drag-and-drop logic
-                        System.out.println("clicked gate " + component.getID());
-                    }
-                }
+            protected Transferable createTransferable(JComponent c) {
+                return new TransferableLogicGate(selected);
             }
-        });
-        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public int getSourceActions(JComponent c) {
+                return COPY_OR_MOVE;
+            }
+        };
+        setTransferHandler(handler);
+
+        MouseAdapter mouseHandler = new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
                 boolean repaintNeeded = false;
@@ -43,13 +45,42 @@ public class PalettePanel extends JPanel {
                     if (comp.isHovered() != contains) {
                         comp.setHovered(contains);
                         repaintNeeded = true;
+                        e.getComponent().setCursor(
+                                contains ? Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) : Cursor.getDefaultCursor());
                     }
                 }
                 if (repaintNeeded) {
                     repaint();
                 }
             }
-        });
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                for (PaletteComponent comp : paletteComponents) {
+                    if (comp.contains(e.getPoint())) {
+                        switch(comp.getType()) {
+                            case GateType.AND -> selected = new ANDGate();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (selected == null) return;
+                selected.setPosition(e.getPoint());
+                repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (selected == null) return;
+
+                selected = null;
+            }
+        };
+        addMouseListener(mouseHandler);
+        addMouseMotionListener(mouseHandler);
     }
 
     private List<PaletteComponent> getPaletteComponents() {
@@ -82,6 +113,9 @@ public class PalettePanel extends JPanel {
         super.paintComponent(g);
         for (PaletteComponent component : paletteComponents) {
             component.draw(g);
+        }
+        if (selected != null) {
+            selected.draw_move(g);
         }
     }
 }

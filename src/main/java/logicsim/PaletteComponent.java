@@ -1,5 +1,6 @@
 package logicsim;
 
+import logicsim.gates.GateType;
 import logicsim.gates.LogicGate;
 
 import java.awt.*;
@@ -50,5 +51,9 @@ public class PaletteComponent {
     public static void setDimensions(int width, int height) {
         PaletteComponent.width = width;
         PaletteComponent.height = height;
+    }
+
+    public GateType getType() {
+        return logicGate.getType();
     }
 }
