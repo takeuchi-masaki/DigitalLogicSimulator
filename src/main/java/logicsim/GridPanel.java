@@ -1,110 +1,87 @@
 package logicsim;
 
-import logicsim.gates.ANDGate;
 import logicsim.gates.GateType;
 import logicsim.gates.LogicGate;
+import logicsim.util.Pair;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.util.*;
 
-import static java.lang.Math.min;
+import static java.lang.Math.round;
 
-public class GridPanel extends JPanel {
-    private int gridSize = 50; // Size of the grid cells
-//    private List<GridComponent> gridComponentList;
-    private LogicGate selected = null;
+public class GridPanel {
+    Point zeroPos;
+    public static int gridSize = 50;
+    private int startWidth, endWidth, height;
+    private final Map<Integer, GridComponent> gridComponentMap;
+//    private List<WireComponent> wireComponentList;
 
-    public GridPanel() {
-        setPreferredSize(new Dimension(getWidth(), getHeight()));
-        setupMouseEvents();
+    public GridPanel(int startWidth, int endWidth, int height) {
+        gridComponentMap = new HashMap<>();
+        zeroPos = new Point(startWidth, 0);
+        this.startWidth = startWidth;
+        this.endWidth = endWidth;
+        this.height = height;
     }
 
-    public Point closesetPoint(Point mousePos) {
-        int width = getWidth();
-        int height = getHeight();
-        return new Point(min(width, mousePos.x / gridSize), min(height, mousePos.y / gridSize));
+    public void setDimensions(int startWidth, int endWidth, int height) {
+        this.startWidth = startWidth;
+        this.endWidth = endWidth;
+        this.height = height;
     }
 
-    private void drawGrid(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        int width = getWidth();
-        int height = getHeight();
-        g2d.setColor(Color.LIGHT_GRAY);
+    public Point relativePoint(Point absPoint) {
+        return new Point((int)round((double)(absPoint.x - startWidth) / gridSize), (int)round((double)absPoint.y / gridSize));
+    }
 
-        // Adjust grid drawing based on the current zoom level
-        for (int x = 0; x < width; x += gridSize) {
+    public Point absolutePoint(Point relPoint) {
+        return new Point(relPoint.x * gridSize + startWidth, relPoint.y * gridSize);
+    }
+
+    public Point closestAbsPoint(Point mousePos) {
+        return absolutePoint(relativePoint(mousePos));
+    }
+
+    public void draw(Graphics2D g) {
+        g.setColor(Color.LIGHT_GRAY);
+        for (int x = startWidth; x < endWidth; x += gridSize) {
             for (int y = 0; y < height; y += gridSize) {
-                g2d.drawLine(x, 0, x, height);
-                g2d.drawLine(0, y, width, y);
+                g.drawLine(x, 0, x, height);
+                g.drawLine(x, y, endWidth, y);
             }
+        }
+        for (GridComponent component : gridComponentMap.values()) {
+            component.draw(g, gridSize, zeroPos);
         }
     }
 
-    private void setupMouseEvents() {
-        TransferHandler handler = new TransferHandler() {
-            @Override
-            public boolean canImport(TransferHandler.TransferSupport support) {
-                // Check for the type of data and decide whether to accept it
-                return support.isDataFlavorSupported(LogicGate.LOGIC_GATE_FLAVOR);
-            }
+    public void addComponent(LogicGate gate, Point relativePos) {
+        GridComponent add = new GridComponent(gate, relativePos);
+        gridComponentMap.put(add.getID(), add);
+    }
 
-            @Override
-            public boolean importData(TransferHandler.TransferSupport support) {
-                if (!canImport(support)) {
-                    return false;
-                }
+    public void removeComponent(int selectedID) {
+        gridComponentMap.remove(selectedID);
+    }
 
-                try {
-                    selected = (LogicGate) support.getTransferable().getTransferData(LogicGate.LOGIC_GATE_FLAVOR);
-                } catch (UnsupportedFlavorException | IOException ex) {
-                    return false;
-                }
-                Point dropLocation = support.getDropLocation().getDropPoint();
-                selected.setPosition(dropLocation);
-                repaint();
+    public boolean modifyHover(Point point) {
+        Point relPoint = relativePoint(point);
+        for (GridComponent component : gridComponentMap.values()) {
+            if (component.contains(relPoint) != component.isHovered()) {
+                component.setHovered(component.contains(relPoint));
                 return true;
             }
-        };
-        setTransferHandler(handler);
-
-        MouseAdapter mouseHandler = new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                if (selected != null) {
-                    System.out.println("AAA");
-                    selected.setPosition(e.getPoint());
-                    repaint();
-                }
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                System.out.println("DRAGGING");
-                if (selected == null) return;
-                selected.setPosition(e.getPoint());
-                repaint();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (selected == null) return;
-                selected = null;
-            }
-        };
-        addMouseListener(mouseHandler);
-        addMouseMotionListener(mouseHandler);
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        drawGrid(g);
-        if (selected != null) {
-            selected.draw_move(g);
         }
+        return false;
     }
+
+    public Pair<GateType, Integer> checkHover() {
+        for (GridComponent component : gridComponentMap.values()) {
+            if (component.isHovered()) {
+                return new Pair<>(component.gate.getType(), component.getID());
+            }
+        }
+        return null;
+    }
+
 }

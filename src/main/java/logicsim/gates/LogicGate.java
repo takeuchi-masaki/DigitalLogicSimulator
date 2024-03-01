@@ -1,15 +1,14 @@
 package logicsim.gates;
 
 import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
 
-public abstract class LogicGate {
-    public static final DataFlavor LOGIC_GATE_FLAVOR = new DataFlavor(LogicGate.class, "Logic Gate");
-    static int id_count = 0;
-    int id;
-    boolean input1Not = false, input2Not = false, outputNot = false;
-    Point topLeft; // relative grid position
-    int orientation = 0;
+public abstract class LogicGate implements Cloneable {
+    private static int id_count = 0;
+    private final int id;
+    protected boolean input1Not = false, input2Not = false, outputNot = false;
+    protected Point topLeft;
+    protected short orientation = 0;
+    protected boolean hovered = false;
 
     public LogicGate() {
         id = id_count++;
@@ -21,36 +20,41 @@ public abstract class LogicGate {
         topLeft = position;
     }
 
-    public void setInput1Not(boolean val) {
-        input1Not = val;
+    public static LogicGate logicGateFactory(GateType type, Point position) {
+        LogicGate returnValue = null;
+        switch (type) {
+            case GateType.AND -> returnValue = new ANDGate(position);
+        }
+        return returnValue;
     }
 
-    public void setInput2Not(boolean val) {
-        input2Not = val;
-    }
+    public void setInput1Not(boolean val) { input1Not = val; }
 
-    public void setOutputNot(boolean val) {
-        outputNot = val;
-    }
+    public void setInput2Not(boolean val) { input2Not = val; }
 
-    public void setPosition(Point point) {
-        topLeft = point;
-    }
+    public void setOutputNot(boolean val) { outputNot = val; }
+
+    public void setPosition(Point point) { topLeft = point; }
 
     public void turn() {
-        orientation = (orientation + 1) % 4;
+        if (++orientation == 4) {
+            orientation = 0;
+        }
     }
+
+    public short getOrientation() { return orientation; }
+
+    public int getID() { return id; }
+
+    public Point getPos() { return topLeft; }
+
+    public boolean isHovered() { return hovered; }
+
+    public void setHovered(boolean val) { hovered = val; }
 
     abstract public boolean output(boolean input1, boolean input2);
-
     abstract public void draw(Graphics g, int gridScale, Point zeroPosition);
-
     abstract public void draw_move(Graphics g);
-
     abstract public GateType getType();
-
-    @Override
-    public String toString() {
-        return Integer.toString(id);
-    }
+    @Override abstract public LogicGate clone();
 }
