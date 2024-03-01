@@ -20,12 +20,7 @@ public class PaletteComponent {
     }
 
     public void draw(Graphics g) {
-        if (hover) {
-            // Light color for depth effect
-            g.setColor(new Color(220, 220, 220));
-        } else {
-            g.setColor(Color.WHITE);
-        }
+        g.setColor(hover ? new Color(220, 220, 220) : Color.WHITE);
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the background
         g.setColor(Color.BLACK);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the border
