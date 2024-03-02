@@ -30,9 +30,8 @@ public class MainPanel extends JPanel {
                 boolean needRepaint =
                         palettePanel.modifyHover(e.getPoint())
                         || gridPanel.modifyHover(e.getPoint());
-                if (needRepaint) {
-                    repaint();
-                }
+                if (!needRepaint) { return; }
+                repaint();
             }
             @Override
             public void mousePressed(MouseEvent e) {

@@ -6,13 +6,14 @@ Launch the Application by running the App.java file `/src/main/java/logicsim/App
 
 ## Functionality
 
-Current functionality is limited. Hover over items in the Logic Component Pallete on the left-hand side to select a Logic Gate. Clicking within the Rectangle will show a message within the Console Standard Output of the program.
+Clicking and dragging a component will allow you to add the Logic Gate to the Grid on the right-hand side. Each logic gate will be able to be rotated, as well as have its inputs or outputs negated. Each component will snap to the grid when dragging, and a visual shows the current position of the dragged object.
+Objects placed on the grid are able to be moved with another drag and drop operation.
 
 ## Future Functionality
 
-### Adding Components
+### Modifying Components
 
-Clicking a component or clicking and dragging a component will allow you to add the Logic Gate to the Grid on the right-hand side. Each logic gate will be able to be rotated, as well as have its inputs or outputs negated.
+Rotation and editing the `not` state of each of the inputs and outputs for the object will be added.
 
 ### Wiring
 

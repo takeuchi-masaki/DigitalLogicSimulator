@@ -7,6 +7,7 @@ public class App extends JFrame {
         setTitle("Digital Logic Simulator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
         setJMenuBar(new MenuBar());
         add(new MainPanel());
         pack();

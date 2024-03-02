@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The digital logic simulator project aims to create a user-friendly, interactive environment for building and testing digital circuits. The primary goal is to address usability issues encountered in existing simulators, like Logisim, and incorporate successful features such as a grid layout, panning, and zooming.
+The digital logic simulator project aims to create a user-friendly, interactive environment for building and testing digital circuits. The primary goal is to address usability issues encountered in existing simulators, like Logisim, and incorporate their successful features such as a grid layout, panning, and zooming.
 
 ## Background
 
@@ -23,6 +23,7 @@ Testing was conducted informally through debugging sessions.
 ## Results and Discussion
 
 The first week took a lot of trial and error learning about Java Swing, brainstorming the architecture of the project, and working with ChatGPT effectively.
+In the second week, much of the project was rewritten to manually handle the transition of drag and drop objects from the PalettePanel into the GridPanel, instead of using the TransferHandler interface and multiple JPanels in a Border style layout.
 
 ## Conclusion
 
@@ -32,3 +33,4 @@ Now that a larger framework has become clearer in the design process, the next w
 
 - Logisim software
 - Java Swing documentation
+- ChatGPT

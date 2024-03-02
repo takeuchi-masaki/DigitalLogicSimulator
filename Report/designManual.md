@@ -5,20 +5,17 @@
 The application is structured around the main `App` class, which extends `JFrame`. It orchestrates the overall layout and interactions between the `PalettePanel`, `GridPanel`, and `TopMenuBarPanel`.
 
 - `App`: Serves as the main entry point and container for the application. It initializes and arranges the primary panels.
-- `TopMenuBarPanel`: Extends `JPanel` and includes menu items for actions like saving, loading, undoing changes, adjusting settings, and accessing information about the application.
-- `PalettePanel`: Extends `JPanel`, contains a collection of `PaletteComponents`, and handles mouse events for interactions with these components.
-- `GridPanel`: Also extends `JPanel` and is responsible for displaying the grid, logic gates, and wires. It manages mouse interactions and holds references to `GridLogicHandler`.
-- `GridLogicHandler`: Handles the logic related to the grid, including interactions with logic gates and wires.
+- `MenuBar`: Contains menu items for `Save` and `Open` operations
+- `MainPanel`: Handles mouse events and interactions between the PalettePanel and GridPanel
+- `PalettePanel`: Displays useable LogicGates and information.
 - `PaletteComponent`: Represents a draggable component in the `PalettePanel` with properties such as `logicGate` and `bounds`. It includes a `draw()` method for rendering.
+- `GridPanel`: Handles grid components and wires using relative coordinate system
+- `GridLogicHandler`: Handles the logic related to the grid, including interactions with logic gates and wires.
 - `LogicGate`: An abstract class extended by specific gate types like `ANDGate`. It provides essential methods like `draw()`, `contains()`, and `output()` to handle logic gate functionalities.
 
 Each of these components works together to provide a comprehensive digital logic simulation environment.
 
 ## Design Patterns
-
-### Flyweight
-
-The `LogicGate` instances are shared among `PaletteComponents` to minimize memory usage. Only the position and orientation are unique to each `PaletteComponent`.
 
 ### State
 
@@ -28,11 +25,15 @@ The `GridLogicHandler` will potentially implement the State pattern to step thro
 
 ### App
 
-At the top of the architectural hierarchy is the App class. This launches and initializes the application and creates a layout for the TopMenuBarPanel, PalettePanel, and GridPanel.
+At the top of the architectural hierarchy is the App class. This initializes the window with a MainPanel and MenuBar object.
 
-### TopMenuBarPanel
+### MenuBar
 
-The TopMenuBarPanel will contain commands for saving and loading circuits.
+The MenuBar contains commands for saving and loading circuits.
+
+### MainPanel
+
+The MainPanel contains the logic for handling mouse operations (may be refactored out to a MouseHandler class). This class manages the interaction between the PalettePanel and GridPanel, such as drag and dropping new logic gate items from the PalettePanel into the GridPanel.
 
 ### PalettePanel
 
