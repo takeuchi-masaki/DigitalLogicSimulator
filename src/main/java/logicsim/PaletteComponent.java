@@ -4,6 +4,7 @@ import logicsim.gates.GateType;
 import logicsim.gates.LogicGate;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class PaletteComponent {
     static final int scale = 50; // scale does not change for the Palette Panel
@@ -24,7 +25,7 @@ public class PaletteComponent {
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the background
         g.setColor(Color.BLACK);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the border
-        logicGate.draw(g, scale, new Point(bounds.x + (int) (scale * 1.5), bounds.y + scale / 2));
+//        logicGate.draw(g, scale, new Point(bounds.x + (int) (scale * 1.5), bounds.y + scale / 2));
     }
 
     public void setHovered(boolean isHovered) {
@@ -50,5 +51,13 @@ public class PaletteComponent {
 
     public GateType getType() {
         return logicGate.getType();
+    }
+
+    public Point drawPosition() {
+        return new Point(bounds.x + (int)(scale * 1.5), bounds.y + scale / 2);
+    }
+
+    public Image getImage() {
+        return logicGate.getImage();
     }
 }

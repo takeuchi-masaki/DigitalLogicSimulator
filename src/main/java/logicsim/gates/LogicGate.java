@@ -53,8 +53,9 @@ public abstract class LogicGate implements Cloneable {
     public void setHovered(boolean val) { hovered = val; }
 
     abstract public boolean output(boolean input1, boolean input2);
-    abstract public void draw(Graphics g, int gridScale, Point zeroPosition);
-    abstract public void draw_move(Graphics g);
+    abstract public Image getImage();
+//    abstract public void draw(Graphics g, int gridScale, Point zeroPosition);
+//    abstract public void draw_move(Graphics g);
     abstract public GateType getType();
     @Override abstract public LogicGate clone();
 }

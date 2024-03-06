@@ -5,6 +5,7 @@ import logicsim.gates.GateType;
 import logicsim.util.Pair;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,13 @@ public class PalettePanel {
     private int width, height;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;
+    private final ImageObserver observer;
 
-    public PalettePanel(int width, int height) {
+    public PalettePanel(int width, int height, ImageObserver observer) {
         this.width = width;
         this.height = height;
         paletteComponents = new ArrayList<>();
+        this.observer = observer;
         getPaletteComponents();
     }
 
@@ -71,6 +74,8 @@ public class PalettePanel {
         g.fillRect(0, 0, width, height);
         for (PaletteComponent component : paletteComponents) {
             component.draw(g);
+            Point pos = component.drawPosition();
+            g.drawImage(component.getImage(), pos.x, pos.y, observer);
         }
     }
 }

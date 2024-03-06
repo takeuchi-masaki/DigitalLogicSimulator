@@ -1,10 +1,42 @@
 package logicsim.gates;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
+
+import static java.lang.System.exit;
 
 public class ANDGate extends LogicGate {
-    public ANDGate() { super(); }
-    public ANDGate(Point position) { super(position); }
+    private static BufferedImage image = null;
+
+    private void loadImage() {
+        String imagePath = "/logicsim/gates/AndGate.png";
+        try {
+            BufferedImage original = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+            int resizeX = 150, resizeY = 150;
+            image = new BufferedImage(resizeX, resizeY, original.getType());
+            Graphics2D g2d = image.createGraphics();
+            g2d.drawImage(original, 0, 0, resizeX, resizeY, null);
+            g2d.dispose();
+        } catch (IOException e) {
+            System.err.println("Cannot open " + imagePath);
+            exit(1);
+        }
+    }
+    public ANDGate() {
+        super();
+        if (image == null) {
+            loadImage();
+        }
+    }
+    public ANDGate(Point position) {
+        super(position);
+        if (image == null) {
+            loadImage();
+        }
+    }
 
     @Override
     public boolean output(boolean input1, boolean input2) {
@@ -12,23 +44,8 @@ public class ANDGate extends LogicGate {
     }
 
     @Override
-    public void draw(Graphics g, int gridScale, Point zeroPosition) {
-        // Calculate the top-left corner of the AND gate in pixel coordinates
-        int x = topLeft.x * gridScale + zeroPosition.x;
-        int y = topLeft.y * gridScale + zeroPosition.y;
-
-        g.setColor(hovered ? Color.darkGray : Color.GRAY);
-        g.fillRect(x, y, gridScale, 3 * gridScale); // Rectangle takes 1 grid unit width and 3 grid units height
-        g.fillArc((int) (x + gridScale / 4.0), y, (int)(gridScale * 1.5), 3 * gridScale, 90, -180);
-    }
-
-    @Override
-    public void draw_move(Graphics g) {
-        int gridScale = 50;
-        Point move = topLeft;
-        g.setColor(Color.GREEN);
-        g.fillRect(move.x, move.y, gridScale, (int)(3 * gridScale));
-        g.fillArc((int) (move.x + gridScale / 4.0), move.y, (int) (gridScale * 1.5), 3 * gridScale, 90, -180);
+    public Image getImage() {
+        return image;
     }
 
     @Override

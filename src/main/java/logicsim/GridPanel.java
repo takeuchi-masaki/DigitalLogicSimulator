@@ -5,23 +5,24 @@ import logicsim.gates.LogicGate;
 import logicsim.util.Pair;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.*;
 
 import static java.lang.Math.round;
 
 public class GridPanel {
-    Point zeroPos;
     public static int gridSize = 50;
     private int startWidth, endWidth, height;
     private final Map<Integer, GridComponent> gridComponentMap;
+    private final ImageObserver observer;
 //    private List<WireComponent> wireComponentList;
 
-    public GridPanel(int startWidth, int endWidth, int height) {
+    public GridPanel(int startWidth, int endWidth, int height, ImageObserver observer) {
         gridComponentMap = new HashMap<>();
-        zeroPos = new Point(startWidth, 0);
         this.startWidth = startWidth;
         this.endWidth = endWidth;
         this.height = height;
+        this.observer = observer;
     }
 
     public void setDimensions(int startWidth, int endWidth, int height) {
@@ -51,7 +52,8 @@ public class GridPanel {
             }
         }
         for (GridComponent component : gridComponentMap.values()) {
-            component.draw(g, gridSize, zeroPos);
+            Point drawLocation = absolutePoint(component.gate.getPos());
+            g.drawImage(component.getImage(), drawLocation.x, drawLocation.y, observer);
         }
     }
 

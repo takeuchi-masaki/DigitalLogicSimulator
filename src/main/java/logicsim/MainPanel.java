@@ -17,8 +17,8 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
         setPreferredSize(new Dimension(width, height));
-        palettePanel = new PalettePanel(300, height);
-        gridPanel = new GridPanel(300, width, height);
+        palettePanel = new PalettePanel(300, height, this);
+        gridPanel = new GridPanel(300, width, height, this);
         initResizeListener();
         initMouseHandler();
     }
@@ -93,7 +93,8 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selected != null) {
-            selected.draw_move(g2d);
+            Point pos = selected.getPos();
+            g.drawImage(selected.getImage(), pos.x, pos.y, this);
         }
     }
 }
