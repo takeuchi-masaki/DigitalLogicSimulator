@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02511493-b269-4a20-9d90-a450acb2805e" name="Changes" comment="Initialize project with Sample App">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logicsim/gates/AndGate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logicsim/gates/AndGate_full.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logicsim/gates/OrGate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logicsim/gates/XorGate.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/GridComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/GridPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/PaletteComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/PaletteComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/PalettePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/PalettePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/ANDGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/ANDGate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/LogicGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/LogicGate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userManual.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +50,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "resize-grid",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -160,6 +147,8 @@
       <workItem from="1709332220857" duration="1688000" />
       <workItem from="1709338266309" duration="697000" />
       <workItem from="1709705731111" duration="3752000" />
+      <workItem from="1709712207552" duration="4000" />
+      <workItem from="1709744738103" duration="619000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project with Sample App">
       <option name="closed" value="true" />
