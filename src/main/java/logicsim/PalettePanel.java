@@ -1,7 +1,6 @@
 package logicsim;
 
 import logicsim.gates.*;
-import logicsim.util.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,23 +25,23 @@ public class PalettePanel {
 
     private void getPaletteComponents() {
         Point palettePosition = new Point(scale / 2, scale / 2);
-        PaletteComponent.setDimensions(this.width - scale, scale * 4);
+        PaletteComponent.setDimensions(this.width - 2 * scale, scale * 3);
 
         paletteComponents.add(
                 new PaletteComponent(
-                        new ANDGate(),
+                        new ANDGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += (int) (scale * 5.5);
+        palettePosition.y += scale * 3;
 
         paletteComponents.add(
                 new PaletteComponent(
-                        new ORGate(),
+                        new ORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += (int) (scale * 5.5);
+        palettePosition.y += scale * 3;
 
         paletteComponents.add(
                 new PaletteComponent(
-                        new XORGate(),
+                        new XORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
     }
 
@@ -57,9 +56,11 @@ public class PalettePanel {
         return modified;
     }
 
-    public Pair<GateType, Integer> checkHover() {
+    public LogicGate checkHover() {
         for (PaletteComponent component : paletteComponents) {
-            if (component.isHovered()) return new Pair<>(component.getType(), -1);
+            if (component.isHovered()) {
+                return component.getGate();
+            }
         }
         return null;
     }

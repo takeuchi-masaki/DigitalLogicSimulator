@@ -8,7 +8,11 @@ public class GridComponent {
     LogicGate gate;
 
     public GridComponent(LogicGate gate, Point relativePos) {
-        this.gate = gate.clone();
+        if (gate.getID() == -1) {
+            this.gate = gate.uniqueCopy();
+        } else {
+            this.gate = gate.clone();
+        }
         this.gate.setPosition(relativePos);
     }
 
@@ -18,8 +22,10 @@ public class GridComponent {
 
     public boolean contains(Point relativePos) {
         Point gatePos = gate.getPos();
-        return relativePos.x >= gatePos.x && relativePos.x <= gatePos.x + 3
-                && relativePos.y >= gatePos.y && relativePos.y <= gatePos.y + 3;
+        return relativePos.x >= gatePos.x - 2
+                && relativePos.x <= gatePos.x + 2
+                && relativePos.y >= gatePos.y - 2
+                && relativePos.y <= gatePos.y + 2;
     }
 
     public boolean isHovered() { return gate.isHovered(); }
@@ -28,5 +34,9 @@ public class GridComponent {
 
     public void draw(Graphics2D g, Point drawLocation) {
         gate.drawScaled(g, drawLocation);
+    }
+
+    public LogicGate getGate() {
+        return gate;
     }
 }

@@ -12,7 +12,6 @@ public class MainPanel extends JPanel {
     PalettePanel palettePanel;
     GridPanel gridPanel;
     LogicGate selected = null;
-    int selectedID = -1;
 
     public MainPanel() {
         setPreferredSize(new Dimension(width, height));
@@ -35,21 +34,25 @@ public class MainPanel extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                Pair<GateType, Integer> hovering = palettePanel.checkHover();
+                LogicGate hovering = palettePanel.checkHover();
                 if (hovering == null) {
                     hovering = gridPanel.checkHover();
                 }
                 if (hovering == null) return;
-                selected = LogicGate.logicGateFactory(hovering.first, e.getPoint());
-                selectedID = hovering.second;
+                if (hovering.getID() == -1) {
+                    selected = hovering.uniqueCopy();
+                } else {
+                    selected = hovering.clone();
+                }
+                selected.setPosition(e.getPoint());
                 repaint();
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (selected == null) return;
-                if (selectedID != -1) {
-                    gridPanel.removeComponent(selectedID);
+                if (selected.getID() != -1) {
+                    gridPanel.removeComponent(selected.getID());
                 }
                 Point currPos = e.getPoint();
                 if (currPos.x > 300) {
@@ -57,6 +60,7 @@ public class MainPanel extends JPanel {
                 } else {
                     selected.setPosition(currPos);
                 }
+                selected.setHovered(true);
                 repaint();
             }
 
@@ -107,7 +111,7 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selected != null) {
-            selected.drawScaled(g, selected.getPos());
+            selected.drawScaled(g2d, selected.getPos());
         }
     }
 }

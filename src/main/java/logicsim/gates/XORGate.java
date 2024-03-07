@@ -22,6 +22,13 @@ public class XORGate extends LogicGate {
             scaledImage = resizeImage(this.scale, image);
         }
     }
+    public XORGate(int id, Point position) {
+        super(id, position);
+        if (image == null) {
+            image = loadImage(imagePath);
+            scaledImage = resizeImage(this.scale, image);
+        }
+    }
 
     @Override
     public boolean output(boolean input1, boolean input2) {
@@ -29,13 +36,13 @@ public class XORGate extends LogicGate {
     }
 
     @Override
-    public void draw(Graphics g, Point drawPosition) {
+    public void draw(Graphics2D g, Point drawPosition) {
         draw(g, drawPosition, image);
     }
 
     @Override
-    public void drawScaled(Graphics g, Point drawPosition) {
-        draw(g, drawPosition, scaledImage);
+    public void drawScaled(Graphics2D g, Point drawPosition) {
+        draw(g, getTopLeft(drawPosition), scaledImage);
     }
 
     @Override

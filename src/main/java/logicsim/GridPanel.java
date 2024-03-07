@@ -1,7 +1,6 @@
 package logicsim;
 
 import logicsim.gates.*;
-import logicsim.util.Pair;
 
 import java.awt.*;
 import java.util.*;
@@ -84,10 +83,10 @@ public class GridPanel {
         return false;
     }
 
-    public Pair<GateType, Integer> checkHover() {
+    public LogicGate checkHover() {
         for (GridComponent component : gridComponentMap.values()) {
             if (component.isHovered()) {
-                return new Pair<>(component.gate.getType(), component.getID());
+                return component.getGate();
             }
         }
         return null;

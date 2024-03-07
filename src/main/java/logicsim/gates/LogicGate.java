@@ -12,29 +12,36 @@ public abstract class LogicGate implements Cloneable {
     private static int id_count = 0;
     private final int id;
     protected boolean input1Not = false, input2Not = false, outputNot = false;
-    protected Point topLeft;
-    protected short orientation = 0;
+    protected Point center;
+    protected short orientation = 1;
     protected boolean hovered = false;
-    protected int scale;
+    protected int scale = 20;
 
     public LogicGate() {
-        id = -1;
-        topLeft = new Point(0, 0);
-        scale = 20;
+        id = ++id_count;
+        center = new Point(0, 0);
     }
     public LogicGate(Point position) {
         id = ++id_count;
-        topLeft = position;
-        scale = 20;
+        center = position;
     }
-    public static LogicGate logicGateFactory(GateType type, Point position) {
-        LogicGate returnValue = null;
-        switch (type) {
-            case GateType.AND -> returnValue = new ANDGate(position);
-            case GateType.OR -> returnValue = new ORGate(position);
-            case GateType.XOR -> returnValue = new XORGate(position);
-        }
-        return returnValue;
+    public LogicGate(int id, Point position) {
+        this.id = id;
+        center = position;
+    }
+    protected static LogicGate logicGateFactory(GateType type, Point position, int id) {
+        return switch (type) {
+            case GateType.AND -> new ANDGate(id, position);
+            case GateType.OR -> new ORGate(id, position);
+            case GateType.XOR -> new XORGate(id, position);
+        };
+    }
+    protected static LogicGate logicGateFactory(GateType type, Point position) {
+        return switch (type) {
+            case GateType.AND -> new ANDGate(position);
+            case GateType.OR -> new ORGate(position);
+            case GateType.XOR -> new XORGate(position);
+        };
     }
 
     protected BufferedImage loadImage(String path) {
@@ -44,6 +51,7 @@ public abstract class LogicGate implements Cloneable {
             int resizeX = scale * 5, resizeY = scale * 5;
             result = new BufferedImage(resizeX, resizeY, original.getType());
             Graphics2D g2d = result.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.drawImage(original, 0, 0, resizeX, resizeY, null);
             g2d.dispose();
         } catch (IOException e) {
@@ -58,10 +66,23 @@ public abstract class LogicGate implements Cloneable {
         this.scale = newScale;
         int dim = this.scale * 4;
         BufferedImage resizedImage = new BufferedImage(dim, dim, original.getType());
-        Graphics2D g2D = resizedImage.createGraphics();
-        g2D.drawImage(original, 0, 0, dim, dim, null);
-        g2D.dispose();
+        Graphics2D g2d = resizedImage.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.drawImage(original, 0, 0, dim, dim, null);
+        g2d.dispose();
         return resizedImage;
+    }
+
+    protected Point getTopLeft(Point center) {
+        return new Point(center.x - 2 * scale, center.y - 2 * scale);
+    }
+
+    protected void draw(Graphics2D g, Point drawPosition, BufferedImage image) {
+        if (isHovered()) {
+            g.drawImage(image, drawPosition.x, drawPosition.y, Color.LIGHT_GRAY, null);
+        } else {
+            g.drawImage(image, drawPosition.x, drawPosition.y, null);
+        }
     }
 
     public void setInput1Not(boolean val) { input1Not = val; }
@@ -70,7 +91,7 @@ public abstract class LogicGate implements Cloneable {
 
     public void setOutputNot(boolean val) { outputNot = val; }
 
-    public void setPosition(Point point) { topLeft = point; }
+    public void setPosition(Point point) { center = point; }
 
     public void turn() {
         if (++orientation == 4) {
@@ -82,7 +103,7 @@ public abstract class LogicGate implements Cloneable {
 
     public int getID() { return id; }
 
-    public Point getPos() { return topLeft; }
+    public Point getPos() { return center; }
 
     public boolean isHovered() { return hovered; }
 
@@ -90,21 +111,28 @@ public abstract class LogicGate implements Cloneable {
 
     abstract public boolean output(boolean input1, boolean input2);
 
-    protected void draw(Graphics g, Point drawPosition, BufferedImage image) {
-        g.drawImage(image, drawPosition.x, drawPosition.y, null);
-    }
-
     abstract public void resizeImage(int newScale);
 
-    abstract public void draw(Graphics g, Point drawPosition);
+    abstract public void draw(Graphics2D g, Point drawPosition);
 
-    abstract public void drawScaled(Graphics g, Point drawPosition);
+    abstract public void drawScaled(Graphics2D g, Point drawPosition);
 
     abstract public GateType getType();
 
+    public LogicGate uniqueCopy() {
+        LogicGate copy = logicGateFactory(this.getType(), this.center);
+        copy.input1Not = this.input1Not;
+        copy.input2Not = this.input2Not;
+        copy.outputNot = this.outputNot;
+        while(copy.getOrientation() != this.orientation) {
+            copy.turn();
+        }
+        return copy;
+    }
+
     @Override
     public LogicGate clone() {
-        LogicGate deepCopy = logicGateFactory(this.getType(), this.topLeft);
+        LogicGate deepCopy = logicGateFactory(this.getType(), this.center, this.id);
         deepCopy.input1Not = this.input1Not;
         deepCopy.input2Not = this.input2Not;
         deepCopy.outputNot = this.outputNot;

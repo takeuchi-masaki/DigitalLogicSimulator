@@ -19,7 +19,7 @@ public class PaletteComponent {
         this.hover = false;
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(hover ? new Color(220, 220, 220) : Color.WHITE);
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the background
         g.setColor(Color.BLACK);
@@ -50,5 +50,9 @@ public class PaletteComponent {
 
     public GateType getType() {
         return logicGate.getType();
+    }
+
+    public LogicGate getGate() {
+        return logicGate;
     }
 }
