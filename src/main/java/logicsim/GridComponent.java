@@ -27,6 +27,6 @@ public class GridComponent {
     public void setHovered(boolean val) { gate.setHovered(val); }
 
     public void draw(Graphics2D g, Point drawLocation) {
-        gate.draw_move(g, drawLocation);
+        gate.drawScaled(g, drawLocation);
     }
 }

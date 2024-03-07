@@ -2,10 +2,11 @@ package logicsim;
 
 import logicsim.gates.ANDGate;
 import logicsim.gates.GateType;
+import logicsim.gates.ORGate;
+import logicsim.gates.XORGate;
 import logicsim.util.Pair;
 
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,16 +37,15 @@ public class PalettePanel {
                         new Point(palettePosition)));
         palettePosition.y += (int) (scale * 5.5);
 
-        // TODO: change gate types to ORGate, XORGate
         paletteComponents.add(
                 new PaletteComponent(
-                        new ANDGate(),
+                        new ORGate(),
                         new Point(palettePosition)));
         palettePosition.y += (int) (scale * 5.5);
 
         paletteComponents.add(
                 new PaletteComponent(
-                        new ANDGate(),
+                        new XORGate(),
                         new Point(palettePosition)));
     }
 

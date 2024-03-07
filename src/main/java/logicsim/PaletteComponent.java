@@ -40,8 +40,8 @@ public class PaletteComponent {
         return bounds.contains(p);
     }
 
-    public String getID() {
-        return logicGate.toString();
+    public int getID() {
+        return logicGate.getID();
     }
 
     public static void setDimensions(int width, int height) {

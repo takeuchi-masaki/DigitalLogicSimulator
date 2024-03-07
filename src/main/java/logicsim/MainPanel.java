@@ -107,7 +107,7 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selected != null) {
-            selected.draw_move(g, selected.getPos());
+            selected.drawScaled(g, selected.getPos());
         }
     }
 }
