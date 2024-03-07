@@ -1,9 +1,6 @@
 package logicsim;
 
-import logicsim.gates.ANDGate;
-import logicsim.gates.GateType;
-import logicsim.gates.ORGate;
-import logicsim.gates.XORGate;
+import logicsim.gates.*;
 import logicsim.util.Pair;
 
 import java.awt.*;

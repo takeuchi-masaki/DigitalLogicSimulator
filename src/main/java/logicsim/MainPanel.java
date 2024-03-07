@@ -1,7 +1,6 @@
 package logicsim;
 
-import logicsim.gates.GateType;
-import logicsim.gates.LogicGate;
+import logicsim.gates.*;
 import logicsim.util.Pair;
 
 import javax.swing.*;
@@ -103,6 +102,7 @@ public class MainPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);

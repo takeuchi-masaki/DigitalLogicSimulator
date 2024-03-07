@@ -4,7 +4,6 @@ import logicsim.gates.GateType;
 import logicsim.gates.LogicGate;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class PaletteComponent {
     static final int scale = 50; // scale does not change for the Palette Panel

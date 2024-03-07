@@ -1,12 +1,9 @@
 package logicsim;
 
-import logicsim.gates.ANDGate;
-import logicsim.gates.GateType;
-import logicsim.gates.LogicGate;
+import logicsim.gates.*;
 import logicsim.util.Pair;
 
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.util.*;
 import java.util.List;
 
@@ -22,7 +19,8 @@ public class GridPanel {
     public GridPanel(int startWidth, int endWidth, int height) {
         if (GATE_TYPES.isEmpty()) {
             GATE_TYPES.add(new ANDGate());
-//            GATE_TYPES.add(); // TODO: add other types
+            GATE_TYPES.add(new ORGate());
+            GATE_TYPES.add(new XORGate());
         }
         gridComponentMap = new HashMap<>();
         this.startWidth = startWidth;

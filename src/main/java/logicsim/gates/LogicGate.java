@@ -18,12 +18,12 @@ public abstract class LogicGate implements Cloneable {
     protected int scale;
 
     public LogicGate() {
-        id = id_count++;
+        id = -1;
         topLeft = new Point(0, 0);
         scale = 20;
     }
     public LogicGate(Point position) {
-        id = id_count++;
+        id = ++id_count;
         topLeft = position;
         scale = 20;
     }
@@ -64,8 +64,6 @@ public abstract class LogicGate implements Cloneable {
         return resizedImage;
     }
 
-    abstract public void resizeImage(int newScale);
-
     public void setInput1Not(boolean val) { input1Not = val; }
 
     public void setInput2Not(boolean val) { input2Not = val; }
@@ -95,6 +93,8 @@ public abstract class LogicGate implements Cloneable {
     protected void draw(Graphics g, Point drawPosition, BufferedImage image) {
         g.drawImage(image, drawPosition.x, drawPosition.y, null);
     }
+
+    abstract public void resizeImage(int newScale);
 
     abstract public void draw(Graphics g, Point drawPosition);
 
