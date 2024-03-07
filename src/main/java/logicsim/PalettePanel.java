@@ -74,8 +74,6 @@ public class PalettePanel {
         g.fillRect(0, 0, width, height);
         for (PaletteComponent component : paletteComponents) {
             component.draw(g);
-            Point pos = component.drawPosition();
-            g.drawImage(component.getImage(), pos.x, pos.y, observer);
         }
     }
 }

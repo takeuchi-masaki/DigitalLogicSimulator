@@ -1,6 +1,7 @@
 package logicsim.gates;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 public abstract class LogicGate implements Cloneable {
     private static int id_count = 0;
@@ -53,9 +54,8 @@ public abstract class LogicGate implements Cloneable {
     public void setHovered(boolean val) { hovered = val; }
 
     abstract public boolean output(boolean input1, boolean input2);
-    abstract public Image getImage();
-//    abstract public void draw(Graphics g, int gridScale, Point zeroPosition);
-//    abstract public void draw_move(Graphics g);
+    abstract public void draw(Graphics g, Point drawPosition);
+    abstract public void draw_move(Graphics g);
     abstract public GateType getType();
     @Override abstract public LogicGate clone();
 }

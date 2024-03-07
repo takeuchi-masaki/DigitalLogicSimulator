@@ -38,14 +38,21 @@ public class ANDGate extends LogicGate {
         }
     }
 
+
+
     @Override
     public boolean output(boolean input1, boolean input2) {
         return (input1 ^ input1Not) && (input2 ^ input2Not);
     }
 
     @Override
-    public Image getImage() {
-        return image;
+    public void draw(Graphics g, Point drawPosition) {
+        g.drawImage(image, drawPosition.x, drawPosition.y, null);
+    }
+
+    @Override
+    public void draw_move(Graphics g) {
+        g.drawImage(image, topLeft.x, topLeft.y, null);
     }
 
     @Override

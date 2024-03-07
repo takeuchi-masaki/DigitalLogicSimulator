@@ -53,7 +53,7 @@ public class GridPanel {
         }
         for (GridComponent component : gridComponentMap.values()) {
             Point drawLocation = absolutePoint(component.gate.getPos());
-            g.drawImage(component.getImage(), drawLocation.x, drawLocation.y, observer);
+            component.draw(g, drawLocation);
         }
     }
 
