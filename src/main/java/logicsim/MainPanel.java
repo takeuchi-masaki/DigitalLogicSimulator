@@ -17,8 +17,8 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
         setPreferredSize(new Dimension(width, height));
-        palettePanel = new PalettePanel(300, height, this);
-        gridPanel = new GridPanel(300, width, height, this);
+        palettePanel = new PalettePanel(300, height);
+        gridPanel = new GridPanel(300, width, height);
         initResizeListener();
         initMouseHandler();
     }
@@ -33,6 +33,7 @@ public class MainPanel extends JPanel {
                 if (!needRepaint) { return; }
                 repaint();
             }
+
             @Override
             public void mousePressed(MouseEvent e) {
                 Pair<GateType, Integer> hovering = palettePanel.checkHover();
@@ -44,6 +45,7 @@ public class MainPanel extends JPanel {
                 selectedID = hovering.second;
                 repaint();
             }
+
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (selected == null) return;
@@ -58,6 +60,7 @@ public class MainPanel extends JPanel {
                 }
                 repaint();
             }
+
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (selected == null) return;
@@ -68,9 +71,20 @@ public class MainPanel extends JPanel {
                 selected = null;
                 repaint();
             }
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                if (e.getWheelRotation() > 0) {
+                    gridPanel.zoomIn();
+                } else {
+                    gridPanel.zoomOut();
+                }
+                repaint();
+            }
         };
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
+        addMouseWheelListener(mouseAdapter);
     }
 
     private void initResizeListener() {
@@ -93,7 +107,7 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selected != null) {
-            selected.draw_move(g);
+            selected.draw_move(g, selected.getPos());
         }
     }
 }

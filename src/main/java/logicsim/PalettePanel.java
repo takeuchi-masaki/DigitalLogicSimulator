@@ -13,13 +13,11 @@ public class PalettePanel {
     private int width, height;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;
-    private final ImageObserver observer;
 
-    public PalettePanel(int width, int height, ImageObserver observer) {
+    public PalettePanel(int width, int height) {
         this.width = width;
         this.height = height;
         paletteComponents = new ArrayList<>();
-        this.observer = observer;
         getPaletteComponents();
     }
 
