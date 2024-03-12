@@ -41,10 +41,14 @@ public abstract class LogicGate implements Cloneable {
     private static void initGateTypes() {
         if (GATE_TYPES == null) {
             GATE_TYPES = new ArrayList<>();
-            GATE_TYPES.add(new ANDGate());
-            GATE_TYPES.add(new ORGate());
-            GATE_TYPES.add(new XORGate());
+            for (GateType type : GateType.values()) {
+                GATE_TYPES.add(logicGateFactory(type, new Point(0, 0), -1));
+            }
         }
+    }
+    public static List<LogicGate> getTypes() {
+        LogicGate.initGateTypes();
+        return GATE_TYPES;
     }
 
     protected static LogicGate logicGateFactory(GateType type, Point position, int id) {
@@ -60,11 +64,6 @@ public abstract class LogicGate implements Cloneable {
             case GateType.OR -> new ORGate(position);
             case GateType.XOR -> new XORGate(position);
         };
-    }
-
-    public static List<LogicGate> getTypes() {
-        LogicGate.initGateTypes();
-        return GATE_TYPES;
     }
 
     protected BufferedImage loadImage(String path) {
