@@ -14,8 +14,8 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
         setPreferredSize(new Dimension(width, height));
-        palettePanel = new PalettePanel(300, height);
-        gridPanel = new GridPanel(300, width, height);
+        palettePanel = PalettePanel.getInstance();
+        gridPanel = GridPanel.getInstance();
         initResizeListener();
         initMouseHandler();
     }

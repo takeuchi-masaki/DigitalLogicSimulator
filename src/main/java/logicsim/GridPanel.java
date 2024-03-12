@@ -4,27 +4,25 @@ import logicsim.gates.*;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 import static java.lang.Math.*;
 
 public class GridPanel {
+    private static GridPanel INSTANCE;
     private static int gridSize = 20;
-    private int startWidth, endWidth, height;
+    private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GridComponent> gridComponentMap;
-    private final static List<LogicGate> GATE_TYPES = new ArrayList<>();
 //    private List<WireComponent> wireComponentList; // TODO: wires
 
-    public GridPanel(int startWidth, int endWidth, int height) {
-        if (GATE_TYPES.isEmpty()) {
-            GATE_TYPES.add(new ANDGate());
-            GATE_TYPES.add(new ORGate());
-            GATE_TYPES.add(new XORGate());
-        }
+    private GridPanel() {
         gridComponentMap = new HashMap<>();
-        this.startWidth = startWidth;
-        this.endWidth = endWidth;
-        this.height = height;
+    }
+
+    public static GridPanel getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new GridPanel();
+        }
+        return INSTANCE;
     }
 
     public void setDimensions(int startWidth, int endWidth, int height) {
@@ -94,7 +92,7 @@ public class GridPanel {
     public void zoomIn() {
         gridSize = (int)min(80, gridSize * 1.2);
         LogicGate.resizeScale(gridSize);
-        for (LogicGate gate : GATE_TYPES) {
+        for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage(gridSize);
         }
     }
@@ -102,7 +100,7 @@ public class GridPanel {
     public void zoomOut() {
         gridSize = (int)max(5, gridSize / 1.2);
         LogicGate.resizeScale(gridSize);
-        for (LogicGate gate : GATE_TYPES) {
+        for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage(gridSize);
         }
     }
@@ -110,7 +108,7 @@ public class GridPanel {
     public void resetZoom() {
         gridSize = 20;
         LogicGate.resizeScale(gridSize);
-        for (LogicGate gate : GATE_TYPES) {
+        for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage(gridSize);
         }
     }

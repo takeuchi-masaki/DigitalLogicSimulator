@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static java.lang.System.exit;
@@ -18,6 +20,7 @@ public abstract class LogicGate implements Cloneable {
     protected boolean hovered = false;
     protected static final int defaultScale = 20;
     protected static int gridScale = 20;
+    private static List<LogicGate> GATE_TYPES;
 
     public LogicGate() {
         id = ++id_count;
@@ -34,6 +37,16 @@ public abstract class LogicGate implements Cloneable {
         center = position;
         topLeft = new Point(center.x - 2, center.y - 2);
     }
+
+    private static void initGateTypes() {
+        if (GATE_TYPES == null) {
+            GATE_TYPES = new ArrayList<>();
+            GATE_TYPES.add(new ANDGate());
+            GATE_TYPES.add(new ORGate());
+            GATE_TYPES.add(new XORGate());
+        }
+    }
+
     protected static LogicGate logicGateFactory(GateType type, Point position, int id) {
         return switch (type) {
             case GateType.AND -> new ANDGate(id, position);
@@ -47,6 +60,11 @@ public abstract class LogicGate implements Cloneable {
             case GateType.OR -> new ORGate(position);
             case GateType.XOR -> new XORGate(position);
         };
+    }
+
+    public static List<LogicGate> getTypes() {
+        LogicGate.initGateTypes();
+        return GATE_TYPES;
     }
 
     protected BufferedImage loadImage(String path) {

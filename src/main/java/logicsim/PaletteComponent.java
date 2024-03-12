@@ -20,10 +20,15 @@ public class PaletteComponent {
     }
 
     public void draw(Graphics2D g) {
-        g.setColor(hover ? new Color(220, 220, 220) : Color.WHITE);
-        g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the background
+        // Draw the background of the PaletteComponent
+        g.setColor(hover ? Color.LIGHT_GRAY : Color.WHITE);
+        g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+
+        // Draw the border of the PaletteComponent
         g.setColor(Color.BLACK);
-        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the border
+        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+
+        // Draw the gate preview
         logicGate.draw(g, new Point(bounds.x + (int)(scale * 1.2), bounds.y + scale / 2));
     }
 

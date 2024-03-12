@@ -7,15 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PalettePanel {
-    private int width, height;
+    private static PalettePanel INSTANCE;
+    private int width = 300, height = 900;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;
 
-    public PalettePanel(int width, int height) {
-        this.width = width;
-        this.height = height;
+    private PalettePanel() {
         paletteComponents = new ArrayList<>();
         getPaletteComponents();
+    }
+
+    public static PalettePanel getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PalettePanel();
+        }
+        return INSTANCE;
     }
 
     public void setDimensions(int w, int h) {
