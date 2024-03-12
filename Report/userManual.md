@@ -6,7 +6,7 @@ Launch the Application by running the App.java file `/src/main/java/logicsim/App
 
 ## Functionality
 
-Clicking and dragging a component will allow you to add the Logic Gate to the Grid on the right-hand side. Each logic gate will be able to be rotated, as well as have its inputs or outputs negated. Each component will snap to the grid when dragging, and a visual shows the current position of the dragged object.
+Clicking and dragging a component allows you to add the Logic Gate to the Grid on the right-hand side. Each logic gate will be able to be rotated, as well as have its inputs or outputs negated. Each component will snap to the grid when dragging, and a visual shows the current position of the dragged object.
 Objects placed on the grid are able to be moved with another drag and drop operation.
 
 ## Future Functionality

@@ -10,7 +10,7 @@ Logisim, a key reference for this project, offers valuable lessons in user exper
 
 ## Methodology
 
-The project adopted an agile development methodology, with iterative testing and refinement. Java Swing was used for the graphical user interface, ensuring cross-platform compatibility and ease of use. A focus on modularity allowed for flexible addition or alteration of components during the development process.
+The project adopted an agile development methodology, with iterative testing and refinement. Java Swing was used for the graphical user interface, ensuring cross-platform compatibility and ease of use.
 
 ## Implementation Details
 
@@ -24,13 +24,13 @@ Testing was conducted informally through debugging sessions.
 
 The first week took a lot of trial and error learning about Java Swing, brainstorming the architecture of the project, and working with ChatGPT effectively.
 In the second week, much of the project was rewritten to manually handle the transition of drag and drop objects from the PalettePanel into the GridPanel, instead of using the TransferHandler interface and multiple JPanels in a Border style layout.
+In the third week, the gate display was updated to use images instead of drawing using Java Swing graphics. In addition, resizing functionality was added to the Grid.
 
 ## Conclusion
-
-Now that a larger framework has become clearer in the design process, the next weeks of adding additional features should be easier.
 
 ## References and Appendices
 
 - Logisim software
 - Java Swing documentation
 - ChatGPT
+- Logic Gate images taken from https://www.categories.acsl.org/wiki/index.php?title=Digital_Electronics

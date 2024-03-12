@@ -8,14 +8,12 @@ import java.awt.event.*;
 
 public class MainPanel extends JPanel {
     private int width = 1200, height = 900;
-    PalettePanel palettePanel;
-    GridPanel gridPanel;
+    private static PalettePanel palettePanel = PalettePanel.getInstance();
+    private static GridPanel gridPanel = GridPanel.getInstance();
     LogicGate selected = null;
 
     public MainPanel() {
         setPreferredSize(new Dimension(width, height));
-        palettePanel = PalettePanel.getInstance();
-        gridPanel = GridPanel.getInstance();
         initResizeListener();
         initMouseHandler();
     }
@@ -24,8 +22,7 @@ public class MainPanel extends JPanel {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                boolean needRepaint =
-                        palettePanel.modifyHover(e.getPoint())
+                boolean needRepaint = palettePanel.modifyHover(e.getPoint())
                         || gridPanel.modifyHover(e.getPoint());
                 if (needRepaint) {
                     repaint();
@@ -37,7 +34,8 @@ public class MainPanel extends JPanel {
                 LogicGate hovering = palettePanel.checkHover();
                 if (hovering == null) {
                     hovering = gridPanel.checkHover();
-                    if (hovering == null) return;
+                    if (hovering == null)
+                        return;
                 }
                 if (hovering.getID() == -1) {
                     selected = hovering.uniqueCopy();
@@ -68,7 +66,8 @@ public class MainPanel extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (selected == null) return;
+                if (selected == null)
+                    return;
                 Point curr = e.getPoint();
                 if (curr.x > 300) {
                     gridPanel.addComponent(selected, gridPanel.relativePoint(curr));
