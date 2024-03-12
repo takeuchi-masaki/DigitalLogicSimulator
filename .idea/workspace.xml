@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02511493-b269-4a20-9d90-a450acb2805e" name="Changes" comment="Initialize project with Sample App" />
+    <list default="true" id="02511493-b269-4a20-9d90-a450acb2805e" name="Changes" comment="Initialize project with Sample App">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/GridComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/GridPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/PaletteComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/PaletteComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/ANDGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/ANDGate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/LogicGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/LogicGate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/ORGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/ORGate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/XORGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/XORGate.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +39,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -153,6 +163,7 @@
       <workItem from="1709744738103" duration="799000" />
       <workItem from="1709779528952" duration="3695000" />
       <workItem from="1709841276240" duration="8521000" />
+      <workItem from="1710267510128" duration="4457000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project with Sample App">
       <option name="closed" value="true" />

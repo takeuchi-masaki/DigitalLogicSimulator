@@ -37,28 +37,30 @@ public class MainPanel extends JPanel {
                 LogicGate hovering = palettePanel.checkHover();
                 if (hovering == null) {
                     hovering = gridPanel.checkHover();
+                    if (hovering == null) return;
                 }
-                if (hovering == null) return;
                 if (hovering.getID() == -1) {
                     selected = hovering.uniqueCopy();
                 } else {
                     selected = hovering.clone();
                 }
-                selected.setPosition(e.getPoint());
+                selected.setPosition(selected.getTopLeft(e.getPoint()));
                 repaint();
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (selected == null) return;
+                if (selected == null) {
+                    return;
+                }
                 if (selected.getID() != -1) {
                     gridPanel.removeComponent(selected.getID());
                 }
-                Point currPos = e.getPoint();
-                if (currPos.x > 300) {
-                    selected.setPosition(gridPanel.closestAbsPoint(currPos));
+                Point mousePos = e.getPoint();
+                if (mousePos.x >= 300) {
+                    selected.setPosition(selected.getTopLeft(gridPanel.closestAbsPoint(mousePos)));
                 } else {
-                    selected.setPosition(currPos);
+                    selected.setPosition(selected.getTopLeft(mousePos));
                 }
                 selected.setHovered(true);
                 repaint();
@@ -75,19 +77,19 @@ public class MainPanel extends JPanel {
                 repaint();
             }
 
-//            @Override
-//            public void mouseWheelMoved(MouseWheelEvent e) {
-//                if (e.getWheelRotation() > 0) {
-//                    gridPanel.zoomIn();
-//                } else {
-//                    gridPanel.zoomOut();
-//                }
-//                repaint();
-//            }
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                if (e.getWheelRotation() > 0) {
+                    gridPanel.zoomIn();
+                } else {
+                    gridPanel.zoomOut();
+                }
+                repaint();
+            }
         };
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
-//        addMouseWheelListener(mouseAdapter);
+        addMouseWheelListener(mouseAdapter);
     }
 
     private void initResizeListener() {
@@ -111,7 +113,7 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selected != null) {
-            selected.drawScaled(g2d, selected.getPos());
+            selected.drawScaled(g2d, selected.getCenter());
         }
     }
 }

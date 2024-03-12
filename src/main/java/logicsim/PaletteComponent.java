@@ -24,7 +24,7 @@ public class PaletteComponent {
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the background
         g.setColor(Color.BLACK);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height); // Draw the border
-        logicGate.draw(g, new Point(bounds.x + (int) (scale * 1.5), bounds.y + scale / 2));
+        logicGate.draw(g, new Point(bounds.x + (int)(scale * 1.2), bounds.y + scale / 2));
     }
 
     public void setHovered(boolean isHovered) {

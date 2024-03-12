@@ -34,7 +34,10 @@ public class GridPanel {
     }
 
     public Point relativePoint(Point absPoint) {
-        return new Point((int)round((double)(absPoint.x - startWidth) / gridSize), (int)round((double)absPoint.y / gridSize));
+        return new Point(
+                (int)round((absPoint.x - startWidth) / (double)gridSize),
+                (int)round(absPoint.y / (double)gridSize)
+        );
     }
 
     public Point absolutePoint(Point relPoint) {
@@ -43,10 +46,6 @@ public class GridPanel {
 
     public Point closestAbsPoint(Point mousePos) {
         return absolutePoint(relativePoint(mousePos));
-    }
-
-    private static void resizeGrid(int newScale) {
-        gridSize = newScale;
     }
 
     public void draw(Graphics2D g) {
@@ -58,7 +57,7 @@ public class GridPanel {
             }
         }
         for (GridComponent component : gridComponentMap.values()) {
-            Point drawLocation = absolutePoint(component.gate.getPos());
+            Point drawLocation = absolutePoint(component.gate.getTopLeft());
             component.draw(g, drawLocation);
         }
     }
@@ -93,21 +92,24 @@ public class GridPanel {
     }
 
     public void zoomIn() {
-        resizeGrid((int) min(80, gridSize * 1.2));
+        gridSize = (int)min(80, gridSize * 1.2);
+        LogicGate.resizeScale(gridSize);
         for (LogicGate gate : GATE_TYPES) {
             gate.resizeImage(gridSize);
         }
     }
 
     public void zoomOut() {
-        resizeGrid((int) max(5, gridSize / 1.2));
+        gridSize = (int)max(5, gridSize / 1.2);
+        LogicGate.resizeScale(gridSize);
         for (LogicGate gate : GATE_TYPES) {
             gate.resizeImage(gridSize);
         }
     }
 
     public void resetZoom() {
-        resizeGrid(20);
+        gridSize = 20;
+        LogicGate.resizeScale(gridSize);
         for (LogicGate gate : GATE_TYPES) {
             gate.resizeImage(gridSize);
         }

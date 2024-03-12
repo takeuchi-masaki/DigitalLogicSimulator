@@ -12,22 +12,27 @@ public abstract class LogicGate implements Cloneable {
     private static int id_count = 0;
     private final int id;
     protected boolean input1Not = false, input2Not = false, outputNot = false;
+    protected Point topLeft;
     protected Point center;
     protected short orientation = 1;
     protected boolean hovered = false;
-    protected int scale = 20;
+    protected static final int defaultScale = 20;
+    protected static int gridScale = 20;
 
     public LogicGate() {
         id = ++id_count;
         center = new Point(0, 0);
+        topLeft = new Point(center.x - 2, center.y - 2);
     }
     public LogicGate(Point position) {
         id = ++id_count;
         center = position;
+        topLeft = new Point(center.x - 2, center.y - 2);
     }
     public LogicGate(int id, Point position) {
         this.id = id;
         center = position;
+        topLeft = new Point(center.x - 2, center.y - 2);
     }
     protected static LogicGate logicGateFactory(GateType type, Point position, int id) {
         return switch (type) {
@@ -48,7 +53,7 @@ public abstract class LogicGate implements Cloneable {
         BufferedImage result = null;
         try {
             BufferedImage original = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(path)));
-            int resizeX = scale * 5, resizeY = scale * 5;
+            int resizeX = defaultScale * 5, resizeY = defaultScale * 5;
             result = new BufferedImage(resizeX, resizeY, original.getType());
             Graphics2D g2d = result.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -62,19 +67,14 @@ public abstract class LogicGate implements Cloneable {
         return result;
     }
 
-    protected BufferedImage resizeImage(int newScale, BufferedImage original) {
-        this.scale = newScale;
-        int dim = this.scale * 4;
+    protected BufferedImage resizeImage(BufferedImage original) {
+        int dim = LogicGate.gridScale * 4;
         BufferedImage resizedImage = new BufferedImage(dim, dim, original.getType());
         Graphics2D g2d = resizedImage.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.drawImage(original, 0, 0, dim, dim, null);
         g2d.dispose();
         return resizedImage;
-    }
-
-    protected Point getTopLeft(Point center) {
-        return new Point(center.x - 2 * scale, center.y - 2 * scale);
     }
 
     protected void draw(Graphics2D g, Point drawPosition, BufferedImage image) {
@@ -91,7 +91,11 @@ public abstract class LogicGate implements Cloneable {
 
     public void setOutputNot(boolean val) { outputNot = val; }
 
-    public void setPosition(Point point) { center = point; }
+    public void setPosition(Point point) {
+        center = point;
+        topLeft.x = center.x - 2;
+        topLeft.y = center.y - 2;
+    }
 
     public void turn() {
         if (++orientation == 4) {
@@ -99,11 +103,21 @@ public abstract class LogicGate implements Cloneable {
         }
     }
 
+    public static void resizeScale(int newScale) {
+        gridScale = newScale;
+    }
+
     public short getOrientation() { return orientation; }
 
     public int getID() { return id; }
 
-    public Point getPos() { return center; }
+    public Point getTopLeft(Point absCenterPoint) {
+        return new Point(absCenterPoint.x - 2 * gridScale, absCenterPoint.y - 2 * gridScale);
+    }
+
+    public Point getTopLeft() { return topLeft; }
+
+    public Point getCenter() { return center; }
 
     public boolean isHovered() { return hovered; }
 

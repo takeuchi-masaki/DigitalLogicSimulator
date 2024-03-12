@@ -21,11 +21,11 @@ public class GridComponent {
     }
 
     public boolean contains(Point relativePos) {
-        Point gatePos = gate.getPos();
-        return relativePos.x >= gatePos.x - 2
-                && relativePos.x <= gatePos.x + 2
-                && relativePos.y >= gatePos.y - 2
-                && relativePos.y <= gatePos.y + 2;
+        Point gatePos = gate.getTopLeft();
+        return relativePos.x >= gatePos.x
+                && relativePos.x <= gatePos.x + 4
+                && relativePos.y >= gatePos.y
+                && relativePos.y <= gatePos.y + 4;
     }
 
     public boolean isHovered() { return gate.isHovered(); }
