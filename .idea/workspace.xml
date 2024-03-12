@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02511493-b269-4a20-9d90-a450acb2805e" name="Changes" comment="Initialize project with Sample App">
-      <change afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridExporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridImporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.bundle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/GridExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/GridExporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/MenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/gates/LogicGate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logicsim/gates/LogicGate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logicsim/util/Pair.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +162,7 @@
       <workItem from="1709744738103" duration="799000" />
       <workItem from="1709779528952" duration="3695000" />
       <workItem from="1709841276240" duration="8521000" />
-      <workItem from="1710267510128" duration="10095000" />
+      <workItem from="1710267510128" duration="11860000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project with Sample App">
       <option name="closed" value="true" />

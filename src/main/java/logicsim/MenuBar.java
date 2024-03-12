@@ -80,7 +80,7 @@ public class MenuBar extends JMenuBar {
     }
 
     private void showAbout() {
-        JOptionPane.showMessageDialog(this,
+        JOptionPane.showMessageDialog(null,
                 """
                         Digital Logic Simulator
                         Version 0.1

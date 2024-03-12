@@ -1,5 +1,13 @@
 package logicsim;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 public class GridExporter {
@@ -16,5 +24,35 @@ public class GridExporter {
 
     public void exportFile(File xmlFile) {
         System.out.println("Export: " + xmlFile.getAbsolutePath());
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.newDocument();
+            Element rootElement = doc.createElement("GridComponents");
+            doc.appendChild(rootElement);
+
+            for (GridComponent component : components) {
+                Element componentElement = doc.createElement("GridComponent");
+                componentElement.setAttribute("id", String.valueOf(component.id));
+                componentElement.setAttribute("x", String.valueOf(component.coordinatePosition.x));
+                componentElement.setAttribute("y", String.valueOf(component.coordinatePosition.y));
+                componentElement.setAttribute("gateType", component.gateType.name());
+                componentElement.setAttribute("orientation", String.valueOf(component.orientation));
+                componentElement.setAttribute("input1Not", String.valueOf(component.input1Not));
+                componentElement.setAttribute("input2Not", String.valueOf(component.input2Not));
+                componentElement.setAttribute("outputNot", String.valueOf(component.outputNot));
+                rootElement.appendChild(componentElement);
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(xmlFile);
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            System.err.println("Export failed");
+            e.printStackTrace();
+        }
     }
 }
