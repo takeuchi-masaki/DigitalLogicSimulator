@@ -1,7 +1,6 @@
 package logicsim;
 
 import logicsim.gates.*;
-import logicsim.util.Pair;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +27,9 @@ public class MainPanel extends JPanel {
                 boolean needRepaint =
                         palettePanel.modifyHover(e.getPoint())
                         || gridPanel.modifyHover(e.getPoint());
-                if (!needRepaint) { return; }
-                repaint();
+                if (needRepaint) {
+                    repaint();
+                }
             }
 
             @Override
@@ -75,19 +75,19 @@ public class MainPanel extends JPanel {
                 repaint();
             }
 
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                if (e.getWheelRotation() > 0) {
-                    gridPanel.zoomIn();
-                } else {
-                    gridPanel.zoomOut();
-                }
-                repaint();
-            }
+//            @Override
+//            public void mouseWheelMoved(MouseWheelEvent e) {
+//                if (e.getWheelRotation() > 0) {
+//                    gridPanel.zoomIn();
+//                } else {
+//                    gridPanel.zoomOut();
+//                }
+//                repaint();
+//            }
         };
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
-        addMouseWheelListener(mouseAdapter);
+//        addMouseWheelListener(mouseAdapter);
     }
 
     private void initResizeListener() {
