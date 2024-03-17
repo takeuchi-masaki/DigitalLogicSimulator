@@ -1,4 +1,4 @@
-package logicsim;
+package logicsim.palette;
 
 import logicsim.gates.*;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PalettePanel {
-    private static PalettePanel INSTANCE;
+    private static PalettePanel INSTANCE = null;
     private int width = 300, height = 900;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;

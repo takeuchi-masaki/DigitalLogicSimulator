@@ -1,4 +1,4 @@
-package logicsim;
+package logicsim.grid;
 
 import logicsim.gates.*;
 
@@ -8,11 +8,11 @@ import java.util.*;
 import static java.lang.Math.*;
 
 public class GridPanel {
-    private static GridPanel INSTANCE;
+    private static GridPanel INSTANCE = null;
     private static int gridSize = 20;
     private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GridComponent> gridComponentMap;
-//    private List<WireComponent> wireComponentList; // TODO: wires
+//    private final List<WireComponent> wireComponentList; // TODO: wires
 
     private GridPanel() {
         gridComponentMap = new HashMap<>();
@@ -69,7 +69,7 @@ public class GridPanel {
         gridComponentMap.remove(selectedID);
     }
 
-    public boolean modifyHover(Point point) {
+    public boolean modifyComponentHover(Point point) {
         Point relPoint = relativePoint(point);
         for (GridComponent component : gridComponentMap.values()) {
             if (component.contains(relPoint) != component.isHovered()) {
@@ -80,7 +80,7 @@ public class GridPanel {
         return false;
     }
 
-    public LogicGate checkHover() {
+    public LogicGate checkComponentHover() {
         for (GridComponent component : gridComponentMap.values()) {
             if (component.isHovered()) {
                 return component.getGate();

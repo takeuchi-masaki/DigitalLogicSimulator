@@ -1,4 +1,4 @@
-package logicsim;
+package logicsim.palette;
 
 import logicsim.gates.GateType;
 import logicsim.gates.LogicGate;

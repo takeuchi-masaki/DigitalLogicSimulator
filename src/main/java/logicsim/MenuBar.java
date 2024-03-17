@@ -1,5 +1,8 @@
 package logicsim;
 
+import logicsim.grid.GridExporter;
+import logicsim.grid.GridImporter;
+
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;

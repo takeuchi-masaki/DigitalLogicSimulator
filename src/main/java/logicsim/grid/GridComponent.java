@@ -1,4 +1,4 @@
-package logicsim;
+package logicsim.grid;
 
 import logicsim.gates.LogicGate;
 

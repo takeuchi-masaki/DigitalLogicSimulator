@@ -1,6 +1,11 @@
 package logicsim;
 
 import logicsim.gates.*;
+import logicsim.grid.GridPanel;
+import logicsim.mouseAdapters.MouseMode;
+import logicsim.mouseAdapters.MoveMode;
+import logicsim.mouseAdapters.WireMode;
+import logicsim.palette.PalettePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,74 +13,45 @@ import java.awt.event.*;
 
 public class MainPanel extends JPanel {
     private int width = 1200, height = 900;
-    private static PalettePanel palettePanel = PalettePanel.getInstance();
-    private static GridPanel gridPanel = GridPanel.getInstance();
-    LogicGate selected = null;
+    private static final PalettePanel palettePanel = PalettePanel.getInstance();
+    private static final GridPanel gridPanel = GridPanel.getInstance();
+    private LogicGate selectedComponent = null;
+    MouseMode currentMode;
+    MouseAdapter moveMode, wireMode;
 
     public MainPanel() {
         setPreferredSize(new Dimension(width, height));
+        moveMode = new MoveMode(this);
+        wireMode = new WireMode(this);
         initResizeListener();
-        initMouseHandler();
+        initKeyListener();
+        setMouseMoveMode();
     }
 
-    private void initMouseHandler() {
-        MouseAdapter mouseAdapter = new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                boolean needRepaint = palettePanel.modifyHover(e.getPoint())
-                        || gridPanel.modifyHover(e.getPoint());
-                if (needRepaint) {
-                    repaint();
-                }
-            }
+    private void setMouseMoveMode() {
+        if (currentMode == MouseMode.MOVE_MODE) {
+            return;
+        }
+        currentMode = MouseMode.MOVE_MODE;
+        removeMouseListener(wireMode);
+        removeMouseMotionListener(wireMode);
+        addMouseListener(moveMode);
+        addMouseMotionListener(moveMode);
+    }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                LogicGate hovering = palettePanel.checkHover();
-                if (hovering == null) {
-                    hovering = gridPanel.checkHover();
-                    if (hovering == null)
-                        return;
-                }
-                if (hovering.getID() == -1) {
-                    selected = hovering.uniqueCopy();
-                } else {
-                    selected = hovering.clone();
-                }
-                selected.setPosition(selected.getTopLeft(e.getPoint()));
-                repaint();
-            }
+    private void setWireMode(){
+        if (currentMode == MouseMode.WIRE_MODE) {
+            return;
+        }
+        currentMode = MouseMode.WIRE_MODE;
+        removeMouseListener(moveMode);
+        removeMouseMotionListener(moveMode);
+        addMouseListener(wireMode);
+        addMouseMotionListener(wireMode);
+    }
 
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                if (selected == null) {
-                    return;
-                }
-                if (selected.getID() != -1) {
-                    gridPanel.removeComponent(selected.getID());
-                }
-                Point mousePos = e.getPoint();
-                if (mousePos.x >= 300) {
-                    selected.setPosition(selected.getTopLeft(gridPanel.closestAbsPoint(mousePos)));
-                } else {
-                    selected.setPosition(selected.getTopLeft(mousePos));
-                }
-                selected.setHovered(true);
-                repaint();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (selected == null)
-                    return;
-                Point curr = e.getPoint();
-                if (curr.x > 300) {
-                    gridPanel.addComponent(selected, gridPanel.relativePoint(curr));
-                }
-                selected = null;
-                repaint();
-            }
-
+    private void initResizeListener() {
+        MouseWheelListener mouseWheelListener = new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 if (e.getWheelRotation() > 0) {
@@ -86,12 +62,7 @@ public class MainPanel extends JPanel {
                 repaint();
             }
         };
-        addMouseListener(mouseAdapter);
-        addMouseMotionListener(mouseAdapter);
-        addMouseWheelListener(mouseAdapter);
-    }
-
-    private void initResizeListener() {
+        addMouseWheelListener(mouseWheelListener);
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 width = getWidth();
@@ -103,6 +74,77 @@ public class MainPanel extends JPanel {
         });
     }
 
+    private void initKeyListener() {
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keycode = e.getKeyCode();
+                if (keycode == KeyEvent.VK_ESCAPE) {
+                    setMouseMoveMode();
+                } else if (keycode == KeyEvent.VK_W) {
+                    if (currentMode == MouseMode.WIRE_MODE) {
+                        setMouseMoveMode();
+                    } else {
+                        setWireMode();
+                    }
+                }
+            }
+        });
+        setFocusable(true); // Make sure the component is focusable
+        requestFocusInWindow(); // Request focus to receive key events
+    }
+
+    public void checkComponentHover(Point mousePosition) {
+        boolean needRepaint = palettePanel.modifyHover(mousePosition)
+                || gridPanel.modifyComponentHover(mousePosition);
+        if (needRepaint) {
+            repaint();
+        }
+    }
+
+    public void selectHoveredComponent(Point mousePosition) {
+        LogicGate hovering = palettePanel.checkHover();
+        if (hovering == null) {
+            hovering = gridPanel.checkComponentHover();
+            if (hovering == null)
+                return;
+        }
+        if (hovering.getID() == -1) {
+            selectedComponent = hovering.uniqueCopy();
+        } else {
+            selectedComponent = hovering.clone();
+        }
+        selectedComponent.setPosition(selectedComponent.getTopLeft(mousePosition));
+        repaint();
+    }
+
+    public void dragSelectedComponent(Point mousePosition) {
+        if (selectedComponent == null) {
+            return;
+        }
+        if (selectedComponent.getID() != -1) {
+            gridPanel.removeComponent(selectedComponent.getID());
+        }
+        if (mousePosition.x >= 300) {
+            selectedComponent.setPosition(selectedComponent.getTopLeft(gridPanel.closestAbsPoint(mousePosition)));
+        } else {
+            selectedComponent.setPosition(selectedComponent.getTopLeft(mousePosition));
+        }
+        selectedComponent.setHovered(true);
+        repaint();
+    }
+
+    public void releaseSelectedComponent(Point mousePosition) {
+        if (selectedComponent == null) {
+            return;
+        }
+        if (mousePosition.x > 300) {
+            gridPanel.addComponent(selectedComponent, gridPanel.relativePoint(mousePosition));
+        }
+        selectedComponent = null;
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -111,8 +153,8 @@ public class MainPanel extends JPanel {
 
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
-        if (selected != null) {
-            selected.drawScaled(g2d, selected.getCenter());
+        if (selectedComponent != null) {
+            selectedComponent.drawScaled(g2d, selectedComponent.getCenter());
         }
     }
 }

@@ -9,7 +9,8 @@ public class App extends JFrame {
         setLocationRelativeTo(null);
 
         setJMenuBar(new MenuBar());
-        add(new MainPanel());
+        MainPanel mainPanel = new MainPanel();
+        add(mainPanel);
         pack();
     }
 
