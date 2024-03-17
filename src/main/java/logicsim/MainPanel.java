@@ -28,7 +28,7 @@ public class MainPanel extends JPanel {
         setMouseMoveMode();
     }
 
-    private void setMouseMoveMode() {
+    public void setMouseMoveMode() {
         if (currentMode == MouseMode.MOVE_MODE) {
             return;
         }
@@ -39,7 +39,7 @@ public class MainPanel extends JPanel {
         addMouseMotionListener(moveMode);
     }
 
-    private void setWireMode(){
+    public void setWireMode(){
         if (currentMode == MouseMode.WIRE_MODE) {
             return;
         }
@@ -90,7 +90,7 @@ public class MainPanel extends JPanel {
                 }
             }
         });
-        setFocusable(true); // Make sure the component is focusable
+        setFocusable(true);
         requestFocusInWindow(); // Request focus to receive key events
     }
 
