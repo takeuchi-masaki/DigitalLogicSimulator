@@ -52,4 +52,9 @@ public class XORGate extends LogicGate {
 
     @Override
     public GateType getType() { return GateType.XOR; }
+
+    @Override
+    public String toString() {
+        return "XOR Gate";
+    }
 }

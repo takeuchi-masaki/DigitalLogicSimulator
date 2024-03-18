@@ -28,8 +28,10 @@ public class PaletteComponent {
         g.setColor(Color.BLACK);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
 
+        g.drawString(logicGate.toString(), bounds.x + 10, bounds.y + 70);
+
         // Draw the gate preview
-        logicGate.draw(g, new Point(bounds.x + (int)(scale * 1.2), bounds.y + scale / 2));
+        logicGate.draw(g, new Point(bounds.x + (int)(scale * 1.8), bounds.y + scale / 2));
     }
 
     public void setHovered(boolean isHovered) {

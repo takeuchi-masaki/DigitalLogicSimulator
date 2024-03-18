@@ -52,4 +52,9 @@ public class ANDGate extends LogicGate {
 
     @Override
     public GateType getType() { return GateType.AND; }
+
+    @Override
+    public String toString() {
+        return "AND Gate";
+    }
 }

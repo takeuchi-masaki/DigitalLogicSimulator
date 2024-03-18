@@ -52,4 +52,9 @@ public class ORGate extends LogicGate {
 
     @Override
     public GateType getType() { return GateType.OR; }
+
+    @Override
+    public String toString() {
+        return "OR Gate";
+    }
 }

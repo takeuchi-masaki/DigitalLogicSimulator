@@ -16,9 +16,8 @@ public abstract class PaletteButton extends JToggleButton {
         super();
         this.width = width;
         this.height = height;
-        setBorderPainted(false);
         setSelected(enable);
-        setContentAreaFilled(false);
+        setBorderPainted(false);
         setOpaque(true);
         this.setBounds(position.x, position.y, width, height);
     }

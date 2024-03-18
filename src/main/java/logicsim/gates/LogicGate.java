@@ -172,4 +172,9 @@ public abstract class LogicGate implements Cloneable {
         }
         return deepCopy;
     }
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }
