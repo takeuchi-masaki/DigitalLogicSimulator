@@ -69,6 +69,12 @@ public class GridPanel {
         gridComponentMap.remove(selectedID);
     }
 
+    public void clearHover() {
+        for (GridComponent component : gridComponentMap.values()) {
+            component.setHovered(false);
+        }
+    }
+
     public boolean modifyComponentHover(Point point) {
         Point relPoint = relativePoint(point);
         for (GridComponent component : gridComponentMap.values()) {

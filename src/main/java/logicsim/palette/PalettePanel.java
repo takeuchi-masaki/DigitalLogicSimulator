@@ -11,12 +11,12 @@ public class PalettePanel {
     private int width = 300, height = 900;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;
-    private final PaletteButton moveButton;
-    private final PaletteButton wireModeButton;
+    public final PaletteButton moveButton;
+    public final PaletteButton wireModeButton;
 
     private PalettePanel() {
-        moveButton = new MoveButton(true, new Point(50, 50), 80, 80);
-        wireModeButton = new WireModeButton(false, new Point(150, 50), 100, 80);
+        moveButton = new MoveButton(true, new Point(50, 50), 80, 100);
+        wireModeButton = new WireModeButton(false, new Point(150, 50), 80, 100);
         paletteComponents = new ArrayList<>();
         getPaletteComponents();
     }
@@ -55,6 +55,12 @@ public class PalettePanel {
                         new Point(palettePosition)));
     }
 
+    public void clearHover() {
+        for (PaletteComponent component : paletteComponents) {
+            component.setHovered(false);
+        }
+    }
+
     public boolean modifyHover(Point mouseLocation) {
         boolean modified = false;
         for (PaletteComponent component : paletteComponents) {
@@ -78,8 +84,6 @@ public class PalettePanel {
     public void draw(Graphics2D g) {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, width, height);
-        moveButton.draw(g);
-        wireModeButton.draw(g);
         for (PaletteComponent component : paletteComponents) {
             component.draw(g);
         }

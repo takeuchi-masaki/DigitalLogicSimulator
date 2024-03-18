@@ -1,6 +1,7 @@
 package logicsim.palette;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,26 +9,24 @@ import java.util.Objects;
 
 import static java.lang.System.exit;
 
-public abstract class PaletteButton {
-    protected boolean hover = false;
-    protected boolean enabled;
-    protected Rectangle bounds;
-    protected int width, height;
-    protected Point position;
+public abstract class PaletteButton extends JToggleButton {
+    int width, height;
 
-    public PaletteButton(boolean enable, Point position, int maxX, int maxY) {
-        this.enabled = enable;
-        this.position = position;
-        this.width = maxX;
-        this.height = maxY;
-        bounds = new Rectangle(position.x, position.y, width, height);
+    public PaletteButton(boolean enable, Point position, int width, int height) {
+        super();
+        this.width = width;
+        this.height = height;
+        setBorderPainted(false);
+        setSelected(enable);
+        setContentAreaFilled(false);
+        setOpaque(true);
+        this.setBounds(position.x, position.y, width, height);
     }
 
-    protected BufferedImage loadImage(String path) {
+    protected BufferedImage loadImage(String path, int resizeX, int resizeY) {
         BufferedImage result = null;
         try {
             BufferedImage original = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(path)));
-            int resizeX = 50, resizeY = 50;
             result = new BufferedImage(resizeX, resizeY, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = result.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -39,25 +38,5 @@ public abstract class PaletteButton {
             exit(1);
         }
         return result;
-    }
-
-    void draw(Graphics2D g) {
-        g.setColor(hover ? Color.LIGHT_GRAY : Color.WHITE);
-        g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-
-        g.setColor(Color.BLACK);
-        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
-    }
-
-    void setHover(boolean hovering) {
-        hover = hovering;
-    }
-
-    void setEnabled(boolean enable) {
-        enabled = enable;
-    }
-
-    boolean contains(Point mousePosition) {
-        return bounds.contains(mousePosition);
     }
 }

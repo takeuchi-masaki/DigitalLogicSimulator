@@ -17,21 +17,22 @@ public class MainPanel extends JPanel {
     private static final GridPanel gridPanel = GridPanel.getInstance();
     private LogicGate selectedComponent = null;
     MouseMode currentMode;
-    MouseAdapter moveMode, wireMode;
+    MouseAdapter moveMode = new MoveMode(this);
+    MouseAdapter wireMode = new WireMode(this);
 
     public MainPanel() {
+        setLayout(null);
         setPreferredSize(new Dimension(width, height));
-        moveMode = new MoveMode(this);
-        wireMode = new WireMode(this);
+        initButtons();
         initResizeListener();
         initKeyListener();
         setMouseMoveMode();
     }
 
     public void setMouseMoveMode() {
-        if (currentMode == MouseMode.MOVE_MODE) {
-            return;
-        }
+        palettePanel.moveButton.setSelected(true);
+        palettePanel.wireModeButton.setSelected(false);
+        if (currentMode == MouseMode.MOVE_MODE) return;
         currentMode = MouseMode.MOVE_MODE;
         removeMouseListener(wireMode);
         removeMouseMotionListener(wireMode);
@@ -40,14 +41,24 @@ public class MainPanel extends JPanel {
     }
 
     public void setWireMode(){
-        if (currentMode == MouseMode.WIRE_MODE) {
-            return;
-        }
+        palettePanel.wireModeButton.setSelected(true);
+        palettePanel.moveButton.setSelected(false);
+        if (currentMode == MouseMode.WIRE_MODE) return;
         currentMode = MouseMode.WIRE_MODE;
         removeMouseListener(moveMode);
         removeMouseMotionListener(moveMode);
         addMouseListener(wireMode);
         addMouseMotionListener(wireMode);
+        palettePanel.clearHover();
+        gridPanel.clearHover();
+        repaint();
+    }
+
+    private void initButtons() {
+        palettePanel.moveButton.addActionListener(e -> setMouseMoveMode());
+        palettePanel.wireModeButton.addActionListener(e -> setWireMode());
+        add(palettePanel.moveButton);
+        add(palettePanel.wireModeButton);
     }
 
     private void initResizeListener() {
