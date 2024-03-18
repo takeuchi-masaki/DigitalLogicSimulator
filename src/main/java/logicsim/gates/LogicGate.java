@@ -86,7 +86,7 @@ public abstract class LogicGate implements Cloneable {
 
     protected BufferedImage resizeImage(BufferedImage original) {
         int dim = LogicGate.gridScale * 4;
-        BufferedImage resizedImage = new BufferedImage(dim, dim, original.getType());
+        BufferedImage resizedImage = new BufferedImage(dim, dim, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = resizedImage.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.drawImage(original, 0, 0, dim, dim, null);

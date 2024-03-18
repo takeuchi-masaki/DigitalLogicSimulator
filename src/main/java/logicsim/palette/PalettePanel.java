@@ -11,8 +11,12 @@ public class PalettePanel {
     private int width = 300, height = 900;
     final int scale = 50;
     private final List<PaletteComponent> paletteComponents;
+    private final PaletteButton moveButton;
+    private final PaletteButton wireModeButton;
 
     private PalettePanel() {
+        moveButton = new MoveButton(true, new Point(50, 50), 80, 80);
+        wireModeButton = new WireModeButton(false, new Point(150, 50), 100, 80);
         paletteComponents = new ArrayList<>();
         getPaletteComponents();
     }
@@ -30,20 +34,20 @@ public class PalettePanel {
     }
 
     private void getPaletteComponents() {
-        Point palettePosition = new Point(scale / 2, scale / 2);
+        Point palettePosition = new Point(scale / 2 + 20, scale / 2 + scale * 3);
         PaletteComponent.setDimensions(this.width - 2 * scale, scale * 3);
 
         paletteComponents.add(
                 new PaletteComponent(
                         new ANDGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += scale * 3;
+        palettePosition.y += scale * 3 + 10;
 
         paletteComponents.add(
                 new PaletteComponent(
                         new ORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += scale * 3;
+        palettePosition.y += scale * 3 + 10;
 
         paletteComponents.add(
                 new PaletteComponent(
@@ -74,6 +78,8 @@ public class PalettePanel {
     public void draw(Graphics2D g) {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, width, height);
+        moveButton.draw(g);
+        wireModeButton.draw(g);
         for (PaletteComponent component : paletteComponents) {
             component.draw(g);
         }

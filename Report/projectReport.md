@@ -34,3 +34,5 @@ In the third week, the gate display was updated to use images instead of drawing
 - Java Swing documentation
 - ChatGPT
 - Logic Gate images taken from https://www.categories.acsl.org/wiki/index.php?title=Digital_Electronics
+- Mouse button image taken from https://en.m.wikipedia.org/wiki/File:Mouse-cursor-hand-pointer.svg
+- Add button image taken from https://www.cleanpng.com/png-plus-and-minus-signs-clip-art-3214188/

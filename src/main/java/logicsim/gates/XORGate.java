@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 public class XORGate extends LogicGate {
     private static BufferedImage image = null;
     private static BufferedImage scaledImage = null;
-    private static final String imagePath = "/logicsim/gates/XorGate.png";
+    private static final String imagePath = "/gates/XorGate.png";
 
     public XORGate() {
         super();

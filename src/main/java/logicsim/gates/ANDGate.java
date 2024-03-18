@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 public class ANDGate extends LogicGate {
     private static BufferedImage image = null;
     private static BufferedImage scaledImage = null;
-    private static final String imagePath = "/logicsim/gates/AndGate.png";
+    private static final String imagePath = "/gates/AndGate.png";
 
     public ANDGate() {
         super();
