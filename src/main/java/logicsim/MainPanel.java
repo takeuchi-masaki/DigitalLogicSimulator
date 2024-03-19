@@ -2,6 +2,7 @@ package logicsim;
 
 import logicsim.gates.*;
 import logicsim.grid.GridPanel;
+import logicsim.grid.WireComponent;
 import logicsim.mouseAdapters.MouseMode;
 import logicsim.mouseAdapters.MoveMode;
 import logicsim.mouseAdapters.WireMode;
@@ -16,9 +17,10 @@ public class MainPanel extends JPanel {
     private static final PalettePanel palettePanel = PalettePanel.getInstance();
     private static final GridPanel gridPanel = GridPanel.getInstance();
     private LogicGate selectedComponent = null;
-    MouseMode currentMode;
-    MouseAdapter moveMode = new MoveMode(this);
-    MouseAdapter wireMode = new WireMode(this);
+    private WireComponent hoveredWire = null;
+    private MouseMode currentMode;
+    private final MouseAdapter moveMode = new MoveMode(this);
+    private final MouseAdapter wireMode = new WireMode(this);
 
     public MainPanel() {
         setLayout(null);
@@ -33,11 +35,13 @@ public class MainPanel extends JPanel {
         palettePanel.moveButton.setSelected(true);
         palettePanel.wireModeButton.setSelected(false);
         if (currentMode == MouseMode.MOVE_MODE) return;
+        hoveredWire = null;
         currentMode = MouseMode.MOVE_MODE;
         removeMouseListener(wireMode);
         removeMouseMotionListener(wireMode);
         addMouseListener(moveMode);
         addMouseMotionListener(moveMode);
+        repaint();
     }
 
     public void setWireMode(){
@@ -50,7 +54,7 @@ public class MainPanel extends JPanel {
         addMouseListener(wireMode);
         addMouseMotionListener(wireMode);
         palettePanel.clearHover();
-        gridPanel.clearHover();
+        gridPanel.clearComponentHover();
         repaint();
     }
 
@@ -156,6 +160,18 @@ public class MainPanel extends JPanel {
         repaint();
     }
 
+    public void hoverWire(Point mousePosition) {
+        hoveredWire = gridPanel.closestWire(mousePosition);
+        repaint();
+    }
+
+    public void addWire() {
+        if (hoveredWire == null) return;
+        gridPanel.addWire(hoveredWire);
+        hoveredWire = null;
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -166,6 +182,12 @@ public class MainPanel extends JPanel {
         palettePanel.draw(g2d);
         if (selectedComponent != null) {
             selectedComponent.drawScaled(g2d, selectedComponent.getCenter());
+        }
+        if (hoveredWire != null) {
+            hoveredWire.drawHovered(g2d,
+                    gridPanel.absolutePoint(hoveredWire.start),
+                    gridPanel.absolutePoint(hoveredWire.end)
+            );
         }
     }
 }

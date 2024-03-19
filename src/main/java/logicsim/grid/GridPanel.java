@@ -12,10 +12,11 @@ public class GridPanel {
     private static int gridSize = 20;
     private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GridComponent> gridComponentMap;
-//    private final List<WireComponent> wireComponentList; // TODO: wires
+    private final ArrayList<WireComponent> wires;
 
     private GridPanel() {
         gridComponentMap = new HashMap<>();
+        wires = new ArrayList<>();
     }
 
     public static GridPanel getInstance() {
@@ -33,30 +34,50 @@ public class GridPanel {
 
     public Point relativePoint(Point absPoint) {
         return new Point(
-                (int)round((absPoint.x - startWidth) / (double)gridSize),
-                (int)round(absPoint.y / (double)gridSize)
+            (int)round((absPoint.x - startWidth) / (double)gridSize),
+            (int)round(absPoint.y / (double)gridSize)
         );
     }
 
     public Point absolutePoint(Point relPoint) {
-        return new Point(relPoint.x * gridSize + startWidth, relPoint.y * gridSize);
+        return new Point(
+        relPoint.x * gridSize + startWidth,
+        relPoint.y * gridSize
+        );
     }
 
     public Point closestAbsPoint(Point mousePos) {
         return absolutePoint(relativePoint(mousePos));
     }
 
-    public void draw(Graphics2D g) {
-        g.setColor(Color.LIGHT_GRAY);
-        for (int x = startWidth; x < endWidth; x += gridSize) {
-            for (int y = 0; y < height; y += gridSize) {
-                g.drawLine(x, 0, x, height);
-                g.drawLine(x, y, endWidth, y);
+    public WireComponent closestWire(Point mousePosition) {
+        final int[] dx = { -1, 1, 0, 0 };
+        final int[] dy = { 0, 0, -1, 1 };
+        Point start = relativePoint(mousePosition);
+        Point absStart = absolutePoint(start);
+        int best = Integer.MAX_VALUE;
+        Point bestEnd = new Point();
+        for (int i = 0; i < 4; i++) {
+            Point end = new Point(start.x + dx[i], start.y + dy[i]);
+            if ((start.x <= 0 && end.x <= 0)
+                || (start.y <= 0 && end.y <= 0)) {
+                continue;
+            }
+            Point absEnd = absolutePoint(end);
+            int dist = abs(mousePosition.x - (absStart.x + absEnd.x) / 2)
+                    + abs(mousePosition.y - (absStart.y + absEnd.y) / 2);
+            if (dist < best) {
+                best = dist;
+                bestEnd = end;
             }
         }
-        for (GridComponent component : gridComponentMap.values()) {
-            Point drawLocation = absolutePoint(component.gate.getTopLeft());
-            component.draw(g, drawLocation);
+        if (best == Integer.MAX_VALUE) return null;
+        return new WireComponent(start, bestEnd);
+    }
+
+    public void addWire(WireComponent wire) {
+        if (!wires.contains(wire)) {
+            wires.add(wire);
         }
     }
 
@@ -69,7 +90,7 @@ public class GridPanel {
         gridComponentMap.remove(selectedID);
     }
 
-    public void clearHover() {
+    public void clearComponentHover() {
         for (GridComponent component : gridComponentMap.values()) {
             component.setHovered(false);
         }
@@ -116,6 +137,23 @@ public class GridPanel {
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage(gridSize);
+        }
+    }
+
+    public void draw(Graphics2D g) {
+        g.setColor(Color.LIGHT_GRAY);
+        for (int x = startWidth; x < endWidth; x += gridSize) {
+            for (int y = 0; y < height; y += gridSize) {
+                g.drawLine(x, 0, x, height);
+                g.drawLine(x, y, endWidth, y);
+            }
+        }
+        for (GridComponent component : gridComponentMap.values()) {
+            Point drawLocation = absolutePoint(component.gate.getTopLeft());
+            component.draw(g, drawLocation);
+        }
+        for (WireComponent wire : wires) {
+            wire.draw(g, absolutePoint(wire.start), absolutePoint(wire.end));
         }
     }
 }

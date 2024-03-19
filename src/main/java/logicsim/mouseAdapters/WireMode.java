@@ -15,7 +15,7 @@ public class WireMode extends MouseAdapter {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
+        mainPanel.hoverWire(e.getPoint());
     }
 
     @Override
@@ -24,17 +24,7 @@ public class WireMode extends MouseAdapter {
         if (mousePosition.x < 300) {
             mainPanel.setMouseMoveMode();
         } else {
-
+            mainPanel.addWire();
         }
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
     }
 }

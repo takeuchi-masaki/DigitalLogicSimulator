@@ -1,29 +1,55 @@
-//package logicsim;
-//
-//import java.awt.*;
-//
-//public class WireComponent {
-//    Point start, end;
-//
-//    public WireComponent(Point start, Point end) {
-//        this.start = start;
-//        this.end = end;
-//    }
-//
-//    void draw(Graphics2D g) {
-//        // Save the original state
-//        Stroke originalStroke = g.getStroke();
-//        Color originalColor = g.getColor();
-//
-//        // Set custom properties
-//        g.setStroke(new BasicStroke(2f)); // Set a custom stroke
-//        g.setColor(Color.RED); // Set a custom color
-//
-//        // Perform custom drawing
-//        g.drawLine(start.x, start.y, end.x, end.y);
-//
-//        // Restore original state
-//        g.setStroke(originalStroke);
-//        g.setColor(originalColor);
-//    }
-//}
+package logicsim.grid;
+
+import java.awt.*;
+
+public class WireComponent {
+    public Point start, end;
+
+    public WireComponent(Point start, Point end) {
+        boolean startLower;
+        if (start.x == end.x) {
+            startLower = start.y < end.y;
+        } else {
+            startLower = start.x < end.x;
+        }
+        if (startLower) {
+            this.start = start;
+            this.end = end;
+        } else {
+            this.start = end;
+            this.end = start;
+        }
+    }
+
+    /**
+        Draw to absolute points
+     */
+    public void draw(Graphics2D g, Point startStroke, Point endStroke) {
+        Stroke originalStroke = g.getStroke();
+        Color originalColor = g.getColor();
+
+        g.setStroke(new BasicStroke(3f));
+        g.setColor(Color.RED);
+        g.drawLine(startStroke.x, startStroke.y, endStroke.x, endStroke.y);
+
+        g.setStroke(originalStroke);
+        g.setColor(originalColor);
+    }
+
+    public void drawHovered(Graphics2D g, Point startStroke, Point endStroke) {
+        Stroke originalStroke = g.getStroke();
+        Color originalColor = g.getColor();
+
+        g.setStroke(new BasicStroke(3f));
+        g.setColor(Color.BLACK);
+        g.drawLine(startStroke.x, startStroke.y, endStroke.x, endStroke.y);
+
+        g.setStroke(originalStroke);
+        g.setColor(originalColor);
+    }
+
+    @Override
+    public String toString() {
+        return "{ [" + start.x + ", " + start.y + "], [" + end.x + ", " + end.y + "] }";
+    }
+}
