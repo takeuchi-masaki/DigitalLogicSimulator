@@ -1,6 +1,8 @@
 package logicsim.grid;
 
 import logicsim.gates.*;
+import logicsim.inout.InputComponent;
+import logicsim.inout.OutputComponent;
 import logicsim.mouseAdapters.ModeEnum;
 
 import java.awt.*;
@@ -11,11 +13,13 @@ import static java.lang.Math.*;
 public class GridPanel {
     private static GridPanel INSTANCE = null;
     private final int defaultGridSize = 20;
-    private static int gridSize;
+    public static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GridComponent> gridComponentMap;
     private final ArrayList<WireComponent> wires;
     public ModeEnum currentMode;
+    private InputComponent test1 = new InputComponent(new Point(10, 10), true);
+    private OutputComponent test2 = new OutputComponent(new Point(15, 15), false);
 
     private GridPanel() {
         gridComponentMap = new HashMap<>();
@@ -185,7 +189,13 @@ public class GridPanel {
             component.draw(g, drawLocation, color);
         }
         for (WireComponent wire : wires) {
-            wire.draw(g, absolutePoint(wire.start), absolutePoint(wire.end), Color.BLACK);
+            wire.draw(g,
+                    absolutePoint(wire.start),
+                    absolutePoint(wire.end),
+                    Color.BLACK,
+                    gridSize * 0.2f);
         }
+        test1.draw(g, absolutePoint(test1.position), gridSize);
+        test2.draw(g, absolutePoint(test2.position), gridSize);
     }
 }

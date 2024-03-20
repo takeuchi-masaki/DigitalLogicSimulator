@@ -108,7 +108,7 @@ public class MainPanel extends JPanel {
     }
 
     public void selectHoveredComponent() {
-        LogicGate hovering = palettePanel.checkHover();
+        LogicGate hovering = palettePanel.checkGateHover();
         if (hovering == null) {
             hovering = gridPanel.checkComponentHover();
         }
@@ -191,19 +191,20 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selectedComponent != null) {
-            Color color = currentMode.getMode() == ModeEnum.DELETE_MODE
+            Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
                     ? Color.RED
                     : Color.LIGHT_GRAY;
             selectedComponent.drawScaled(g2d, selectedComponent.getCenter(), color);
         }
         if (hoveredWire != null) {
-            Color color = currentMode.getMode() == ModeEnum.DELETE_MODE
+            Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
                 ? Color.RED
                 : Color.BLUE;
             hoveredWire.draw(g2d,
                 gridPanel.absolutePoint(hoveredWire.start),
                 gridPanel.absolutePoint(hoveredWire.end),
-                color
+                color,
+                GridPanel.gridSize * 0.2f
             );
         }
     }

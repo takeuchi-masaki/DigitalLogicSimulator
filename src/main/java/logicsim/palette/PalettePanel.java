@@ -10,7 +10,7 @@ public class PalettePanel {
     private static PalettePanel INSTANCE = null;
     private int width = 300, height = 900;
     final int scale = 50;
-    private final List<PaletteComponent> paletteComponents;
+    private final List<PaletteGateComponent> paletteGateComponents;
     public final PaletteButton moveButton;
     public final PaletteButton wireModeButton;
     public final PaletteButton deleteModeButton;
@@ -19,7 +19,7 @@ public class PalettePanel {
         moveButton = new MoveButton(true, new Point(5, 50), 90, 100);
         wireModeButton = new WireModeButton(false, new Point(105, 50), 90, 100);
         deleteModeButton = new DeleteModeButton(false, new Point(205, 50), 90, 100);
-        paletteComponents = new ArrayList<>();
+        paletteGateComponents = new ArrayList<>();
         getPaletteComponents();
     }
 
@@ -37,35 +37,35 @@ public class PalettePanel {
 
     private void getPaletteComponents() {
         Point palettePosition = new Point(scale / 2 + 20, scale / 2 + scale * 3);
-        PaletteComponent.setDimensions(this.width - 2 * scale, scale * 3);
+        PaletteGateComponent.setDimensions(this.width - 2 * scale, scale * 3);
 
-        paletteComponents.add(
-                new PaletteComponent(
+        paletteGateComponents.add(
+                new PaletteGateComponent(
                         new ANDGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
         palettePosition.y += scale * 3 + 10;
 
-        paletteComponents.add(
-                new PaletteComponent(
+        paletteGateComponents.add(
+                new PaletteGateComponent(
                         new ORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
         palettePosition.y += scale * 3 + 10;
 
-        paletteComponents.add(
-                new PaletteComponent(
+        paletteGateComponents.add(
+                new PaletteGateComponent(
                         new XORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
     }
 
     public void clearHover() {
-        for (PaletteComponent component : paletteComponents) {
+        for (PaletteGateComponent component : paletteGateComponents) {
             component.setHovered(false);
         }
     }
 
     public boolean modifyHover(Point mouseLocation) {
         boolean modified = false;
-        for (PaletteComponent component : paletteComponents) {
+        for (PaletteGateComponent component : paletteGateComponents) {
             if (component.contains(mouseLocation) != component.isHovered()) {
                 component.setHovered(!component.isHovered());
                 modified = true;
@@ -74,8 +74,8 @@ public class PalettePanel {
         return modified;
     }
 
-    public LogicGate checkHover() {
-        for (PaletteComponent component : paletteComponents) {
+    public LogicGate checkGateHover() {
+        for (PaletteGateComponent component : paletteGateComponents) {
             if (component.isHovered()) {
                 return component.getGate();
             }
@@ -86,7 +86,7 @@ public class PalettePanel {
     public void draw(Graphics2D g) {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, width, height);
-        for (PaletteComponent component : paletteComponents) {
+        for (PaletteGateComponent component : paletteGateComponents) {
             component.draw(g);
         }
     }

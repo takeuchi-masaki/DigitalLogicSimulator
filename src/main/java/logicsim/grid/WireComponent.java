@@ -24,11 +24,11 @@ public class WireComponent {
     /**
         Draw to absolute points
      */
-    public void draw(Graphics2D g, Point startStroke, Point endStroke, Color color) {
+    public void draw(Graphics2D g, Point startStroke, Point endStroke, Color color, float strokeWidth) {
         Stroke originalStroke = g.getStroke();
         Color originalColor = g.getColor();
 
-        g.setStroke(new BasicStroke(3f));
+        g.setStroke(new BasicStroke(strokeWidth));
         g.setColor(color);
         g.drawLine(startStroke.x, startStroke.y, endStroke.x, endStroke.y);
 

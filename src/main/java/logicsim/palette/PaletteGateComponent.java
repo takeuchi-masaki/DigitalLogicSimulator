@@ -5,7 +5,7 @@ import logicsim.gates.LogicGate;
 
 import java.awt.*;
 
-public class PaletteComponent {
+public class PaletteGateComponent {
     static final int scale = 50; // scale does not change for the Palette Panel
     private final LogicGate logicGate;
     private final Rectangle bounds;
@@ -13,7 +13,7 @@ public class PaletteComponent {
     private static int height;
     private boolean hover;
 
-    public PaletteComponent(LogicGate logicGate, Point position) {
+    public PaletteGateComponent(LogicGate logicGate, Point position) {
         this.logicGate = logicGate;
         this.bounds = new Rectangle(position.x, position.y, width, height);
         this.hover = false;
@@ -54,8 +54,8 @@ public class PaletteComponent {
     }
 
     public static void setDimensions(int width, int height) {
-        PaletteComponent.width = width;
-        PaletteComponent.height = height;
+        PaletteGateComponent.width = width;
+        PaletteGateComponent.height = height;
     }
 
     public GateType getType() {
