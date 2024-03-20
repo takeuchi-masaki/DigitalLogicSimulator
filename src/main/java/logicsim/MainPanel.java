@@ -35,6 +35,7 @@ public class MainPanel extends JPanel {
         palettePanel.wireModeButton.setSelected(mode.getMode() == palettePanel.wireModeButton.getMode());
         palettePanel.deleteModeButton.setSelected(mode.getMode() == palettePanel.deleteModeButton.getMode());
         if (currentMode == mode) return;
+        gridPanel.currentMode = mode.getMode();
         palettePanel.clearHover();
         gridPanel.clearComponentHover();
         removeMouseListener(currentMode);
@@ -190,12 +191,15 @@ public class MainPanel extends JPanel {
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
         if (selectedComponent != null) {
-            selectedComponent.drawScaled(g2d, selectedComponent.getCenter());
+            Color color = currentMode.getMode() == ModeEnum.DELETE_MODE
+                    ? Color.RED
+                    : Color.LIGHT_GRAY;
+            selectedComponent.drawScaled(g2d, selectedComponent.getCenter(), color);
         }
         if (hoveredWire != null) {
-            Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE
+            Color color = currentMode.getMode() == ModeEnum.DELETE_MODE
                 ? Color.RED
-                : Color.BLUE);
+                : Color.BLUE;
             hoveredWire.draw(g2d,
                 gridPanel.absolutePoint(hoveredWire.start),
                 gridPanel.absolutePoint(hoveredWire.end),

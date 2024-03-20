@@ -31,7 +31,10 @@ public class PaletteComponent {
         g.drawString(logicGate.toString(), bounds.x + 10, bounds.y + 70);
 
         // Draw the gate preview
-        logicGate.draw(g, new Point(bounds.x + (int)(scale * 1.8), bounds.y + scale / 2));
+        Color color = logicGate.isHovered()
+                ? Color.LIGHT_GRAY
+                : null;
+        logicGate.drawPalette(g, new Point(bounds.x + (int)(scale * 1.8), bounds.y + scale / 2), color);
     }
 
     public void setHovered(boolean isHovered) {

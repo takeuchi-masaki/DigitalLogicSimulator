@@ -36,17 +36,17 @@ public class ORGate extends LogicGate {
     }
 
     @Override
-    public void draw(Graphics2D g, Point drawPosition) {
-        draw(g, drawPosition, image);
+    public void drawPalette(Graphics2D g, Point drawPosition, Color color) {
+        drawScaled(g, drawPosition, image, color);
     }
 
     @Override
-    public void drawScaled(Graphics2D g, Point drawPosition) {
-        draw(g, drawPosition, scaledImage);
+    public void drawScaled(Graphics2D g, Point drawPosition, Color color) {
+        drawScaled(g, drawPosition, scaledImage, color);
     }
 
     @Override
-    public void resizeImage(int newScale) {
+    public void resizeImage() {
         scaledImage = resizeImage(image);
     }
 

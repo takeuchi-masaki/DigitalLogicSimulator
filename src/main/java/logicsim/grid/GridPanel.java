@@ -1,6 +1,7 @@
 package logicsim.grid;
 
 import logicsim.gates.*;
+import logicsim.mouseAdapters.ModeEnum;
 
 import java.awt.*;
 import java.util.*;
@@ -9,11 +10,12 @@ import static java.lang.Math.*;
 
 public class GridPanel {
     private static GridPanel INSTANCE = null;
-    private final int defaultGridSize = 30;
+    private final int defaultGridSize = 20;
     private static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GridComponent> gridComponentMap;
     private final ArrayList<WireComponent> wires;
+    public ModeEnum currentMode;
 
     private GridPanel() {
         gridComponentMap = new HashMap<>();
@@ -142,7 +144,7 @@ public class GridPanel {
         gridSize = (int)min(80, gridSize * 1.2);
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
-            gate.resizeImage(gridSize);
+            gate.resizeImage();
         }
     }
 
@@ -150,7 +152,7 @@ public class GridPanel {
         gridSize = (int)max(5, gridSize / 1.2);
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
-            gate.resizeImage(gridSize);
+            gate.resizeImage();
         }
     }
 
@@ -158,7 +160,7 @@ public class GridPanel {
         gridSize = defaultGridSize;
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
-            gate.resizeImage(gridSize);
+            gate.resizeImage();
         }
     }
 
@@ -172,7 +174,15 @@ public class GridPanel {
         }
         for (GridComponent component : gridComponentMap.values()) {
             Point drawLocation = absolutePoint(component.gate.getTopLeft());
-            component.draw(g, drawLocation);
+            Color color = null;
+            if (component.isHovered()) {
+                if (currentMode == ModeEnum.DELETE_MODE) {
+                    color = Color.RED;
+                } else {
+                    color = Color.LIGHT_GRAY;
+                }
+            }
+            component.draw(g, drawLocation, color);
         }
         for (WireComponent wire : wires) {
             wire.draw(g, absolutePoint(wire.start), absolutePoint(wire.end), Color.BLACK);

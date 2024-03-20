@@ -16,9 +16,8 @@ public abstract class LogicGate implements Cloneable {
     protected boolean input1Not = false, input2Not = false, outputNot = false;
     protected Point topLeft;
     protected Point center;
-    protected short orientation = 1;
     protected boolean hovered = false;
-    protected static final int defaultScale = 20;
+    protected static final int defaultScale = 25;
     protected static int gridScale = 20;
     private static List<LogicGate> GATE_TYPES;
 
@@ -70,7 +69,7 @@ public abstract class LogicGate implements Cloneable {
         BufferedImage result = null;
         try {
             BufferedImage original = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(path)));
-            int resizeX = defaultScale * 5, resizeY = defaultScale * 5;
+            int resizeX = defaultScale * 4, resizeY = defaultScale * 4;
             result = new BufferedImage(resizeX, resizeY, original.getType());
             Graphics2D g2d = result.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -85,7 +84,7 @@ public abstract class LogicGate implements Cloneable {
     }
 
     protected BufferedImage resizeImage(BufferedImage original) {
-        int dim = LogicGate.gridScale * 4;
+        int dim = gridScale * 4;
         BufferedImage resizedImage = new BufferedImage(dim, dim, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = resizedImage.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -94,12 +93,8 @@ public abstract class LogicGate implements Cloneable {
         return resizedImage;
     }
 
-    protected void draw(Graphics2D g, Point drawPosition, BufferedImage image) {
-        if (isHovered()) {
-            g.drawImage(image, drawPosition.x, drawPosition.y, Color.LIGHT_GRAY, null);
-        } else {
-            g.drawImage(image, drawPosition.x, drawPosition.y, null);
-        }
+    protected void drawScaled(Graphics2D g, Point drawPosition, BufferedImage image, Color color) {
+        g.drawImage(image, drawPosition.x, drawPosition.y, color, null);
     }
 
     public void setInput1Not(boolean val) { input1Not = val; }
@@ -114,17 +109,9 @@ public abstract class LogicGate implements Cloneable {
         topLeft.y = center.y - 2;
     }
 
-    public void turn() {
-        if (++orientation == 4) {
-            orientation = 0;
-        }
-    }
-
     public static void resizeScale(int newScale) {
         gridScale = newScale;
     }
-
-    public short getOrientation() { return orientation; }
 
     public int getID() { return id; }
 
@@ -142,11 +129,11 @@ public abstract class LogicGate implements Cloneable {
 
     abstract public boolean output(boolean input1, boolean input2);
 
-    abstract public void resizeImage(int newScale);
+    abstract public void resizeImage();
 
-    abstract public void draw(Graphics2D g, Point drawPosition);
+    abstract public void drawPalette(Graphics2D g, Point drawPosition, Color color);
 
-    abstract public void drawScaled(Graphics2D g, Point drawPosition);
+    abstract public void drawScaled(Graphics2D g, Point drawPosition, Color color);
 
     abstract public GateType getType();
 
@@ -155,9 +142,6 @@ public abstract class LogicGate implements Cloneable {
         copy.input1Not = this.input1Not;
         copy.input2Not = this.input2Not;
         copy.outputNot = this.outputNot;
-        while(copy.getOrientation() != this.orientation) {
-            copy.turn();
-        }
         return copy;
     }
 
@@ -167,9 +151,6 @@ public abstract class LogicGate implements Cloneable {
         deepCopy.input1Not = this.input1Not;
         deepCopy.input2Not = this.input2Not;
         deepCopy.outputNot = this.outputNot;
-        while(deepCopy.getOrientation() != this.orientation) {
-            deepCopy.turn();
-        }
         return deepCopy;
     }
 
