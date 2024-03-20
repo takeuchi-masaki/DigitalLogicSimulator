@@ -49,18 +49,18 @@ public class PaletteGateComponent {
         return bounds.contains(p);
     }
 
-    public int getID() {
-        return logicGate.getID();
-    }
+//    public int getID() {
+//        return logicGate.getID();
+//    }
 
     public static void setDimensions(int width, int height) {
         PaletteGateComponent.width = width;
         PaletteGateComponent.height = height;
     }
 
-    public GateType getType() {
-        return logicGate.getType();
-    }
+//    public GateType getType() {
+//        return logicGate.getType();
+//    }
 
     public LogicGate getGate() {
         return logicGate;
