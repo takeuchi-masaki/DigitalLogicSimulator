@@ -3,14 +3,11 @@ package logicsim.mouseAdapters;
 import logicsim.MainPanel;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class WireMode extends MouseAdapter {
-    MainPanel mainPanel;
-
+public class WireMode extends MouseMode {
     public WireMode(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
+        super(mainPanel);
     }
 
     @Override
@@ -22,9 +19,14 @@ public class WireMode extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         Point mousePosition = e.getPoint();
         if (mousePosition.x < 300) {
-            mainPanel.setMouseMoveMode();
+            mainPanel.setMode(mainPanel.moveMode);
         } else {
             mainPanel.addWire();
         }
+    }
+
+    @Override
+    public ModeEnum getMode() {
+        return ModeEnum.WIRE_MODE;
     }
 }

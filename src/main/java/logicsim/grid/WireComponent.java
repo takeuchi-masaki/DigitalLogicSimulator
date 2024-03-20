@@ -24,24 +24,12 @@ public class WireComponent {
     /**
         Draw to absolute points
      */
-    public void draw(Graphics2D g, Point startStroke, Point endStroke) {
+    public void draw(Graphics2D g, Point startStroke, Point endStroke, Color color) {
         Stroke originalStroke = g.getStroke();
         Color originalColor = g.getColor();
 
         g.setStroke(new BasicStroke(3f));
-        g.setColor(Color.RED);
-        g.drawLine(startStroke.x, startStroke.y, endStroke.x, endStroke.y);
-
-        g.setStroke(originalStroke);
-        g.setColor(originalColor);
-    }
-
-    public void drawHovered(Graphics2D g, Point startStroke, Point endStroke) {
-        Stroke originalStroke = g.getStroke();
-        Color originalColor = g.getColor();
-
-        g.setStroke(new BasicStroke(3f));
-        g.setColor(Color.BLACK);
+        g.setColor(color);
         g.drawLine(startStroke.x, startStroke.y, endStroke.x, endStroke.y);
 
         g.setStroke(originalStroke);

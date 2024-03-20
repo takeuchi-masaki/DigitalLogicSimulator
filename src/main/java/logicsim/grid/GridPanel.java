@@ -9,7 +9,8 @@ import static java.lang.Math.*;
 
 public class GridPanel {
     private static GridPanel INSTANCE = null;
-    private static int gridSize = 20;
+    private final int defaultGridSize = 30;
+    private static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GridComponent> gridComponentMap;
     private final ArrayList<WireComponent> wires;
@@ -17,6 +18,7 @@ public class GridPanel {
     private GridPanel() {
         gridComponentMap = new HashMap<>();
         wires = new ArrayList<>();
+        resetZoom();
     }
 
     public static GridPanel getInstance() {
@@ -116,6 +118,26 @@ public class GridPanel {
         return null;
     }
 
+    public boolean containsWire(WireComponent hoveredWire) {
+        for (WireComponent wire : wires) {
+            if (wire.start.equals(hoveredWire.start)
+                && wire.end.equals(hoveredWire.end)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeWire(WireComponent hoveredWire) {
+        for (int i = 0; i < wires.size(); i++) {
+            if (wires.get(i).start.equals(hoveredWire.start)
+                    && wires.get(i).end.equals(hoveredWire.end)) {
+                wires.remove(i);
+                return;
+            }
+        }
+    }
+
     public void zoomIn() {
         gridSize = (int)min(80, gridSize * 1.2);
         LogicGate.resizeScale(gridSize);
@@ -133,7 +155,7 @@ public class GridPanel {
     }
 
     public void resetZoom() {
-        gridSize = 20;
+        gridSize = defaultGridSize;
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage(gridSize);
@@ -153,7 +175,7 @@ public class GridPanel {
             component.draw(g, drawLocation);
         }
         for (WireComponent wire : wires) {
-            wire.draw(g, absolutePoint(wire.start), absolutePoint(wire.end));
+            wire.draw(g, absolutePoint(wire.start), absolutePoint(wire.end), Color.BLACK);
         }
     }
 }

@@ -1,5 +1,7 @@
 package logicsim.palette;
 
+import logicsim.mouseAdapters.ModeEnum;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ import static java.lang.System.exit;
 public abstract class PaletteButton extends JToggleButton {
     int width, height;
 
-    public PaletteButton(boolean enable, Point position, int width, int height) {
+    protected PaletteButton(boolean enable, Point position, int width, int height) {
         super();
         this.width = width;
         this.height = height;
@@ -38,4 +40,6 @@ public abstract class PaletteButton extends JToggleButton {
         }
         return result;
     }
+
+    abstract public ModeEnum getMode();
 }

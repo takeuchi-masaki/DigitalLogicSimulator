@@ -3,9 +3,7 @@ package logicsim;
 import logicsim.gates.*;
 import logicsim.grid.GridPanel;
 import logicsim.grid.WireComponent;
-import logicsim.mouseAdapters.MouseMode;
-import logicsim.mouseAdapters.MoveMode;
-import logicsim.mouseAdapters.WireMode;
+import logicsim.mouseAdapters.*;
 import logicsim.palette.PalettePanel;
 
 import javax.swing.*;
@@ -19,8 +17,9 @@ public class MainPanel extends JPanel {
     private LogicGate selectedComponent = null;
     private WireComponent hoveredWire = null;
     private MouseMode currentMode;
-    private final MouseAdapter moveMode = new MoveMode(this);
-    private final MouseAdapter wireMode = new WireMode(this);
+    public final MouseMode moveMode = new MoveMode(this);
+    public final MouseMode wireMode = new WireMode(this);
+    public final MouseMode deleteMode = new DeleteMode(this);
 
     public MainPanel() {
         setLayout(null);
@@ -28,41 +27,31 @@ public class MainPanel extends JPanel {
         initButtons();
         initResizeListener();
         initKeyListener();
-        setMouseMoveMode();
+        setMode(moveMode);
     }
 
-    public void setMouseMoveMode() {
-        palettePanel.moveButton.setSelected(true);
-        palettePanel.wireModeButton.setSelected(false);
-        if (currentMode == MouseMode.MOVE_MODE) return;
-        hoveredWire = null;
-        currentMode = MouseMode.MOVE_MODE;
-        removeMouseListener(wireMode);
-        removeMouseMotionListener(wireMode);
-        addMouseListener(moveMode);
-        addMouseMotionListener(moveMode);
-        repaint();
-    }
-
-    public void setWireMode(){
-        palettePanel.wireModeButton.setSelected(true);
-        palettePanel.moveButton.setSelected(false);
-        if (currentMode == MouseMode.WIRE_MODE) return;
-        currentMode = MouseMode.WIRE_MODE;
-        removeMouseListener(moveMode);
-        removeMouseMotionListener(moveMode);
-        addMouseListener(wireMode);
-        addMouseMotionListener(wireMode);
+    public void setMode(MouseMode mode) {
+        palettePanel.moveButton.setSelected(mode.getMode() == palettePanel.moveButton.getMode());
+        palettePanel.wireModeButton.setSelected(mode.getMode() == palettePanel.wireModeButton.getMode());
+        palettePanel.deleteModeButton.setSelected(mode.getMode() == palettePanel.deleteModeButton.getMode());
+        if (currentMode == mode) return;
         palettePanel.clearHover();
         gridPanel.clearComponentHover();
+        removeMouseListener(currentMode);
+        removeMouseMotionListener(currentMode);
+        currentMode = mode;
+        addMouseListener(mode);
+        addMouseMotionListener(mode);
         repaint();
     }
 
     private void initButtons() {
-        palettePanel.moveButton.addActionListener(e -> setMouseMoveMode());
-        palettePanel.wireModeButton.addActionListener(e -> setWireMode());
+        palettePanel.moveButton.addActionListener(e -> setMode(moveMode));
+        palettePanel.wireModeButton.addActionListener(e -> setMode(wireMode));
+        palettePanel.deleteModeButton.addActionListener(e -> setMode(deleteMode));
         add(palettePanel.moveButton);
         add(palettePanel.wireModeButton);
+        add(palettePanel.deleteModeButton);
     }
 
     private void initResizeListener() {
@@ -95,12 +84,12 @@ public class MainPanel extends JPanel {
             public void keyPressed(KeyEvent e) {
                 int keycode = e.getKeyCode();
                 if (keycode == KeyEvent.VK_ESCAPE) {
-                    setMouseMoveMode();
+                    setMode(moveMode);
                 } else if (keycode == KeyEvent.VK_W) {
-                    if (currentMode == MouseMode.WIRE_MODE) {
-                        setMouseMoveMode();
+                    if (currentMode.getMode() == ModeEnum.WIRE_MODE) {
+                        setMode(moveMode);
                     } else {
-                        setWireMode();
+                        setMode(wireMode);
                     }
                 }
             }
@@ -117,26 +106,21 @@ public class MainPanel extends JPanel {
         }
     }
 
-    public void selectHoveredComponent(Point mousePosition) {
+    public void selectHoveredComponent() {
         LogicGate hovering = palettePanel.checkHover();
         if (hovering == null) {
             hovering = gridPanel.checkComponentHover();
-            if (hovering == null)
-                return;
         }
+        if (hovering == null) return;
         if (hovering.getID() == -1) {
             selectedComponent = hovering.uniqueCopy();
         } else {
             selectedComponent = hovering.clone();
         }
-        selectedComponent.setPosition(selectedComponent.getTopLeft(mousePosition));
-        repaint();
     }
 
     public void dragSelectedComponent(Point mousePosition) {
-        if (selectedComponent == null) {
-            return;
-        }
+        if (selectedComponent == null) return;
         if (selectedComponent.getID() != -1) {
             gridPanel.removeComponent(selectedComponent.getID());
         }
@@ -150,12 +134,19 @@ public class MainPanel extends JPanel {
     }
 
     public void releaseSelectedComponent(Point mousePosition) {
-        if (selectedComponent == null) {
-            return;
-        }
+        if (selectedComponent == null) return;
         if (mousePosition.x > 300) {
             gridPanel.addComponent(selectedComponent, gridPanel.relativePoint(mousePosition));
         }
+        selectedComponent = null;
+        repaint();
+    }
+
+    public void removeComponent(Point mousePosition) {
+        checkComponentHover(mousePosition);
+        selectHoveredComponent();
+        if (selectedComponent == null) return;
+        gridPanel.removeComponent(selectedComponent.getID());
         selectedComponent = null;
         repaint();
     }
@@ -165,11 +156,29 @@ public class MainPanel extends JPanel {
         repaint();
     }
 
+    public boolean hoverExistingWire(Point mousePosition) {
+        hoveredWire = gridPanel.closestWire(mousePosition);
+        if (hoveredWire != null
+            && !gridPanel.containsWire(hoveredWire)) {
+            hoveredWire = null;
+        }
+        repaint();
+        return hoveredWire != null;
+    }
+
     public void addWire() {
         if (hoveredWire == null) return;
         gridPanel.addWire(hoveredWire);
         hoveredWire = null;
         repaint();
+    }
+
+    public boolean removeWire() {
+        if (hoveredWire == null) return false;
+        gridPanel.removeWire(hoveredWire);
+        hoveredWire = null;
+        repaint();
+        return true;
     }
 
     @Override
@@ -184,9 +193,13 @@ public class MainPanel extends JPanel {
             selectedComponent.drawScaled(g2d, selectedComponent.getCenter());
         }
         if (hoveredWire != null) {
-            hoveredWire.drawHovered(g2d,
-                    gridPanel.absolutePoint(hoveredWire.start),
-                    gridPanel.absolutePoint(hoveredWire.end)
+            Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE
+                ? Color.RED
+                : Color.BLUE);
+            hoveredWire.draw(g2d,
+                gridPanel.absolutePoint(hoveredWire.start),
+                gridPanel.absolutePoint(hoveredWire.end),
+                color
             );
         }
     }

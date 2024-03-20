@@ -13,10 +13,12 @@ public class PalettePanel {
     private final List<PaletteComponent> paletteComponents;
     public final PaletteButton moveButton;
     public final PaletteButton wireModeButton;
+    public final PaletteButton deleteModeButton;
 
     private PalettePanel() {
-        moveButton = new MoveButton(true, new Point(50, 50), 80, 100);
-        wireModeButton = new WireModeButton(false, new Point(150, 50), 80, 100);
+        moveButton = new MoveButton(true, new Point(5, 50), 90, 100);
+        wireModeButton = new WireModeButton(false, new Point(105, 50), 90, 100);
+        deleteModeButton = new DeleteModeButton(false, new Point(205, 50), 90, 100);
         paletteComponents = new ArrayList<>();
         getPaletteComponents();
     }
