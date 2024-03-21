@@ -1,4 +1,4 @@
-[![Digital Logic Simulator Demo](https://youtu.be/p3Ewi5c09FY/0.jpg)](https://youtu.be/p3Ewi5c09FY)
+[![Digital Logic Simulator Demo](https://img.youtube.com/vi/p3Ewi5c09FY/maxresdefault.jpg)](https://youtu.be/p3Ewi5c09FY)
 
 # Project Report
 
