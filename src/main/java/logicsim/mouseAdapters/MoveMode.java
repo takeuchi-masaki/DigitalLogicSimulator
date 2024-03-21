@@ -17,7 +17,13 @@ public class MoveMode extends MouseMode {
     @Override
     public void mousePressed(MouseEvent e) {
         mainPanel.selectHovered();
-        mainPanel.dragSelectedComponent(e.getPoint());
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            // left click
+            mainPanel.dragSelectedComponent(e.getPoint());
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            // right click, toggle input
+            mainPanel.toggleSelectedInput();
+        }
     }
 
     @Override

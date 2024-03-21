@@ -1,0 +1,2245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.2" class="java.beans.XMLDecoder">
+ <object class="logicsim.importexport.GridWrapper" id="GridWrapper0">
+  <void class="logicsim.importexport.GridWrapper" method="getField">
+   <string>gateIDCount</string>
+   <void method="set">
+    <object idref="GridWrapper0"/>
+    <int>4</int>
+   </void>
+  </void>
+  <void class="logicsim.importexport.GridWrapper" method="getField">
+   <string>inputOutputCount</string>
+   <void method="set">
+    <object idref="GridWrapper0"/>
+    <int>4</int>
+   </void>
+  </void>
+  <void class="logicsim.importexport.GridWrapper" method="getField">
+   <string>gates</string>
+   <void method="set">
+    <object idref="GridWrapper0"/>
+    <object class="java.util.ArrayList">
+     <void method="add">
+      <object class="logicsim.importexport.GateComponentWrapper" id="GateComponentWrapper0">
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>gateType</string>
+        <void method="set">
+         <object idref="GateComponentWrapper0"/>
+         <object class="java.lang.Enum" id="GateType0" method="valueOf">
+          <class>logicsim.gates.GateType</class>
+          <string>AND</string>
+         </object>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="GateComponentWrapper0"/>
+         <int>1</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerX</string>
+        <void method="set">
+         <object idref="GateComponentWrapper0"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerY</string>
+        <void method="set">
+         <object idref="GateComponentWrapper0"/>
+         <int>8</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.GateComponentWrapper" id="GateComponentWrapper1">
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>gateType</string>
+        <void method="set">
+         <object idref="GateComponentWrapper1"/>
+         <object idref="GateType0"/>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="GateComponentWrapper1"/>
+         <int>2</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerX</string>
+        <void method="set">
+         <object idref="GateComponentWrapper1"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerY</string>
+        <void method="set">
+         <object idref="GateComponentWrapper1"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.GateComponentWrapper" id="GateComponentWrapper2">
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>gateType</string>
+        <void method="set">
+         <object idref="GateComponentWrapper2"/>
+         <object class="java.lang.Enum" id="GateType1" method="valueOf">
+          <class>logicsim.gates.GateType</class>
+          <string>NOT</string>
+         </object>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="GateComponentWrapper2"/>
+         <int>3</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerX</string>
+        <void method="set">
+         <object idref="GateComponentWrapper2"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerY</string>
+        <void method="set">
+         <object idref="GateComponentWrapper2"/>
+         <int>8</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.GateComponentWrapper" id="GateComponentWrapper3">
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>gateType</string>
+        <void method="set">
+         <object idref="GateComponentWrapper3"/>
+         <object idref="GateType1"/>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="GateComponentWrapper3"/>
+         <int>4</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerX</string>
+        <void method="set">
+         <object idref="GateComponentWrapper3"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.GateComponentWrapper" method="getField">
+        <string>centerY</string>
+        <void method="set">
+         <object idref="GateComponentWrapper3"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void class="logicsim.importexport.GridWrapper" method="getField">
+   <string>inputOutputs</string>
+   <void method="set">
+    <object idref="GridWrapper0"/>
+    <object class="java.util.ArrayList">
+     <void method="add">
+      <object class="logicsim.importexport.InputOutputWrapper" id="InputOutputWrapper0">
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>type</string>
+        <void method="set">
+         <object idref="InputOutputWrapper0"/>
+         <object class="java.lang.Enum" id="InputOutputEnum0" method="valueOf">
+          <class>logicsim.inout.InputOutputEnum</class>
+          <string>IN</string>
+         </object>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="InputOutputWrapper0"/>
+         <int>1</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionX</string>
+        <void method="set">
+         <object idref="InputOutputWrapper0"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionY</string>
+        <void method="set">
+         <object idref="InputOutputWrapper0"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>enabled</string>
+        <void method="set">
+         <object idref="InputOutputWrapper0"/>
+         <boolean>true</boolean>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.InputOutputWrapper" id="InputOutputWrapper1">
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>type</string>
+        <void method="set">
+         <object idref="InputOutputWrapper1"/>
+         <object idref="InputOutputEnum0"/>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="InputOutputWrapper1"/>
+         <int>2</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionX</string>
+        <void method="set">
+         <object idref="InputOutputWrapper1"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionY</string>
+        <void method="set">
+         <object idref="InputOutputWrapper1"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>enabled</string>
+        <void method="set">
+         <object idref="InputOutputWrapper1"/>
+         <boolean>true</boolean>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.InputOutputWrapper" id="InputOutputWrapper2">
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>type</string>
+        <void method="set">
+         <object idref="InputOutputWrapper2"/>
+         <object class="java.lang.Enum" id="InputOutputEnum1" method="valueOf">
+          <class>logicsim.inout.InputOutputEnum</class>
+          <string>OUT</string>
+         </object>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="InputOutputWrapper2"/>
+         <int>3</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionX</string>
+        <void method="set">
+         <object idref="InputOutputWrapper2"/>
+         <int>20</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionY</string>
+        <void method="set">
+         <object idref="InputOutputWrapper2"/>
+         <int>8</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.InputOutputWrapper" id="InputOutputWrapper3">
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>type</string>
+        <void method="set">
+         <object idref="InputOutputWrapper3"/>
+         <object idref="InputOutputEnum1"/>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>id</string>
+        <void method="set">
+         <object idref="InputOutputWrapper3"/>
+         <int>4</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionX</string>
+        <void method="set">
+         <object idref="InputOutputWrapper3"/>
+         <int>20</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.InputOutputWrapper" method="getField">
+        <string>positionY</string>
+        <void method="set">
+         <object idref="InputOutputWrapper3"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void class="logicsim.importexport.GridWrapper" method="getField">
+   <string>wires</string>
+   <void method="set">
+    <object idref="GridWrapper0"/>
+    <object class="java.util.ArrayList">
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper0">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper0"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper0"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper0"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper0"/>
+         <int>7</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper1">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper1"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper1"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper1"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper1"/>
+         <int>7</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper2">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper2"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper2"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper2"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper2"/>
+         <int>7</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper3">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper3"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper3"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper3"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper3"/>
+         <int>7</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper4">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper4"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper4"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper4"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper4"/>
+         <int>16</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper5">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper5"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper5"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper5"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper5"/>
+         <int>16</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper6">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper6"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper6"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper6"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper6"/>
+         <int>16</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper7">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper7"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper7"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper7"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper7"/>
+         <int>16</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper8">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper8"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper8"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper8"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper8"/>
+         <int>8</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper9">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper9"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper9"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper9"/>
+         <int>19</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper9"/>
+         <int>8</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper10">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper10"/>
+         <int>19</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper10"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper10"/>
+         <int>20</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper10"/>
+         <int>8</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper11">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper11"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper11"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper11"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper11"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper12">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper12"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper12"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper12"/>
+         <int>19</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper12"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper13">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper13"/>
+         <int>19</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper13"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper13"/>
+         <int>20</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper13"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper14">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper14"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper14"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper14"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper14"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper15">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper15"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper15"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper15"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper15"/>
+         <int>10</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper16">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper16"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper16"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper16"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper16"/>
+         <int>11</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper17">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper17"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper17"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper17"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper17"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper18">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper18"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper18"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper18"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper18"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper19">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper19"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper19"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper19"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper19"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper20">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper20"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper20"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper20"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper20"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper21">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper21"/>
+         <int>14</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper21"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper21"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper21"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper22">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper22"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper22"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper22"/>
+         <int>14</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper22"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper23">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper23"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper23"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper23"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper23"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper24">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper24"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper24"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper24"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper24"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper25">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper25"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper25"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper25"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper25"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper26">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper26"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper26"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper26"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper26"/>
+         <int>13</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper27">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper27"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper27"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper27"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper27"/>
+         <int>14</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper28">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper28"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper28"/>
+         <int>14</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper28"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper28"/>
+         <int>14</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper29">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper29"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper29"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper29"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper29"/>
+         <int>16</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper30">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper30"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper30"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper30"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper30"/>
+         <int>17</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper31">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper31"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper31"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper31"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper31"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper32">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper32"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper32"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper32"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper32"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper33">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper33"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper33"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper33"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper33"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper34">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper34"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper34"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper34"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper34"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper35">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper35"/>
+         <int>14</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper35"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper35"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper35"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper36">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper36"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper36"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper36"/>
+         <int>14</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper36"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper37">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper37"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper37"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper37"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper37"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper38">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper38"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper38"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper38"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper38"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper39">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper39"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper39"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper39"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper39"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper40">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper40"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper40"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper40"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper40"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper41">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper41"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper41"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper41"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper41"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper42">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper42"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper42"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper42"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper42"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper43">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper43"/>
+         <int>6</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper43"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper43"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper43"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper44">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper44"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper44"/>
+         <int>18</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper44"/>
+         <int>6</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper44"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper45">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper45"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper45"/>
+         <int>17</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper45"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper45"/>
+         <int>18</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper46">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper46"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper46"/>
+         <int>16</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper46"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper46"/>
+         <int>17</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper47">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper47"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper47"/>
+         <int>15</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper47"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper47"/>
+         <int>16</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper48">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper48"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper48"/>
+         <int>14</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper48"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper48"/>
+         <int>15</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper49">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper49"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper49"/>
+         <int>13</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper49"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper49"/>
+         <int>14</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper50">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper50"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper50"/>
+         <int>12</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper50"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper50"/>
+         <int>13</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper51">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper51"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper51"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper51"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper51"/>
+         <int>12</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper52">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper52"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper52"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper52"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper52"/>
+         <int>11</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper53">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper53"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper53"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper53"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper53"/>
+         <int>10</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper54">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper54"/>
+         <int>5</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper54"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper54"/>
+         <int>6</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper54"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper55">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper55"/>
+         <int>6</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper55"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper55"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper55"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper56">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper56"/>
+         <int>7</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper56"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper56"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper56"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper57">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper57"/>
+         <int>8</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper57"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper57"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper57"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper58">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper58"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper58"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper58"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper58"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="logicsim.importexport.WireWrapper" id="WireWrapper59">
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startX</string>
+        <void method="set">
+         <object idref="WireWrapper59"/>
+         <int>10</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>startY</string>
+        <void method="set">
+         <object idref="WireWrapper59"/>
+         <int>9</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endX</string>
+        <void method="set">
+         <object idref="WireWrapper59"/>
+         <int>11</int>
+        </void>
+       </void>
+       <void class="logicsim.importexport.WireWrapper" method="getField">
+        <string>endY</string>
+        <void method="set">
+         <object idref="WireWrapper59"/>
+         <int>9</int>
+        </void>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

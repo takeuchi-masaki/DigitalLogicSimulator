@@ -4,6 +4,7 @@ import logicsim.gates.*;
 import logicsim.grid.GridPanel;
 import logicsim.grid.WireComponent;
 import logicsim.inout.InputOutputComponent;
+import logicsim.inout.InputOutputEnum;
 import logicsim.mouseAdapters.*;
 import logicsim.palette.PalettePanel;
 
@@ -216,6 +217,14 @@ public class MainPanel extends JPanel {
             selectedInOutComponent = null;
         }
         repaint();
+    }
+
+    public void toggleSelectedInput() {
+        if (selectedInOutComponent == null
+        || selectedInOutComponent.getType() == InputOutputEnum.OUT) {
+            return;
+        }
+        selectedInOutComponent.setEnable(!selectedInOutComponent.enabled);
     }
 
     public void hoverWire(Point mousePosition) {
