@@ -8,6 +8,8 @@ import logicsim.importexport.GridWrapper;
 import logicsim.importexport.InputOutputWrapper;
 import logicsim.importexport.WireWrapper;
 import logicsim.inout.*;
+import logicsim.logic.GridLogicHandler;
+import logicsim.logic.ValidEnum;
 import logicsim.mouseAdapters.ModeEnum;
 
 import java.awt.*;
@@ -17,12 +19,13 @@ import static java.lang.Math.*;
 
 public class GridPanel {
     private static GridPanel INSTANCE = null;
+    private static GridLogicHandler gridLogicHandler = GridLogicHandler.getInstance();
     private final int defaultGridSize = 30;
     public static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
-    private final Map<Integer, GateComponent> gateComponentMap;
-    private final Map<Integer, InputOutputComponent> inputOutputComponentMap;
-    private final ArrayList<WireComponent> wireList;
+    public final Map<Integer, GateComponent> gateComponentMap;
+    public final Map<Integer, InputOutputComponent> inputOutputComponentMap;
+    public final ArrayList<WireComponent> wireList;
     public ModeEnum currentMode;
 
     private GridPanel() {
@@ -91,16 +94,19 @@ public class GridPanel {
     public void addWire(WireComponent wire) {
         if (!wireList.contains(wire)) {
             wireList.add(wire);
+            gridLogicHandler.checkLogic(this);
         }
     }
 
     public void addGateComponent(LogicGate gate, Point relativePos) {
         GateComponent add = new GateComponent(gate, relativePos);
         gateComponentMap.put(add.getID(), add);
+        gridLogicHandler.checkLogic(this);
     }
 
     public void removeGateComponent(int selectedID) {
         gateComponentMap.remove(selectedID);
+        gridLogicHandler.checkLogic(this);
     }
 
     public void addInOutComponent(InputOutputComponent inout, Point position) {
@@ -109,10 +115,12 @@ public class GridPanel {
                     inout.getType(), position, inout.enabled, inout.getId()
             );
         inputOutputComponentMap.put(add.getId(), add);
+        gridLogicHandler.checkLogic(this);
     }
 
     public void removeInOutComponent(int selectedID) {
         inputOutputComponentMap.remove(selectedID);
+        gridLogicHandler.checkLogic(this);
     }
 
     public void clearHover() {
@@ -134,8 +142,8 @@ public class GridPanel {
             }
         }
         for (InputOutputComponent component : inputOutputComponentMap.values()) {
-            if (component.position.equals(relPoint) != component.isHovered()) {
-                component.setHover(component.position.equals(relPoint));
+            if (component.relativePosition.equals(relPoint) != component.isHovered()) {
+                component.setHover(component.relativePosition.equals(relPoint));
                 modified = true;
             }
         }
@@ -175,9 +183,43 @@ public class GridPanel {
             if (wireList.get(i).start.equals(hoveredWire.start)
                     && wireList.get(i).end.equals(hoveredWire.end)) {
                 wireList.remove(i);
-                return;
+                break;
             }
         }
+        gridLogicHandler.checkLogic(this);
+    }
+
+    public void resetValid() {
+        for (GateComponent gate : gateComponentMap.values()) {
+            gate.setValid(ValidEnum.NULL);
+            gate.input1 = -1;
+            gate.input2 = -1;
+        }
+        for (InputOutputComponent inout : inputOutputComponentMap.values()) {
+            inout.setValid(ValidEnum.NULL);
+        }
+        for (WireComponent wire : wireList) {
+            wire.setValid(ValidEnum.NULL);
+        }
+    }
+
+    public boolean hasInvalidComponent() {
+        for (GateComponent gate : gateComponentMap.values()) {
+            if (gate.valid == ValidEnum.INVALID) {
+                return true;
+            }
+        }
+        for (InputOutputComponent inout : inputOutputComponentMap.values()) {
+            if (inout.valid == ValidEnum.INVALID) {
+                return true;
+            }
+        }
+        for (WireComponent wire : wireList) {
+            if (wire.valid == ValidEnum.INVALID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void zoomIn() {
@@ -240,6 +282,7 @@ public class GridPanel {
             );
         }
         System.out.println("Completed importing from file");
+        gridLogicHandler.checkLogic(this);
     }
 
     public void draw(Graphics2D g) {
@@ -268,7 +311,7 @@ public class GridPanel {
             component.draw(g, drawLocation, color);
         }
         for (InputOutputComponent component : inputOutputComponentMap.values()) {
-            Point drawLocation = absolutePoint(component.position);
+            Point drawLocation = absolutePoint(component.relativePosition);
             Color color = null;
             if (component.isHovered()) {
                 color = currentMode == ModeEnum.DELETE_MODE

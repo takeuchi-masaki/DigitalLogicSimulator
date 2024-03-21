@@ -1,23 +1,26 @@
 package logicsim.inout;
 
+import logicsim.logic.ValidEnum;
+
 import java.awt.*;
 
 public abstract class InputOutputComponent {
     private static int id_count = 0;
-    private int id;
-    public Point position; // relative position
+    private final int id;
+    public Point relativePosition; // relative position
     public boolean enabled;
     protected boolean hover = false;
+    public ValidEnum valid = ValidEnum.NULL;
 
-    public InputOutputComponent(Point position, boolean enabled) {
+    public InputOutputComponent(Point relativePosition, boolean enabled) {
         id = ++id_count;
-        this.position = position;
+        this.relativePosition = relativePosition;
         this.enabled = enabled;
     }
 
-    InputOutputComponent(Point position, boolean enabled, int id) {
+    InputOutputComponent(Point relativePosition, boolean enabled, int id) {
         this.id = id;
-        this.position = position;
+        this.relativePosition = relativePosition;
         this.enabled = enabled;
     }
 
@@ -35,6 +38,10 @@ public abstract class InputOutputComponent {
         };
     }
 
+    public void setValid(ValidEnum valid) {
+        this.valid = valid;
+    }
+
     public static int getId_count() {
         return id_count;
     }
@@ -47,8 +54,8 @@ public abstract class InputOutputComponent {
         this.enabled = enable;
     }
 
-    public void setPosition(Point point) {
-        position = point;
+    public void setRelativePosition(Point point) {
+        relativePosition = point;
     }
 
     public int getId() {
@@ -68,11 +75,11 @@ public abstract class InputOutputComponent {
     abstract public InputOutputEnum getType();
 
     public InputOutputComponent uniqueCopy() {
-        return inputOutputFactory(this.getType(), this.position, this.enabled);
+        return inputOutputFactory(this.getType(), this.relativePosition, this.enabled);
     }
 
     @Override
     public InputOutputComponent clone() {
-        return inputOutputFactory(this.getType(), this.position, this.enabled, this.id);
+        return inputOutputFactory(this.getType(), this.relativePosition, this.enabled, this.id);
     }
 }

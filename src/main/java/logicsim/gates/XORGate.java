@@ -30,8 +30,10 @@ public class XORGate extends LogicGate {
         }
     }
 
-    public static boolean output(boolean input1, boolean input2) {
-        return input1 ^ input2;
+    public static boolean output(int input1, int input2) {
+        assert(input1 == 0 || input1 == 1);
+        assert(input2 == 0 || input2 == 1);
+        return (input1 ^ input2) == 1;
     }
 
     @Override

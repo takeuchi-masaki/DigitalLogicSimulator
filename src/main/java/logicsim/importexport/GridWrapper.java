@@ -38,7 +38,7 @@ public class GridWrapper implements Serializable {
             inputOutputs.add(new InputOutputWrapper(
                     inout.getType(),
                     inout.getId(),
-                    inout.position.x, inout.position.y,
+                    inout.relativePosition.x, inout.relativePosition.y,
                     inout.enabled)
             );
         }

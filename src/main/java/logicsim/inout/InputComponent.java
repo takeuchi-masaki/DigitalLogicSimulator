@@ -1,5 +1,7 @@
 package logicsim.inout;
 
+import logicsim.logic.ValidEnum;
+
 import java.awt.*;
 
 public class InputComponent extends InputOutputComponent {
@@ -22,6 +24,9 @@ public class InputComponent extends InputOutputComponent {
             color = enabled ? new Color(48,104,68) : Color.DARK_GRAY;
         } else {
             color = enabled ? Color.GREEN : Color.BLACK;
+        }
+        if (valid == ValidEnum.INVALID) {
+            color = Color.RED;
         }
         g.setColor(color);
         g.fillRect(absolutePosition.x - gridSize / 2, absolutePosition.y - gridSize / 2, gridSize, gridSize);

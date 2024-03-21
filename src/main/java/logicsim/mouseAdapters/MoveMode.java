@@ -29,7 +29,9 @@ public class MoveMode extends MouseMode {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        mainPanel.dragSelectedComponent(e.getPoint());
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            mainPanel.dragSelectedComponent(e.getPoint());
+        }
     }
 
     @Override

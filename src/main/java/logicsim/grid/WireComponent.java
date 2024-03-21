@@ -1,9 +1,12 @@
 package logicsim.grid;
 
+import logicsim.logic.ValidEnum;
+
 import java.awt.*;
 
 public class WireComponent {
     public Point start, end;
+    public ValidEnum valid = ValidEnum.NULL;
 
     public WireComponent(Point start, Point end) {
         boolean startLower;
@@ -21,10 +24,17 @@ public class WireComponent {
         }
     }
 
+    public void setValid(ValidEnum valid) {
+        this.valid = valid;
+    }
+
     /**
         Draw to absolute points
      */
     public void draw(Graphics2D g, Point startStroke, Point endStroke, Color color, float strokeWidth) {
+        if (valid == ValidEnum.INVALID) {
+            color = Color.RED;
+        }
         Stroke originalStroke = g.getStroke();
         Color originalColor = g.getColor();
 

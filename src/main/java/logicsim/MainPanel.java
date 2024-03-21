@@ -1,9 +1,10 @@
 package logicsim;
 
-import logicsim.gates.*;
+import logicsim.gates.LogicGate;
 import logicsim.grid.WireComponent;
 import logicsim.inout.InputOutputComponent;
 import logicsim.inout.InputOutputEnum;
+import logicsim.logic.GridLogicHandler;
 import logicsim.mouseAdapters.*;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class MainPanel extends JPanel {
     private int width = 1200, height = 900;
     private static final PalettePanel palettePanel = PalettePanel.getInstance();
     private static final GridPanel gridPanel = GridPanel.getInstance();
+    private static final GridLogicHandler gridlogic = GridLogicHandler.getInstance();
     private LogicGate selectedGateComponent = null;
     private InputOutputComponent selectedInOutComponent = null;
     private WireComponent hoveredWire = null;
@@ -163,9 +165,9 @@ public class MainPanel extends JPanel {
             gridPanel.removeInOutComponent(selectedInOutComponent.getId());
         }
         if (mousePosition.x >= 300) {
-            selectedInOutComponent.setPosition(gridPanel.closestAbsPoint(mousePosition));
+            selectedInOutComponent.setRelativePosition(gridPanel.closestAbsPoint(mousePosition));
         } else {
-            selectedInOutComponent.setPosition(mousePosition);
+            selectedInOutComponent.setRelativePosition(mousePosition);
         }
         selectedInOutComponent.setHover(true);
         repaint();
@@ -223,6 +225,8 @@ public class MainPanel extends JPanel {
             return;
         }
         selectedInOutComponent.setEnable(!selectedInOutComponent.enabled);
+        gridlogic.checkLogic(gridPanel);
+        repaint();
     }
 
     public void hoverWire(Point mousePosition) {
@@ -270,7 +274,7 @@ public class MainPanel extends JPanel {
             selectedGateComponent.draw(g2d, selectedGateComponent.getCenter(), color);
         }
         if (selectedInOutComponent != null) {
-            selectedInOutComponent.draw(g2d, selectedInOutComponent.position, GridPanel.gridSize);
+            selectedInOutComponent.draw(g2d, selectedInOutComponent.relativePosition, GridPanel.gridSize);
         }
         if (hoveredWire != null) {
             Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
