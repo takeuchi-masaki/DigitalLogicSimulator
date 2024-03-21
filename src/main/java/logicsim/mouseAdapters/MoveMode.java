@@ -2,8 +2,6 @@ package logicsim.mouseAdapters;
 
 import logicsim.MainPanel;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MoveMode extends MouseMode {
@@ -13,12 +11,12 @@ public class MoveMode extends MouseMode {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mainPanel.checkComponentHover(e.getPoint());
+        mainPanel.checkHover(e.getPoint());
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        mainPanel.selectHoveredComponent();
+        mainPanel.selectHovered();
         mainPanel.dragSelectedComponent(e.getPoint());
     }
 

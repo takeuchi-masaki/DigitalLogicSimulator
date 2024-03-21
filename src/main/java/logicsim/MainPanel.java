@@ -3,6 +3,7 @@ package logicsim;
 import logicsim.gates.*;
 import logicsim.grid.GridPanel;
 import logicsim.grid.WireComponent;
+import logicsim.inout.InputOutputComponent;
 import logicsim.mouseAdapters.*;
 import logicsim.palette.PalettePanel;
 
@@ -14,7 +15,8 @@ public class MainPanel extends JPanel {
     private int width = 1200, height = 900;
     private static final PalettePanel palettePanel = PalettePanel.getInstance();
     private static final GridPanel gridPanel = GridPanel.getInstance();
-    private LogicGate selectedComponent = null;
+    private LogicGate selectedGateComponent = null;
+    private InputOutputComponent selectedInOutComponent = null;
     private WireComponent hoveredWire = null;
     private MouseMode currentMode;
     public final MouseMode moveMode = new MoveMode(this);
@@ -37,7 +39,7 @@ public class MainPanel extends JPanel {
         if (currentMode == mode) return;
         gridPanel.currentMode = mode.getMode();
         palettePanel.clearHover();
-        gridPanel.clearComponentHover();
+        gridPanel.clearHover();
         removeMouseListener(currentMode);
         removeMouseMotionListener(currentMode);
         currentMode = mode;
@@ -59,22 +61,22 @@ public class MainPanel extends JPanel {
         MouseWheelListener mouseWheelListener = new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                if (e.getWheelRotation() > 0) {
-                    gridPanel.zoomIn();
-                } else {
-                    gridPanel.zoomOut();
-                }
-                repaint();
+            if (e.getWheelRotation() > 0) {
+                gridPanel.zoomIn();
+            } else {
+                gridPanel.zoomOut();
+            }
+            repaint();
             }
         };
         addMouseWheelListener(mouseWheelListener);
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                width = getWidth();
-                height = getHeight();
-                palettePanel.setDimensions(300, height);
-                gridPanel.setDimensions(300, width, height);
-                repaint();
+            width = getWidth();
+            height = getHeight();
+            palettePanel.setDimensions(300, height);
+            gridPanel.setDimensions(300, width, height);
+            repaint();
             }
         });
     }
@@ -83,72 +85,136 @@ public class MainPanel extends JPanel {
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                int keycode = e.getKeyCode();
-                if (keycode == KeyEvent.VK_ESCAPE) {
+            int keycode = e.getKeyCode();
+            if (keycode == KeyEvent.VK_ESCAPE) {
+                setMode(moveMode);
+            } else if (keycode == KeyEvent.VK_W) {
+                if (currentMode.getMode() == ModeEnum.WIRE_MODE) {
                     setMode(moveMode);
-                } else if (keycode == KeyEvent.VK_W) {
-                    if (currentMode.getMode() == ModeEnum.WIRE_MODE) {
-                        setMode(moveMode);
-                    } else {
-                        setMode(wireMode);
-                    }
+                } else {
+                    setMode(wireMode);
                 }
+            }
             }
         });
         setFocusable(true);
         requestFocusInWindow(); // Request focus to receive key events
     }
 
-    public void checkComponentHover(Point mousePosition) {
-        boolean needRepaint = palettePanel.modifyHover(mousePosition)
-                || gridPanel.modifyComponentHover(mousePosition);
+    public void checkHover(Point mousePosition) {
+        boolean needRepaint = palettePanel.modifyHover(mousePosition);
+        needRepaint |= gridPanel.modifyHover(mousePosition);
         if (needRepaint) {
             repaint();
         }
     }
 
-    public void selectHoveredComponent() {
+    public void selectHoveredGateComponent() {
         LogicGate hovering = palettePanel.checkGateHover();
         if (hovering == null) {
-            hovering = gridPanel.checkComponentHover();
+            hovering = gridPanel.checkGateHover();
         }
         if (hovering == null) return;
         if (hovering.getID() == -1) {
-            selectedComponent = hovering.uniqueCopy();
+            selectedGateComponent = hovering.uniqueCopy();
         } else {
-            selectedComponent = hovering.clone();
+            selectedGateComponent = hovering.clone();
         }
     }
 
-    public void dragSelectedComponent(Point mousePosition) {
-        if (selectedComponent == null) return;
-        if (selectedComponent.getID() != -1) {
-            gridPanel.removeComponent(selectedComponent.getID());
+    public void selectHoveredInOutComponent() {
+        InputOutputComponent hovering = palettePanel.checkInOutHover();
+        if (hovering == null) {
+            hovering = gridPanel.checkInOutHover();
+        }
+        if (hovering == null) return;
+        if (hovering.getId() == -1) {
+            selectedInOutComponent = hovering.uniqueCopy();
+        } else {
+            selectedInOutComponent = hovering.clone();
+        }
+    }
+
+    public void selectHovered() {
+        selectHoveredGateComponent();
+        if (selectedGateComponent == null) {
+            selectHoveredInOutComponent();
+        }
+    }
+
+    private boolean dragSelectedGate(Point mousePosition) {
+        if (selectedGateComponent == null) return false;
+        if (selectedGateComponent.getID() != -1) {
+            gridPanel.removeGateComponent(selectedGateComponent.getID());
         }
         if (mousePosition.x >= 300) {
-            selectedComponent.setPosition(selectedComponent.getTopLeft(gridPanel.closestAbsPoint(mousePosition)));
+            selectedGateComponent.setPosition(
+                selectedGateComponent.getTopLeft(gridPanel.closestAbsPoint(mousePosition))
+            );
         } else {
-            selectedComponent.setPosition(selectedComponent.getTopLeft(mousePosition));
+            selectedGateComponent.setPosition(selectedGateComponent.getTopLeft(mousePosition));
         }
-        selectedComponent.setHovered(true);
+        selectedGateComponent.setHovered(true);
+        repaint();
+        return true;
+    }
+
+    private void dragSelectedInOut(Point mousePosition) {
+        if (selectedInOutComponent == null) return;
+        if (selectedInOutComponent.getId() != -1) {
+            gridPanel.removeInOutComponent(selectedInOutComponent.getId());
+        }
+        if (mousePosition.x >= 300) {
+            selectedInOutComponent.setPosition(gridPanel.closestAbsPoint(mousePosition));
+        } else {
+            selectedInOutComponent.setPosition(mousePosition);
+        }
+        selectedInOutComponent.setHover(true);
+        repaint();
+    }
+
+    public void dragSelectedComponent(Point mousePosition) {
+        if (!dragSelectedGate(mousePosition)) {
+            dragSelectedInOut(mousePosition);
+        }
+    }
+
+    private void releaseSelectedGate(Point mousePosition) {
+        if (mousePosition.x > 300) {
+            gridPanel.addGateComponent(selectedGateComponent, gridPanel.relativePoint(mousePosition));
+        }
+        selectedGateComponent = null;
+        repaint();
+    }
+
+    private void releaseSelectedInOutComponent(Point mousePosition) {
+        if (mousePosition.x > 300) {
+            gridPanel.addInOutComponent(selectedInOutComponent, gridPanel.relativePoint(mousePosition));
+        }
+        selectedInOutComponent = null;
         repaint();
     }
 
     public void releaseSelectedComponent(Point mousePosition) {
-        if (selectedComponent == null) return;
-        if (mousePosition.x > 300) {
-            gridPanel.addComponent(selectedComponent, gridPanel.relativePoint(mousePosition));
+        if (selectedGateComponent != null) {
+            releaseSelectedGate(mousePosition);
         }
-        selectedComponent = null;
-        repaint();
+        if (selectedInOutComponent != null) {
+            releaseSelectedInOutComponent(mousePosition);
+        }
     }
 
     public void removeComponent(Point mousePosition) {
-        checkComponentHover(mousePosition);
-        selectHoveredComponent();
-        if (selectedComponent == null) return;
-        gridPanel.removeComponent(selectedComponent.getID());
-        selectedComponent = null;
+        checkHover(mousePosition);
+        selectHovered();
+        if (selectedGateComponent != null) {
+            gridPanel.removeGateComponent(selectedGateComponent.getID());
+            selectedGateComponent = null;
+        }
+        if (selectedInOutComponent != null) {
+            gridPanel.removeInOutComponent(selectedInOutComponent.getId());
+            selectedInOutComponent = null;
+        }
         repaint();
     }
 
@@ -190,11 +256,14 @@ public class MainPanel extends JPanel {
 
         gridPanel.draw(g2d);
         palettePanel.draw(g2d);
-        if (selectedComponent != null) {
+        if (selectedGateComponent != null) {
             Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
-                    ? Color.RED
-                    : Color.LIGHT_GRAY;
-            selectedComponent.drawScaled(g2d, selectedComponent.getCenter(), color);
+                ? Color.RED
+                : Color.LIGHT_GRAY;
+            selectedGateComponent.drawScaled(g2d, selectedGateComponent.getCenter(), color);
+        }
+        if (selectedInOutComponent != null) {
+            selectedInOutComponent.draw(g2d, selectedInOutComponent.position, GridPanel.gridSize);
         }
         if (hoveredWire != null) {
             Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)

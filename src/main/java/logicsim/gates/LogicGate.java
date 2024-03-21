@@ -31,7 +31,7 @@ public abstract class LogicGate implements Cloneable {
         center = position;
         topLeft = new Point(center.x - 2, center.y - 2);
     }
-    public LogicGate(int id, Point position) {
+    LogicGate(int id, Point position) {
         this.id = id;
         center = position;
         topLeft = new Point(center.x - 2, center.y - 2);
@@ -45,6 +45,7 @@ public abstract class LogicGate implements Cloneable {
             }
         }
     }
+
     public static List<LogicGate> getTypes() {
         LogicGate.initGateTypes();
         return GATE_TYPES;

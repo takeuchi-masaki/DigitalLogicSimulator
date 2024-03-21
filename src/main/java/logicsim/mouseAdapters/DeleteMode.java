@@ -26,7 +26,7 @@ public class DeleteMode extends MouseMode {
     public void mouseMoved(MouseEvent e) {
         Point mousePosition = e.getPoint();
         if (!mainPanel.hoverExistingWire(mousePosition)){
-            mainPanel.checkComponentHover(mousePosition);
+            mainPanel.checkHover(mousePosition);
         }
     }
 

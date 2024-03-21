@@ -2,6 +2,7 @@ package logicsim.palette;
 
 import logicsim.gates.*;
 import logicsim.inout.InputComponent;
+import logicsim.inout.InputOutputComponent;
 import logicsim.inout.OutputComponent;
 
 import java.awt.*;
@@ -19,9 +20,10 @@ public class PalettePanel {
     public final PaletteButton deleteModeButton;
 
     private PalettePanel() {
-        moveButton = new MoveButton(true, new Point(5, 50), 90, 100);
-        wireModeButton = new WireModeButton(false, new Point(105, 50), 90, 100);
-        deleteModeButton = new DeleteModeButton(false, new Point(205, 50), 90, 100);
+        final int buttonWidth = 90, buttonHeight = 100;
+        moveButton = new MoveButton(true, new Point(5, 50), buttonWidth, buttonHeight);
+        wireModeButton = new WireModeButton(false, new Point(105, 50), buttonWidth, buttonHeight);
+        deleteModeButton = new DeleteModeButton(false, new Point(205, 50), buttonWidth, buttonHeight);
         gateComponents = new ArrayList<>();
         inOutComponents = new ArrayList<>();
         getPaletteComponents();
@@ -63,19 +65,22 @@ public class PalettePanel {
         palettePosition.y += scale * 3 + 10;
 
         inOutComponents.add(new PaletteInOutComponent(
-                new InputComponent(new Point(palettePosition), true),
+                new InputComponent(new Point(0, 0), true, -1),
                 new Point(palettePosition)
         ));
         palettePosition.x += scale * 2 + 10;
 
         inOutComponents.add(new PaletteInOutComponent(
-                new OutputComponent(new Point(palettePosition), false),
+                new OutputComponent(new Point(0, 0), false, -1),
                 new Point(palettePosition)
         ));
     }
 
     public void clearHover() {
         for (PaletteGateComponent component : gateComponents) {
+            component.setHovered(false);
+        }
+        for (PaletteInOutComponent component : inOutComponents) {
             component.setHovered(false);
         }
     }
@@ -88,6 +93,12 @@ public class PalettePanel {
                 modified = true;
             }
         }
+        for (PaletteInOutComponent component : inOutComponents) {
+            if (component.contains(mouseLocation) != component.isHovered()) {
+                component.setHovered(!component.isHovered());
+                modified = true;
+            }
+        }
         return modified;
     }
 
@@ -95,6 +106,15 @@ public class PalettePanel {
         for (PaletteGateComponent component : gateComponents) {
             if (component.isHovered()) {
                 return component.getGate();
+            }
+        }
+        return null;
+    }
+
+    public InputOutputComponent checkInOutHover() {
+        for (PaletteInOutComponent component : inOutComponents) {
+            if (component.isHovered()) {
+                return component.getInOut();
             }
         }
         return null;

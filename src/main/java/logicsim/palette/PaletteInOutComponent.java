@@ -39,6 +39,10 @@ public class PaletteInOutComponent {
         return this.hover;
     }
 
+    public InputOutputComponent getInOut() {
+        return inout.clone();
+    }
+
     public boolean contains(Point p) {
         return bounds.contains(p);
     }

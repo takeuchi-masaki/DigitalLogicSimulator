@@ -30,7 +30,7 @@ public class GridComponent {
 
     public boolean isHovered() { return gate.isHovered(); }
 
-    public void setHovered(boolean val) { gate.setHovered(val); }
+    public void setHover(boolean val) { gate.setHovered(val); }
 
     public void draw(Graphics2D g, Point drawLocation, Color color) {
         gate.drawScaled(g, drawLocation, color);

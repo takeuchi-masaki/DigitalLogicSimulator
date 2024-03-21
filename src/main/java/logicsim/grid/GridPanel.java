@@ -14,12 +14,14 @@ public class GridPanel {
     private final int defaultGridSize = 20;
     public static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
-    private final Map<Integer, GridComponent> gridComponentMap;
+    private final Map<Integer, GridComponent> gateComponentMap;
+    private final Map<Integer, InputOutputComponent> inputOutputComponentMap;
     private final ArrayList<WireComponent> wires;
     public ModeEnum currentMode;
 
     private GridPanel() {
-        gridComponentMap = new HashMap<>();
+        gateComponentMap = new HashMap<>();
+        inputOutputComponentMap = new HashMap<>();
         wires = new ArrayList<>();
         resetZoom();
     }
@@ -86,36 +88,67 @@ public class GridPanel {
         }
     }
 
-    public void addComponent(LogicGate gate, Point relativePos) {
+    public void addGateComponent(LogicGate gate, Point relativePos) {
         GridComponent add = new GridComponent(gate, relativePos);
-        gridComponentMap.put(add.getID(), add);
+        gateComponentMap.put(add.getID(), add);
     }
 
-    public void removeComponent(int selectedID) {
-        gridComponentMap.remove(selectedID);
+    public void removeGateComponent(int selectedID) {
+        gateComponentMap.remove(selectedID);
     }
 
-    public void clearComponentHover() {
-        for (GridComponent component : gridComponentMap.values()) {
-            component.setHovered(false);
+    public void addInOutComponent(InputOutputComponent inout, Point position) {
+        InputOutputComponent add =
+            InputOutputComponent.inputOutputFactory(
+                    inout.getType(), position, inout.enabled, inout.getId()
+            );
+        inputOutputComponentMap.put(add.getId(), add);
+    }
+
+    public void removeInOutComponent(int selectedID) {
+        inputOutputComponentMap.remove(selectedID);
+    }
+
+    public void clearHover() {
+        for (GridComponent component : gateComponentMap.values()) {
+            component.setHover(false);
+        }
+        for (InputOutputComponent component : inputOutputComponentMap.values()) {
+            component.setHover(false);
         }
     }
 
-    public boolean modifyComponentHover(Point point) {
+    public boolean modifyHover(Point point) {
+        boolean modified = false;
         Point relPoint = relativePoint(point);
-        for (GridComponent component : gridComponentMap.values()) {
+        for (GridComponent component : gateComponentMap.values()) {
             if (component.contains(relPoint) != component.isHovered()) {
-                component.setHovered(component.contains(relPoint));
-                return true;
+                component.setHover(component.contains(relPoint));
+                modified = true;
             }
         }
-        return false;
+        for (InputOutputComponent component : inputOutputComponentMap.values()) {
+            if (component.position.equals(relPoint) != component.isHovered()) {
+                component.setHover(component.position.equals(relPoint));
+                modified = true;
+            }
+        }
+        return modified;
     }
 
-    public LogicGate checkComponentHover() {
-        for (GridComponent component : gridComponentMap.values()) {
+    public LogicGate checkGateHover() {
+        for (GridComponent component : gateComponentMap.values()) {
             if (component.isHovered()) {
                 return component.getGate();
+            }
+        }
+        return null;
+    }
+
+    public InputOutputComponent checkInOutHover() {
+        for (InputOutputComponent component : inputOutputComponentMap.values()) {
+            if (component.isHovered()) {
+                return component;
             }
         }
         return null;
@@ -173,7 +206,7 @@ public class GridPanel {
                 g.drawLine(x, y, endWidth, y);
             }
         }
-        for (GridComponent component : gridComponentMap.values()) {
+        for (GridComponent component : gateComponentMap.values()) {
             Point drawLocation = absolutePoint(component.gate.getTopLeft());
             Color color = null;
             if (component.isHovered()) {
@@ -185,12 +218,16 @@ public class GridPanel {
             }
             component.draw(g, drawLocation, color);
         }
+        for (InputOutputComponent component : inputOutputComponentMap.values()) {
+            Point drawLocation = absolutePoint(component.position);
+            component.draw(g, drawLocation, gridSize);
+        }
         for (WireComponent wire : wires) {
             wire.draw(g,
-                    absolutePoint(wire.start),
-                    absolutePoint(wire.end),
-                    Color.BLACK,
-                    gridSize * 0.2f);
+                absolutePoint(wire.start),
+                absolutePoint(wire.end),
+                Color.BLACK,
+                gridSize * 0.2f);
         }
     }
 }
