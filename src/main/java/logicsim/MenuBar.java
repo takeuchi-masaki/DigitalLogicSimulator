@@ -1,7 +1,7 @@
 package logicsim;
 
-import logicsim.grid.GridExporter;
-import logicsim.grid.GridImporter;
+import logicsim.importexport.GridExporter;
+import logicsim.importexport.GridImporter;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
@@ -86,7 +86,7 @@ public class MenuBar extends JMenuBar {
         JOptionPane.showMessageDialog(null,
                 """
                         Digital Logic Simulator
-                        Version 0.1
+                        Version 1.0
                         Created by Masaki Takeuchi and ChatGPT""",
                 "About",
                 JOptionPane.INFORMATION_MESSAGE

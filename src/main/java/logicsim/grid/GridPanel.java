@@ -1,6 +1,10 @@
 package logicsim.grid;
 
 import logicsim.gates.*;
+import logicsim.importexport.GateComponentWrapper;
+import logicsim.importexport.GridWrapper;
+import logicsim.importexport.InputOutputWrapper;
+import logicsim.importexport.WireWrapper;
 import logicsim.inout.*;
 import logicsim.mouseAdapters.ModeEnum;
 
@@ -14,15 +18,15 @@ public class GridPanel {
     private final int defaultGridSize = 20;
     public static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
-    private final Map<Integer, GridComponent> gateComponentMap;
+    private final Map<Integer, GateComponent> gateComponentMap;
     private final Map<Integer, InputOutputComponent> inputOutputComponentMap;
-    private final ArrayList<WireComponent> wires;
+    private final ArrayList<WireComponent> wireList;
     public ModeEnum currentMode;
 
     private GridPanel() {
         gateComponentMap = new HashMap<>();
         inputOutputComponentMap = new HashMap<>();
-        wires = new ArrayList<>();
+        wireList = new ArrayList<>();
         resetZoom();
     }
 
@@ -83,13 +87,13 @@ public class GridPanel {
     }
 
     public void addWire(WireComponent wire) {
-        if (!wires.contains(wire)) {
-            wires.add(wire);
+        if (!wireList.contains(wire)) {
+            wireList.add(wire);
         }
     }
 
     public void addGateComponent(LogicGate gate, Point relativePos) {
-        GridComponent add = new GridComponent(gate, relativePos);
+        GateComponent add = new GateComponent(gate, relativePos);
         gateComponentMap.put(add.getID(), add);
     }
 
@@ -110,7 +114,7 @@ public class GridPanel {
     }
 
     public void clearHover() {
-        for (GridComponent component : gateComponentMap.values()) {
+        for (GateComponent component : gateComponentMap.values()) {
             component.setHover(false);
         }
         for (InputOutputComponent component : inputOutputComponentMap.values()) {
@@ -121,7 +125,7 @@ public class GridPanel {
     public boolean modifyHover(Point point) {
         boolean modified = false;
         Point relPoint = relativePoint(point);
-        for (GridComponent component : gateComponentMap.values()) {
+        for (GateComponent component : gateComponentMap.values()) {
             if (component.contains(relPoint) != component.isHovered()) {
                 component.setHover(component.contains(relPoint));
                 modified = true;
@@ -137,7 +141,7 @@ public class GridPanel {
     }
 
     public LogicGate checkGateHover() {
-        for (GridComponent component : gateComponentMap.values()) {
+        for (GateComponent component : gateComponentMap.values()) {
             if (component.isHovered()) {
                 return component.getGate();
             }
@@ -155,7 +159,7 @@ public class GridPanel {
     }
 
     public boolean containsWire(WireComponent hoveredWire) {
-        for (WireComponent wire : wires) {
+        for (WireComponent wire : wireList) {
             if (wire.start.equals(hoveredWire.start)
                 && wire.end.equals(hoveredWire.end)) {
                 return true;
@@ -165,10 +169,10 @@ public class GridPanel {
     }
 
     public void removeWire(WireComponent hoveredWire) {
-        for (int i = 0; i < wires.size(); i++) {
-            if (wires.get(i).start.equals(hoveredWire.start)
-                    && wires.get(i).end.equals(hoveredWire.end)) {
-                wires.remove(i);
+        for (int i = 0; i < wireList.size(); i++) {
+            if (wireList.get(i).start.equals(hoveredWire.start)
+                    && wireList.get(i).end.equals(hoveredWire.end)) {
+                wireList.remove(i);
                 return;
             }
         }
@@ -198,6 +202,44 @@ public class GridPanel {
         }
     }
 
+    public GridWrapper exportWrapper() {
+        return new GridWrapper(gateComponentMap, inputOutputComponentMap, wireList);
+    }
+
+    public void importWrapper(GridWrapper wrapper) {
+        LogicGate.setId_count(wrapper.gateIDCount);
+        gateComponentMap.clear();
+        for (GateComponentWrapper gate : wrapper.gates) {
+            gateComponentMap.put(gate.id,
+                    new GateComponent(
+                            LogicGate.logicGateFactory(gate.gateType,
+                                    new Point(gate.centerX, gate.centerY),
+                                    gate.id),
+                            new Point(gate.centerX, gate.centerY)
+                    )
+            );
+        }
+
+        InputOutputComponent.setId_count(wrapper.inputOutputCount);
+        inputOutputComponentMap.clear();
+        for (InputOutputWrapper inout : wrapper.inputOutputs) {
+            inputOutputComponentMap.put(inout.id,
+                    InputOutputComponent.inputOutputFactory(inout.type,
+                            new Point(inout.positionX, inout.positionY),
+                            inout.enabled, inout.id)
+            );
+        }
+
+        wireList.clear();
+        for (WireWrapper wire : wrapper.wires) {
+            wireList.add(new WireComponent(
+                    new Point(wire.startX, wire.startY),
+                    new Point(wire.endX, wire.endY))
+            );
+        }
+        System.out.println("Completed importing from file");
+    }
+
     public void draw(Graphics2D g) {
         g.setColor(Color.LIGHT_GRAY);
         for (int x = startWidth; x < endWidth; x += gridSize) {
@@ -206,7 +248,7 @@ public class GridPanel {
                 g.drawLine(x, y, endWidth, y);
             }
         }
-        for (GridComponent component : gateComponentMap.values()) {
+        for (GateComponent component : gateComponentMap.values()) {
             Point drawLocation = absolutePoint(component.gate.getTopLeft());
             Color color = null;
             if (component.isHovered()) {
@@ -222,7 +264,7 @@ public class GridPanel {
             Point drawLocation = absolutePoint(component.position);
             component.draw(g, drawLocation, gridSize);
         }
-        for (WireComponent wire : wires) {
+        for (WireComponent wire : wireList) {
             wire.draw(g,
                 absolutePoint(wire.start),
                 absolutePoint(wire.end),

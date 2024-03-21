@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import static java.lang.System.exit;
 
 public abstract class LogicGate implements Cloneable {
     private static int id_count = 0;
-    private final int id;
+    private int id;
     protected boolean input1Not = false, input2Not = false, outputNot = false;
     protected Point topLeft;
     protected Point center;
@@ -26,11 +27,13 @@ public abstract class LogicGate implements Cloneable {
         center = new Point(0, 0);
         topLeft = new Point(center.x - 2, center.y - 2);
     }
+
     public LogicGate(Point position) {
         id = ++id_count;
         center = position;
         topLeft = new Point(center.x - 2, center.y - 2);
     }
+
     LogicGate(int id, Point position) {
         this.id = id;
         center = position;
@@ -51,14 +54,15 @@ public abstract class LogicGate implements Cloneable {
         return GATE_TYPES;
     }
 
-    protected static LogicGate logicGateFactory(GateType type, Point position, int id) {
+    public static LogicGate logicGateFactory(GateType type, Point position, int id) {
         return switch (type) {
             case GateType.AND -> new ANDGate(id, position);
             case GateType.OR -> new ORGate(id, position);
             case GateType.XOR -> new XORGate(id, position);
         };
     }
-    protected static LogicGate logicGateFactory(GateType type, Point position) {
+
+    public static LogicGate logicGateFactory(GateType type, Point position) {
         return switch (type) {
             case GateType.AND -> new ANDGate(position);
             case GateType.OR -> new ORGate(position);
@@ -118,6 +122,14 @@ public abstract class LogicGate implements Cloneable {
 
     public Point getTopLeft(Point absCenterPoint) {
         return new Point(absCenterPoint.x - 2 * gridScale, absCenterPoint.y - 2 * gridScale);
+    }
+
+    public static int getId_count() {
+        return id_count;
+    }
+
+    public static void setId_count(int cnt) {
+        id_count = cnt;
     }
 
     public Point getTopLeft() { return topLeft; }

@@ -4,7 +4,7 @@ import java.awt.*;
 
 public abstract class InputOutputComponent {
     private static int id_count = 0;
-    private final int id;
+    private int id;
     public Point position; // relative position
     public boolean enabled;
     protected boolean hover = false;
@@ -33,6 +33,14 @@ public abstract class InputOutputComponent {
             case IN -> new InputComponent(position, enabled, id);
             case OUT -> new OutputComponent(position, enabled, id);
         };
+    }
+
+    public static int getId_count() {
+        return id_count;
+    }
+
+    public static void setId_count(int cnt) {
+        id_count = cnt;
     }
 
     public void setEnable(boolean enable) {

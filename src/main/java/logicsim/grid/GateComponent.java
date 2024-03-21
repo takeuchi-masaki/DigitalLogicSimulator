@@ -4,10 +4,10 @@ import logicsim.gates.LogicGate;
 
 import java.awt.*;
 
-public class GridComponent {
-    LogicGate gate;
+public class GateComponent {
+    public LogicGate gate;
 
-    public GridComponent(LogicGate gate, Point relativePos) {
+    public GateComponent(LogicGate gate, Point relativePos) {
         if (gate.getID() == -1) {
             this.gate = gate.uniqueCopy();
         } else {
