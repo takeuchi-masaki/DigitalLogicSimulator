@@ -40,7 +40,7 @@ public class GridLogicHandler {
      * check if Gate inputs or outputs are overlapping on same position
      * or InputOutputComponents overlapping on same position
      */
-    private boolean invalidPositioning(GridPanel gridPanel) {
+    private boolean checkInvalidPositioning(GridPanel gridPanel) {
         Set<Point> positions = new HashSet<>();
         for (InputOutputComponent inout : gridPanel.inputOutputComponentMap.values()) {
             if (!positions.add(inout.relativePosition)) {
@@ -70,7 +70,7 @@ public class GridLogicHandler {
 
     public void checkLogic(GridPanel gridPanel) {
         gridPanel.resetValid();
-        if (invalidPositioning(gridPanel)) {
+        if (checkInvalidPositioning(gridPanel)) {
             System.err.println("bad positioning");
             return;
         }

@@ -1,28 +1,26 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>260</x><y>10</y><w>210</w><h>190</h></coordinates><panel_attributes>App
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>300</x><y>10</y><w>210</w><h>190</h></coordinates><panel_attributes>App
 extends JFrame
 --
 - MenuBar
 - MainPanel
 
 --
-main()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>10</x><y>80</y><w>210</w><h>190</h></coordinates><panel_attributes>MenuBar
+main()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>80</y><w>210</w><h>190</h></coordinates><panel_attributes>MenuBar
 extends JMenuBar
 --
-- MenuEventHandler
+saveFile()
+openFile()
 
---
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>220</y><w>210</w><h>190</h></coordinates><panel_attributes>GridPanel
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>220</y><w>210</w><h>190</h></coordinates><panel_attributes>GridPanel
 --
 -Map&lt;GridComponent&gt;
 -List&lt;GridWire&gt;
 
 --
-draw()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>640</x><y>440</y><w>210</w><h>190</h></coordinates><panel_attributes>GridLogicHandler
+draw()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>490</y><w>210</w><h>190</h></coordinates><panel_attributes>GridLogicHandler
 --
--gridLogic
-
---
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>100</y><w>70</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;50;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>260</x><y>220</y><w>210</w><h>190</h></coordinates><panel_attributes>MainPanel
+checkInvalidPositioning()
+checkLogic()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>220</y><w>210</w><h>190</h></coordinates><panel_attributes>MainPanel
 extends JPanel
 --
 - PalettePanel
@@ -31,22 +29,26 @@ extends JPanel
 
 --
 paintComponent()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>190</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>270</y><w>70</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>50;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>400</y><w>110</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>440</y><w>210</w><h>190</h></coordinates><panel_attributes>GridComponent
---
-
-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>190</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>270</y><w>70</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>50;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>430</x><y>400</y><w>210</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;90;190;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>490</y><w>210</w><h>190</h></coordinates><panel_attributes>GateComponent
 --
 draw()
-contains(Point)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>400</y><w>80</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;60;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>270</y><w>70</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;50;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>10</x><y>290</y><w>210</w><h>190</h></coordinates><panel_attributes>PalettePanel
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>400</y><w>50</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;90;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>270</y><w>70</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;50;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>290</y><w>210</w><h>190</h></coordinates><panel_attributes>PalettePanel
 --
 -List&lt;PaletteComponent&gt;
 
 --
-draw()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>100</x><y>470</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>10</x><y>510</y><w>210</w><h>190</h></coordinates><panel_attributes>PaletteComponent
+draw()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>470</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>510</y><w>210</w><h>190</h></coordinates><panel_attributes>PaletteComponent
 --
 - LogicGate
 
 --
 draw()
-contains(Point)</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+contains(Point)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>840</x><y>230</y><w>210</w><h>190</h></coordinates><panel_attributes>WireComponent
+--
+draw()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>300</y><w>110</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>840</x><y>490</y><w>210</w><h>190</h></coordinates><panel_attributes>InputOutputComponent
+--
+draw()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>90</y><w>70</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>400</y><w>220</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>200;90;10;10</additional_attributes></element></diagram>

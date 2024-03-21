@@ -12,6 +12,7 @@ The application is structured around the main `MainPanel` class, which extends `
 - `GridPanel`: Handles grid components and wires using relative coordinate system
 - `GridLogicHandler`: Handles the logic related to the grid, including interactions with logic gates and wires.
 - `LogicGate`: An abstract class extended by specific gate types like `ANDGate`. It provides essential methods like `draw()`, `contains()`, and `output()` to handle logic gate functionalities.
+- `WireComponent`: Has `start` and `end` points and can be drawn to the grid.
 
 Each of these components works together to provide a comprehensive digital logic simulation environment.
 
@@ -21,6 +22,10 @@ Each of these components works together to provide a comprehensive digital logic
 
 The `PalettePanel`, `GridPanel`, `GridImporter`, and `GridExporter` all utilize the Singleton pattern.
 There are no cases with the application that there would need to be more than a single version of these classes. For example when the `GridExporter` needs to export the current grid layout to an XML file, export is called on the single instance of `GridPanel`. The Singleton allows for easy interfacing and synchronization between the classes.
+
+### Strategy
+
+The `MouseModes` for the project made it possible to swap between the different ways to interact using the mouse quickly and easily. This is similar to the `Strategy` design pattern since the program can switch between different algorithms at runtime to interface with the program.
 
 ## Component Descriptions
 
@@ -47,11 +52,23 @@ When dragging a component around the GridPanel, components snap to the grid.
 
 ### GridLogicHandler
 
-Whenever a wire is added to the grid, if the wire connects some output to some input, the wire creates a connection between two components. This creates a Directed Acyclic Graph (DAG). The `GridLogicHandler` guarantees that connected components create a DAG without any cycles. If all the conditions are met, the input signals are processed and create an output.
+Whenever some component or wire is added or removed from the grid, the `checkLogic()` function is called to check the validity of the circuit.
+
+First, the components are checked for overlaps in which case the component is highlighted in red and the check ends early.
+
+When no components are overlapping in an illegal way, the grid is searched greedily starting from the `InputComponents` like a Depth-First-Search (DFS) which is implemented using a Stack data structure. For circuits such as Flip-Flops, the input for part of a gate is dependent with another gate, creating a circular dependency. To tackle this issue, the logicHandler lazily determines the output of some gate with just a single input if it possible to do so. One example would be an `AndGate`. If one input of an `AndGate` is False, it is possible to determine that the `AndGate` must output False.
 
 ### LogicGate
 
-Logic Gates are implemented as an abstract class which is extended by each gate such as ANDGate, ORGate, and XORGate. Each logic gate have associated image files in `resources/logicsim/gates`.
+Logic Gates are implemented as an abstract class which is extended by each gate such as ANDGate, ORGate, and XORGate. Each logic gate have associated image files in `resources/gates`.
+
+### GateComponent
+
+Instead of having the `LogicGate` interface directly with the `GridPanel`, the functions and parameters only necessary with the GridPanel were extended using this GateComponent class.
+
+### WireComponent
+
+When a `WireComponent` is initialized, the points are sorted by lowest x value then lowest y value to make it easier to check for duplicate wires.
 
 ## Diagrams
 
