@@ -27,7 +27,7 @@ public class PalettePanel {
         deleteModeButton = new DeleteModeButton(false, new Point(205, 10), buttonWidth, buttonHeight);
         gateComponents = new ArrayList<>();
         inOutComponents = new ArrayList<>();
-        getPaletteComponents();
+        initPaletteComponents();
     }
 
     public static PalettePanel getInstance() {
@@ -42,7 +42,7 @@ public class PalettePanel {
         height = h;
     }
 
-    private void getPaletteComponents() {
+    private void initPaletteComponents() {
         Point palettePosition = new Point(scale / 2 + 20, scale / 2 + scale * 2);
         PaletteGateComponent.setDimensions(4 * scale + 10, 2 * scale);
         PaletteInOutComponent.setDimensions(2 * scale, 2 * scale);

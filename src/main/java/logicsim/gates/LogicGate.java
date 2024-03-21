@@ -30,22 +30,28 @@ public abstract class LogicGate implements Cloneable {
         setPosition(position);
     }
 
+    /**
+     *  Used to create a deep copy without incrementing the id_count
+     */
     LogicGate(int id, Point position) {
         this.id = id;
         setPosition(position);
     }
 
     private static void initGateTypes() {
-        if (GATE_TYPES == null) {
-            GATE_TYPES = new ArrayList<>();
-            for (GateType type : GateType.values()) {
-                GATE_TYPES.add(logicGateFactory(type, new Point(0, 0), -1));
-            }
+        GATE_TYPES = new ArrayList<>();
+        for (GateType type : GateType.values()) {
+            GATE_TYPES.add(logicGateFactory(type, new Point(0, 0), -1));
         }
     }
 
+    /**
+     * Allows for interating over each type of gate
+     */
     public static List<LogicGate> getTypes() {
-        LogicGate.initGateTypes();
+        if (GATE_TYPES == null){
+            LogicGate.initGateTypes();
+        }
         return GATE_TYPES;
     }
 
@@ -101,6 +107,7 @@ public abstract class LogicGate implements Cloneable {
 
     public void setPosition(Point point) {
         center = new Point(point);
+        // topleft shifted -2, -2 since LogicGate is 4x4
         topLeft = new Point(center.x - 2, center.y - 2);
     }
 

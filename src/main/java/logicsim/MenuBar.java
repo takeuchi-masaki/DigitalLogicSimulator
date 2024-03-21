@@ -25,12 +25,12 @@ public class MenuBar extends JMenuBar {
         fileMenu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open");
         openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+            Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         openItem.addActionListener(e -> openFile());
 
         JMenuItem saveItem = new JMenuItem("Save");
         saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+            Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         saveItem.addActionListener(e -> saveFile());
 
         JMenuItem exitItem = new JMenuItem("Exit");
@@ -60,9 +60,7 @@ public class MenuBar extends JMenuBar {
         fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
 
         int userSelection = fileChooser.showOpenDialog(null);
-        if (userSelection != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
+        if (userSelection != JFileChooser.APPROVE_OPTION) return;
         File xmlFile = fileChooser.getSelectedFile();
         importer.importFile(xmlFile);
     }
@@ -72,11 +70,10 @@ public class MenuBar extends JMenuBar {
         fileChooser.setDialogTitle("Save XML File");
         fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
         int userSelection = fileChooser.showSaveDialog(null);
-        if (userSelection != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
+        if (userSelection != JFileChooser.APPROVE_OPTION) return;
         File xmlFile = fileChooser.getSelectedFile();
         if (!xmlFile.getName().toLowerCase().endsWith(".xml")) {
+            // add .xml extension if not present
             xmlFile = new File(xmlFile.getParentFile(), xmlFile.getName() + ".xml");
         }
         exporter.exportFile(xmlFile);
@@ -84,19 +81,19 @@ public class MenuBar extends JMenuBar {
 
     private void showAbout() {
         JOptionPane.showMessageDialog(null,
-                """
-                        Digital Logic Simulator
-                        Version 1.0
-                        Created by Masaki Takeuchi and ChatGPT""",
-                "About",
-                JOptionPane.INFORMATION_MESSAGE);
+            """
+                Digital Logic Simulator
+                Version 1.0
+                Created by Masaki Takeuchi and ChatGPT""",
+            "About",
+            JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void showDocumentation() {
         JEditorPane editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
         editorPane.setText(
-                "<html><body>Visit the Github repository<div></div><a href='https://github.com/takeuchi-masaki/DigitalLogicSimulator/'>https://github.com/takeuchi-masaki/DigitalLogicSimulator/</a></body></html>");
+            "<html><body>Visit the Github repository<div></div><a href='https://github.com/takeuchi-masaki/DigitalLogicSimulator/'>https://github.com/takeuchi-masaki/DigitalLogicSimulator/</a></body></html>");
         editorPane.addHyperlinkListener(e -> {
             if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                 try {

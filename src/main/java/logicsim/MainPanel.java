@@ -37,8 +37,7 @@ public class MainPanel extends JPanel {
         palettePanel.moveButton.setSelected(mode.getMode() == palettePanel.moveButton.getMode());
         palettePanel.wireModeButton.setSelected(mode.getMode() == palettePanel.wireModeButton.getMode());
         palettePanel.deleteModeButton.setSelected(mode.getMode() == palettePanel.deleteModeButton.getMode());
-        if (currentMode == mode)
-            return;
+        if (currentMode == mode) return;
         gridPanel.currentMode = mode.getMode();
         palettePanel.clearHover();
         gridPanel.clearHover();
@@ -47,6 +46,7 @@ public class MainPanel extends JPanel {
         currentMode = mode;
         addMouseListener(mode);
         addMouseMotionListener(mode);
+        requestFocusInWindow();
         repaint();
     }
 
@@ -100,7 +100,7 @@ public class MainPanel extends JPanel {
             }
         });
         setFocusable(true);
-        requestFocusInWindow(); // Request focus to receive key events
+        requestFocusInWindow();
     }
 
     public void checkHover(Point mousePosition) {
@@ -116,8 +116,7 @@ public class MainPanel extends JPanel {
         if (hovering == null) {
             hovering = gridPanel.checkGateHover();
         }
-        if (hovering == null)
-            return;
+        if (hovering == null) return;
         if (hovering.getID() == -1) {
             selectedGateComponent = hovering.uniqueCopy();
         } else {
@@ -130,8 +129,7 @@ public class MainPanel extends JPanel {
         if (hovering == null) {
             hovering = gridPanel.checkInOutHover();
         }
-        if (hovering == null)
-            return;
+        if (hovering == null) return;
         if (hovering.getId() == -1) {
             selectedInOutComponent = hovering.uniqueCopy();
         } else {
@@ -223,7 +221,7 @@ public class MainPanel extends JPanel {
 
     public void toggleSelectedInput() {
         if (selectedInOutComponent == null
-                || selectedInOutComponent.getType() == InputOutputEnum.OUT) {
+            || selectedInOutComponent.getType() == InputOutputEnum.OUT) {
             return;
         }
         selectedInOutComponent.setEnable(!selectedInOutComponent.enabled);
@@ -239,7 +237,7 @@ public class MainPanel extends JPanel {
     public boolean hoverExistingWire(Point mousePosition) {
         hoveredWire = gridPanel.closestWire(mousePosition);
         if (hoveredWire != null
-                && !gridPanel.containsWire(hoveredWire)) {
+            && !gridPanel.containsWire(hoveredWire)) {
             hoveredWire = null;
         }
         repaint();
@@ -247,16 +245,14 @@ public class MainPanel extends JPanel {
     }
 
     public void addWire() {
-        if (hoveredWire == null)
-            return;
+        if (hoveredWire == null) return;
         gridPanel.addWire(hoveredWire);
         hoveredWire = null;
         repaint();
     }
 
     public boolean removeWire() {
-        if (hoveredWire == null)
-            return false;
+        if (hoveredWire == null) return false;
         gridPanel.removeWire(hoveredWire);
         hoveredWire = null;
         repaint();
@@ -273,8 +269,8 @@ public class MainPanel extends JPanel {
         palettePanel.draw(g2d);
         if (selectedGateComponent != null) {
             Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
-                    ? Color.RED
-                    : Color.LIGHT_GRAY;
+                ? Color.RED
+                : Color.LIGHT_GRAY;
             selectedGateComponent.draw(g2d, selectedGateComponent.getCenter(), color);
         }
         if (selectedInOutComponent != null) {
@@ -282,13 +278,13 @@ public class MainPanel extends JPanel {
         }
         if (hoveredWire != null) {
             Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
-                    ? Color.RED
-                    : Color.BLUE;
+                ? Color.RED
+                : Color.BLUE;
             hoveredWire.draw(g2d,
-                    gridPanel.absolutePoint(hoveredWire.start),
-                    gridPanel.absolutePoint(hoveredWire.end),
-                    color,
-                    GridPanel.gridSize * 0.2f);
+                gridPanel.absolutePoint(hoveredWire.start),
+                gridPanel.absolutePoint(hoveredWire.end),
+                color,
+                GridPanel.gridSize * 0.2f);
         }
     }
 }

@@ -9,6 +9,7 @@ public class WireComponent {
     public ValidEnum valid = ValidEnum.NULL;
 
     public WireComponent(Point start, Point end) {
+        // sort the wire ends by lowest x, then lowest y
         boolean startLower;
         if (start.x == end.x) {
             startLower = start.y < end.y;

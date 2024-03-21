@@ -5,9 +5,13 @@ import logicsim.logic.ValidEnum;
 
 import java.awt.*;
 
+/**
+ *  Used to draw the gates on the grid
+ */
 public class GateComponent {
     public LogicGate gate;
     public ValidEnum valid = ValidEnum.NULL;
+    // -1 means no input, 0/1 is the input signal
     public int input1 = -1, input2 = -1;
 
     public GateComponent(LogicGate gate, Point relativePos) {

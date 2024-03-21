@@ -36,9 +36,9 @@ public class GridLogicHandler {
         }
     }
 
-    /*
-        check if gate inputs are overlapping on same position
-        or inputs/outputs overlapping on same position
+    /**
+     * check if Gate inputs or outputs are overlapping on same position
+     * or InputOutputComponents overlapping on same position
      */
     private boolean invalidPositioning(GridPanel gridPanel) {
         Set<Point> positions = new HashSet<>();
@@ -75,19 +75,20 @@ public class GridLogicHandler {
             return;
         }
 
+        // saves the previous position of visited positions
+        // if the position is an input or gate output,
+        // the previous position is the same as the current position
         Map<Point, Point> previous = new HashMap<>();
 
         Stack<State> stack = new Stack<>();
+        // add all inputs to stack
         for (InputOutputComponent inout : gridPanel.inputOutputComponentMap.values()) {
-            if (inout.relativePosition.x < 0 || inout.relativePosition.x >= 150
-                || inout.relativePosition.y < 0 || inout.relativePosition.y >= 150) {
-                inout.setValid(ValidEnum.INVALID);
-                continue;
+            if (inout.getType() == InputOutputEnum.IN) {
+                previous.put(inout.relativePosition, inout.relativePosition);
+                stack.add(new State(inout.relativePosition, inout.relativePosition, inout.enabled));
             }
-            if (inout.getType() == InputOutputEnum.OUT) continue;
-            previous.put(inout.relativePosition, inout.relativePosition);
-            stack.add(new State(inout.relativePosition, inout.relativePosition, inout.enabled));
         }
+        // run non-recursive DFS to check the logic
         while(!stack.isEmpty()) {
             State curr = stack.pop();
             for (InputOutputComponent inout: gridPanel.inputOutputComponentMap.values()) {
@@ -99,6 +100,7 @@ public class GridLogicHandler {
                         inout.setValid(ValidEnum.INVALID);
                         return;
                     }
+                    // successfully reached an output component
                     inout.setEnable(curr.signal);
                     break;
                 }
@@ -131,7 +133,7 @@ public class GridLogicHandler {
                     Point output = component.gate.output();
                     Point prev = previous.put(output, output);
                     if (prev == null) {
-                        boolean nextSignal = calcNextSignal(component, curr);
+                        boolean nextSignal = calcNextSignal(component, curr.signal);
                         stack.add(new State(output, output, nextSignal));
                     } else if (!prev.equals(output)) {
                         System.err.println("bad gate output");
@@ -143,20 +145,23 @@ public class GridLogicHandler {
             for (WireComponent wire : gridPanel.wireList) {
                 Point wireStart = null;
                 Point wireEnd = null;
-                if (wire.start.equals(curr.pos)
-                        && !wire.end.equals(curr.prevPos)) {
+                // check if one end of the wire is the current position
+                if (wire.start.equals(curr.pos)) {
                     wireStart = wire.start;
                     wireEnd = wire.end;
-                } else if (wire.end.equals(curr.pos)
-                        && !wire.start.equals(curr.prevPos)) {
+                } else if (wire.end.equals(curr.pos)) {
                     wireStart = wire.end;
                     wireEnd = wire.start;
                 }
-                if (wireStart != null) {
+                // if the wire is connected to the current position and
+                // the wire end is not the previous position
+                if (wireStart != null
+                    && !wireEnd.equals(curr.prevPos)) {
                     Point prev = previous.put(wireEnd, curr.pos);
                     if (prev == null) {
                         stack.add(new State(wireEnd, curr.pos, curr.signal));
                     } else if (!prev.equals(curr.pos)) {
+                        // the next position already has a different input
                         System.err.println("bad wire");
                         wire.setValid(ValidEnum.INVALID);
                         return;
@@ -166,6 +171,10 @@ public class GridLogicHandler {
         }
     }
 
+    /**
+     *  the gate can output a signal if both inputs are found
+     *  or if it is possible to greedily determine the output with a single input
+     */
     private static boolean canOutput(GateComponent component) {
         return ((component.input1 != -1) && (component.input2 != -1))
                 || switch (component.gate.getType()) {
@@ -176,7 +185,7 @@ public class GridLogicHandler {
         };
     }
 
-    private static boolean calcNextSignal(GateComponent component, State curr) {
+    private static boolean calcNextSignal(GateComponent component, boolean currentSignal) {
         boolean nextSignal;
         if ((component.input1 != -1) && (component.input2 != -1)) {
             // both inputs found
@@ -192,7 +201,7 @@ public class GridLogicHandler {
                 case AND -> false;  // must be single False
                 case OR -> true;    // must be single True
                 case XOR -> false;  // should not be called
-                case NOT -> !curr.signal;
+                case NOT -> !currentSignal;
             };
         }
         return nextSignal;

@@ -8,6 +8,7 @@ public class InputComponent extends InputOutputComponent {
     public InputComponent(Point position, boolean enabled) {
         super(position, enabled);
     }
+
     public InputComponent(Point position, boolean enabled, int id) {
         super(position, enabled, id);
     }
@@ -20,13 +21,14 @@ public class InputComponent extends InputOutputComponent {
     @Override
     public void draw(Graphics2D g, Point absolutePosition, int gridSize) {
         Color color;
-        if (hover) {
-            color = enabled ? new Color(48,104,68) : Color.DARK_GRAY;
-        } else {
-            color = enabled ? Color.GREEN : Color.BLACK;
-        }
         if (valid == ValidEnum.INVALID) {
             color = Color.RED;
+        } else {
+            if (hover) {
+                color = enabled ? new Color(48,104,68) : Color.DARK_GRAY;
+            } else {
+                color = enabled ? Color.GREEN : Color.BLACK;
+            }
         }
         g.setColor(color);
         g.fillRect(absolutePosition.x - gridSize / 2, absolutePosition.y - gridSize / 2, gridSize, gridSize);

@@ -11,7 +11,6 @@ public class DeleteModeButton extends PaletteButton {
 
     public DeleteModeButton(boolean enable, Point position, int width, int height) {
         super(enable, position, width, height);
-        this.setBounds(position.x, position.y, width, height);
         BufferedImage image = super.loadImage(imagePath, 30, 30);
         ImageIcon icon = new ImageIcon(image);
         this.setIcon(icon);

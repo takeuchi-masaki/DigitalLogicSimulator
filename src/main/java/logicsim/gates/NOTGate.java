@@ -3,6 +3,9 @@ package logicsim.gates;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * 2x2 NOT Gate
+ */
 public class NOTGate extends LogicGate{
     private static BufferedImage image = null;
     private static BufferedImage scaledImage = null;
@@ -14,6 +17,7 @@ public class NOTGate extends LogicGate{
             image = loadImage(imagePath);
             scaledImage = resizeImage(image, 2);
         }
+        // since other gates are 4x4, top left is translated by (1, 1)
         topLeft.x++;
         topLeft.y++;
     }

@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * Wrapper class for the grid, used for saving and loading xml file
+ */
 public class GridWrapper implements Serializable {
     public int gateIDCount, inputOutputCount;
     public ArrayList<GateComponentWrapper> gates;

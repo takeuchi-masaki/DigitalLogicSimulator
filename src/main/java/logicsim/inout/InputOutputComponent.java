@@ -7,7 +7,7 @@ import java.awt.*;
 public abstract class InputOutputComponent {
     private static int id_count = 0;
     private final int id;
-    public Point relativePosition; // relative position
+    public Point relativePosition;
     public boolean enabled;
     protected boolean hover = false;
     public ValidEnum valid = ValidEnum.NULL;
@@ -38,37 +38,21 @@ public abstract class InputOutputComponent {
         };
     }
 
-    public void setValid(ValidEnum valid) {
-        this.valid = valid;
-    }
+    public void setValid(ValidEnum valid) { this.valid = valid; }
 
-    public static int getId_count() {
-        return id_count;
-    }
+    public static int getId_count() { return id_count; }
 
-    public static void setId_count(int cnt) {
-        id_count = cnt;
-    }
+    public static void setId_count(int cnt) { id_count = cnt; }
 
-    public void setEnable(boolean enable) {
-        this.enabled = enable;
-    }
+    public void setEnable(boolean enable) { this.enabled = enable; }
 
-    public void setRelativePosition(Point point) {
-        relativePosition = point;
-    }
+    public void setRelativePosition(Point point) { relativePosition = point; }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public boolean isHovered() {
-        return hover;
-    }
+    public boolean isHovered() { return hover; }
 
-    public void setHover(boolean isHovered) {
-        this.hover = isHovered;
-    }
+    public void setHover(boolean isHovered) { this.hover = isHovered; }
 
     abstract public void draw(Graphics2D g, Point position, int gridSize);
 
