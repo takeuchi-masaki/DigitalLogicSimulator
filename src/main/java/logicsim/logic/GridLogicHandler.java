@@ -77,7 +77,7 @@ public class GridLogicHandler {
 
         Map<Point, Point> previous = new HashMap<>();
 
-        Queue<State> queue = new ArrayDeque<>();
+        Stack<State> stack = new Stack<>();
         for (InputOutputComponent inout : gridPanel.inputOutputComponentMap.values()) {
             if (inout.relativePosition.x < 0 || inout.relativePosition.x >= 150
                 || inout.relativePosition.y < 0 || inout.relativePosition.y >= 150) {
@@ -86,10 +86,10 @@ public class GridLogicHandler {
             }
             if (inout.getType() == InputOutputEnum.OUT) continue;
             previous.put(inout.relativePosition, inout.relativePosition);
-            queue.add(new State(inout.relativePosition, inout.relativePosition, inout.enabled));
+            stack.add(new State(inout.relativePosition, inout.relativePosition, inout.enabled));
         }
-        while(!queue.isEmpty()) {
-            State curr = queue.poll();
+        while(!stack.isEmpty()) {
+            State curr = stack.pop();
             for (InputOutputComponent inout: gridPanel.inputOutputComponentMap.values()) {
                 Point position = inout.relativePosition;
                 if (curr.pos.equals(position)) {
@@ -132,7 +132,7 @@ public class GridLogicHandler {
                     Point prev = previous.put(output, output);
                     if (prev == null) {
                         boolean nextSignal = calcNextSignal(component, curr);
-                        queue.add(new State(output, output, nextSignal));
+                        stack.add(new State(output, output, nextSignal));
                     } else if (!prev.equals(output)) {
                         System.err.println("bad gate output");
                         component.valid = ValidEnum.INVALID;
@@ -142,17 +142,20 @@ public class GridLogicHandler {
             }
             for (WireComponent wire : gridPanel.wireList) {
                 Point wireStart = null;
+                Point wireEnd = null;
                 if (wire.start.equals(curr.pos)
                         && !wire.end.equals(curr.prevPos)) {
                     wireStart = wire.start;
+                    wireEnd = wire.end;
                 } else if (wire.end.equals(curr.pos)
                         && !wire.start.equals(curr.prevPos)) {
                     wireStart = wire.end;
+                    wireEnd = wire.start;
                 }
                 if (wireStart != null) {
-                    Point prev = previous.put(wireStart, curr.pos);
+                    Point prev = previous.put(wireEnd, curr.pos);
                     if (prev == null) {
-                        queue.add(new State(wireStart, curr.pos, curr.signal));
+                        stack.add(new State(wireEnd, curr.pos, curr.signal));
                     } else if (!prev.equals(curr.pos)) {
                         System.err.println("bad wire");
                         wire.setValid(ValidEnum.INVALID);
@@ -168,9 +171,8 @@ public class GridLogicHandler {
                 || switch (component.gate.getType()) {
             case AND -> (component.input1 == 0) || (component.input2 == 0);
             case OR -> (component.input1 == 1) || (component.input2 == 1);
-            // (component.input1 != -1) && (component.input2 != -1) is trivially false if first condition fails
-            case XOR -> false;
-            case NOT -> true; // input1 != -1 || input2 != -1 is trivially true
+            case XOR -> (component.input1 != -1) && (component.input2 != -1);
+            case NOT -> (component.input1 != -1) || (component.input2 != -1);
         };
     }
 
