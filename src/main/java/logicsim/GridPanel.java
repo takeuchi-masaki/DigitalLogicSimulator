@@ -50,16 +50,14 @@ public class GridPanel {
 
     public Point relativePoint(Point absPoint) {
         return new Point(
-            (int)round((absPoint.x - startWidth) / (double)gridSize),
-            (int)round(absPoint.y / (double)gridSize)
-        );
+                (int) round((absPoint.x - startWidth) / (double) gridSize),
+                (int) round(absPoint.y / (double) gridSize));
     }
 
     public Point absolutePoint(Point relPoint) {
         return new Point(
-        relPoint.x * gridSize + startWidth,
-        relPoint.y * gridSize
-        );
+                relPoint.x * gridSize + startWidth,
+                relPoint.y * gridSize);
     }
 
     public Point closestAbsPoint(Point mousePos) {
@@ -76,7 +74,7 @@ public class GridPanel {
         for (int i = 0; i < 4; i++) {
             Point end = new Point(start.x + dx[i], start.y + dy[i]);
             if ((start.x <= 0 && end.x <= 0)
-                || (start.y <= 0 && end.y <= 0)) {
+                    || (start.y <= 0 && end.y <= 0)) {
                 continue;
             }
             Point absEnd = absolutePoint(end);
@@ -87,7 +85,8 @@ public class GridPanel {
                 bestEnd = end;
             }
         }
-        if (best == Integer.MAX_VALUE) return null;
+        if (best == Integer.MAX_VALUE)
+            return null;
         return new WireComponent(start, bestEnd);
     }
 
@@ -110,10 +109,8 @@ public class GridPanel {
     }
 
     public void addInOutComponent(InputOutputComponent inout, Point position) {
-        InputOutputComponent add =
-            InputOutputComponent.inputOutputFactory(
-                    inout.getType(), position, inout.enabled, inout.getId()
-            );
+        InputOutputComponent add = InputOutputComponent.inputOutputFactory(
+                inout.getType(), position, inout.enabled, inout.getId());
         inputOutputComponentMap.put(add.getId(), add);
         gridLogicHandler.checkLogic(this);
     }
@@ -171,7 +168,7 @@ public class GridPanel {
     public boolean containsWire(WireComponent hoveredWire) {
         for (WireComponent wire : wireList) {
             if (wire.start.equals(hoveredWire.start)
-                && wire.end.equals(hoveredWire.end)) {
+                    && wire.end.equals(hoveredWire.end)) {
                 return true;
             }
         }
@@ -223,7 +220,7 @@ public class GridPanel {
     }
 
     public void zoomIn() {
-        gridSize = (int)min(80, gridSize * 1.2);
+        gridSize = (int) min(80, gridSize * 1.2);
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage();
@@ -231,7 +228,7 @@ public class GridPanel {
     }
 
     public void zoomOut() {
-        gridSize = (int)max(5, gridSize / 1.2);
+        gridSize = (int) max(5, gridSize / 1.2);
         LogicGate.resizeScale(gridSize);
         for (LogicGate gate : LogicGate.getTypes()) {
             gate.resizeImage();
@@ -259,9 +256,7 @@ public class GridPanel {
                             LogicGate.logicGateFactory(gate.gateType,
                                     new Point(gate.centerX, gate.centerY),
                                     gate.id),
-                            new Point(gate.centerX, gate.centerY)
-                    )
-            );
+                            new Point(gate.centerX, gate.centerY)));
         }
 
         InputOutputComponent.setId_count(wrapper.inputOutputCount);
@@ -270,16 +265,14 @@ public class GridPanel {
             inputOutputComponentMap.put(inout.id,
                     InputOutputComponent.inputOutputFactory(inout.type,
                             new Point(inout.positionX, inout.positionY),
-                            inout.enabled, inout.id)
-            );
+                            inout.enabled, inout.id));
         }
 
         wireList.clear();
         for (WireWrapper wire : wrapper.wires) {
             wireList.add(new WireComponent(
                     new Point(wire.startX, wire.startY),
-                    new Point(wire.endX, wire.endY))
-            );
+                    new Point(wire.endX, wire.endY)));
         }
         System.out.println("Completed importing from file");
         gridLogicHandler.checkLogic(this);
@@ -295,10 +288,10 @@ public class GridPanel {
         }
         for (WireComponent wire : wireList) {
             wire.draw(g,
-                absolutePoint(wire.start),
-                absolutePoint(wire.end),
-                Color.BLACK,
-                gridSize * 0.2f);
+                    absolutePoint(wire.start),
+                    absolutePoint(wire.end),
+                    Color.BLACK,
+                    gridSize * 0.2f);
         }
         for (GateComponent component : gateComponentMap.values()) {
             Point drawLocation = absolutePoint(component.gate.getTopLeft());
@@ -312,12 +305,6 @@ public class GridPanel {
         }
         for (InputOutputComponent component : inputOutputComponentMap.values()) {
             Point drawLocation = absolutePoint(component.relativePosition);
-            Color color = null;
-            if (component.isHovered()) {
-                color = currentMode == ModeEnum.DELETE_MODE
-                        ? Color.RED
-                        : Color.LIGHT_GRAY;
-            }
             component.draw(g, drawLocation, gridSize);
         }
     }

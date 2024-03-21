@@ -1,8 +1,6 @@
 package logicsim.inout;
 
-import java.io.Serializable;
-
-public enum InputOutputEnum implements Serializable {
+public enum InputOutputEnum {
     IN,
     OUT
 }

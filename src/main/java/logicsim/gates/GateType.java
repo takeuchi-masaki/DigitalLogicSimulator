@@ -1,8 +1,6 @@
 package logicsim.gates;
 
-import java.io.Serializable;
-
-public enum GateType implements Serializable {
+public enum GateType {
     AND,
     OR,
     XOR,

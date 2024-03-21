@@ -89,14 +89,14 @@ public class MenuBar extends JMenuBar {
                         Version 1.0
                         Created by Masaki Takeuchi and ChatGPT""",
                 "About",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void showDocumentation() {
         JEditorPane editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
-        editorPane.setText("<html><body>Click the <a href='https://www.example.com'>https://www.example.com</a> to visit the webpage.</body></html>");
+        editorPane.setText(
+                "<html><body>Visit the Github repository<div></div><a href='https://github.com/takeuchi-masaki/DigitalLogicSimulator/'>https://github.com/takeuchi-masaki/DigitalLogicSimulator/</a></body></html>");
         editorPane.addHyperlinkListener(e -> {
             if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                 try {

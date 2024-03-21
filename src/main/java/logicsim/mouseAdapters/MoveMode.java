@@ -23,7 +23,7 @@ public class MoveMode extends MouseMode {
         } else if (e.getButton() == MouseEvent.BUTTON3) {
             // right click, toggle input
             mainPanel.toggleSelectedInput();
-            mainPanel.checkHover(e.getPoint());
+            // mainPanel.checkHover(e.getPoint());
         }
     }
 
