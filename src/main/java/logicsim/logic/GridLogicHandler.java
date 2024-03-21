@@ -1,11 +1,11 @@
 package logicsim.logic;
 
-import logicsim.grid.GridPanel;
+import logicsim.GridPanel;
 
 public class GridLogicHandler {
     GridPanel gridPanel = GridPanel.getInstance();
 
-    public GridLogicHandler() {
-        
-    }
+    public GridLogicHandler() {}
+
+
 }

@@ -1,9 +1,10 @@
-package logicsim.palette;
+package logicsim;
 
 import logicsim.gates.*;
 import logicsim.inout.InputComponent;
 import logicsim.inout.InputOutputComponent;
 import logicsim.inout.OutputComponent;
+import logicsim.palette.*;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,12 +1,10 @@
 package logicsim;
 
 import logicsim.gates.*;
-import logicsim.grid.GridPanel;
 import logicsim.grid.WireComponent;
 import logicsim.inout.InputOutputComponent;
 import logicsim.inout.InputOutputEnum;
 import logicsim.mouseAdapters.*;
-import logicsim.palette.PalettePanel;
 
 import javax.swing.*;
 import java.awt.*;

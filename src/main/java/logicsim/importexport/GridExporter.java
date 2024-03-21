@@ -1,6 +1,6 @@
 package logicsim.importexport;
 
-import logicsim.grid.GridPanel;
+import logicsim.GridPanel;
 
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;

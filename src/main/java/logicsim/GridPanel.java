@@ -1,6 +1,8 @@
-package logicsim.grid;
+package logicsim;
 
 import logicsim.gates.*;
+import logicsim.grid.GateComponent;
+import logicsim.grid.WireComponent;
 import logicsim.importexport.GateComponentWrapper;
 import logicsim.importexport.GridWrapper;
 import logicsim.importexport.InputOutputWrapper;
@@ -15,7 +17,7 @@ import static java.lang.Math.*;
 
 public class GridPanel {
     private static GridPanel INSTANCE = null;
-    private final int defaultGridSize = 20;
+    private final int defaultGridSize = 30;
     public static int gridSize;
     private int startWidth = 300, endWidth = 1200, height = 900;
     private final Map<Integer, GateComponent> gateComponentMap;
@@ -248,6 +250,13 @@ public class GridPanel {
                 g.drawLine(x, y, endWidth, y);
             }
         }
+        for (WireComponent wire : wireList) {
+            wire.draw(g,
+                absolutePoint(wire.start),
+                absolutePoint(wire.end),
+                Color.BLACK,
+                gridSize * 0.2f);
+        }
         for (GateComponent component : gateComponentMap.values()) {
             Point drawLocation = absolutePoint(component.gate.getTopLeft());
             Color color = null;
@@ -267,13 +276,6 @@ public class GridPanel {
                         : Color.LIGHT_GRAY;
             }
             component.draw(g, drawLocation, gridSize);
-        }
-        for (WireComponent wire : wireList) {
-            wire.draw(g,
-                absolutePoint(wire.start),
-                absolutePoint(wire.end),
-                Color.BLACK,
-                gridSize * 0.2f);
         }
     }
 }
