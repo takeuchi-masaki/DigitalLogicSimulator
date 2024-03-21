@@ -21,9 +21,9 @@ public class PalettePanel {
 
     private PalettePanel() {
         final int buttonWidth = 90, buttonHeight = 100;
-        moveButton = new MoveButton(true, new Point(5, 50), buttonWidth, buttonHeight);
-        wireModeButton = new WireModeButton(false, new Point(105, 50), buttonWidth, buttonHeight);
-        deleteModeButton = new DeleteModeButton(false, new Point(205, 50), buttonWidth, buttonHeight);
+        moveButton = new MoveButton(true, new Point(5, 10), buttonWidth, buttonHeight);
+        wireModeButton = new WireModeButton(false, new Point(105, 10), buttonWidth, buttonHeight);
+        deleteModeButton = new DeleteModeButton(false, new Point(205, 10), buttonWidth, buttonHeight);
         gateComponents = new ArrayList<>();
         inOutComponents = new ArrayList<>();
         getPaletteComponents();
@@ -42,27 +42,35 @@ public class PalettePanel {
     }
 
     private void getPaletteComponents() {
-        Point palettePosition = new Point(scale / 2 + 20, scale / 2 + scale * 3);
-        PaletteGateComponent.setDimensions(4 * scale + 10, 3 * scale);
-        PaletteInOutComponent.setDimensions(2 * scale, 3 * scale);
+        Point palettePosition = new Point(scale / 2 + 20, scale / 2 + scale * 2);
+        PaletteGateComponent.setDimensions(4 * scale + 10, 2 * scale);
+        PaletteInOutComponent.setDimensions(2 * scale, 2 * scale);
 
         gateComponents.add(
                 new PaletteGateComponent(
                         new ANDGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += scale * 3 + 10;
+        palettePosition.y += scale * 2 + 10;
 
         gateComponents.add(
                 new PaletteGateComponent(
                         new ORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += scale * 3 + 10;
+        palettePosition.y += scale * 2 + 10;
 
         gateComponents.add(
                 new PaletteGateComponent(
                         new XORGate(-1, new Point(0, 0)),
                         new Point(palettePosition)));
-        palettePosition.y += scale * 3 + 10;
+        palettePosition.y += scale * 2 + 10;
+
+        gateComponents.add(
+                new PaletteGateComponent(
+                        new NOTGate(-1, new Point(0, 0)),
+                        new Point(palettePosition)
+                )
+        );
+        palettePosition.y += scale * 2 + 10;
 
         inOutComponents.add(new PaletteInOutComponent(
                 new InputComponent(new Point(0, 0), true, -1),

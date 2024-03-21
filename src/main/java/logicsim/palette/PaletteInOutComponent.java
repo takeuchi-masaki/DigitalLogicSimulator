@@ -27,8 +27,8 @@ public class PaletteInOutComponent {
         g.setColor(Color.BLACK);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
 
-        g.drawString(inout.toString(), bounds.x + scale / 2, bounds.y + scale);
-        inout.draw(g, new Point(bounds.x + scale, bounds.y + 2 * scale), scale);
+        g.drawString(inout.toString(), bounds.x + scale / 2, bounds.y + scale / 2);
+        inout.draw(g, new Point(bounds.x + scale, bounds.y + (int)(scale * 1.2)), scale);
     }
 
     public void setHovered(boolean isHovered) {

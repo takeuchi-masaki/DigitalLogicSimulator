@@ -260,7 +260,7 @@ public class MainPanel extends JPanel {
             Color color = (currentMode.getMode() == ModeEnum.DELETE_MODE)
                 ? Color.RED
                 : Color.LIGHT_GRAY;
-            selectedGateComponent.drawScaled(g2d, selectedGateComponent.getCenter(), color);
+            selectedGateComponent.draw(g2d, selectedGateComponent.getCenter(), color);
         }
         if (selectedInOutComponent != null) {
             selectedInOutComponent.draw(g2d, selectedInOutComponent.position, GridPanel.gridSize);

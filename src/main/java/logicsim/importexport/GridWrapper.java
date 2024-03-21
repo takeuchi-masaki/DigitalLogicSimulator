@@ -19,14 +19,18 @@ public class GridWrapper implements Serializable {
 
     public GridWrapper(Map<Integer, GateComponent> gateComponentMap,
                        Map<Integer, InputOutputComponent> inputOutputComponentMap,
-                       ArrayList<WireComponent> wireList) {
+                       ArrayList<WireComponent> wireList
+    ) {
         gateIDCount = LogicGate.getId_count();
         inputOutputCount = InputOutputComponent.getId_count();
 
         gates = new ArrayList<>();
         for (GateComponent gate : gateComponentMap.values()) {
-            gates.add(new GateComponentWrapper(gate.gate.getType(), gate.getID(),
-                    gate.gate.getCenter().x, gate.gate.getCenter().y));
+            gates.add(new GateComponentWrapper(
+                    gate.gate.getType(),
+                    gate.getID(),
+                    gate.gate.getCenter().x, gate.gate.getCenter().y)
+            );
         }
 
         inputOutputs = new ArrayList<>();
@@ -41,7 +45,10 @@ public class GridWrapper implements Serializable {
 
         this.wires = new ArrayList<>();
         for (WireComponent wire : wireList) {
-            this.wires.add(new WireWrapper(wire.start.x, wire.start.y, wire.end.x, wire.end.y));
+            this.wires.add(new WireWrapper(
+                    wire.start.x, wire.start.y,
+                    wire.end.x, wire.end.y)
+            );
         }
     }
 }

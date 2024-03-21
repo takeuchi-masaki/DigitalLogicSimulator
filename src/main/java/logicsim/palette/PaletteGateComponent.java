@@ -1,6 +1,5 @@
 package logicsim.palette;
 
-import logicsim.gates.GateType;
 import logicsim.gates.LogicGate;
 
 import java.awt.*;
@@ -9,8 +8,7 @@ public class PaletteGateComponent {
     static final int scale = 50; // scale does not change for the Palette Panel
     private final LogicGate logicGate;
     private final Rectangle bounds;
-    private static int width;
-    private static int height;
+    private static int width, height;
     private boolean hover;
 
     public PaletteGateComponent(LogicGate logicGate, Point position) {
@@ -28,13 +26,13 @@ public class PaletteGateComponent {
         g.setColor(Color.BLACK);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
 
-        g.drawString(logicGate.toString(), bounds.x + 10, bounds.y + 70);
+        g.drawString(logicGate.toString(), bounds.x + 10, bounds.y + 50);
 
         // Draw the gate preview
         Color color = logicGate.isHovered()
                 ? Color.LIGHT_GRAY
                 : null;
-        logicGate.drawPalette(g, new Point(bounds.x + (int)(scale * 1.8), bounds.y + scale / 2), color);
+        logicGate.drawPalette(g, new Point(bounds.x + scale * 2, bounds.y + 10), color);
     }
 
     public void setHovered(boolean isHovered) {
@@ -49,18 +47,10 @@ public class PaletteGateComponent {
         return bounds.contains(p);
     }
 
-//    public int getID() {
-//        return logicGate.getID();
-//    }
-
     public static void setDimensions(int width, int height) {
         PaletteGateComponent.width = width;
         PaletteGateComponent.height = height;
     }
-
-//    public GateType getType() {
-//        return logicGate.getType();
-//    }
 
     public LogicGate getGate() {
         return logicGate;

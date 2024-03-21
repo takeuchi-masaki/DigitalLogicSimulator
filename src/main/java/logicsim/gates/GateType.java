@@ -6,4 +6,5 @@ public enum GateType implements Serializable {
     AND,
     OR,
     XOR,
+    NOT,
 }

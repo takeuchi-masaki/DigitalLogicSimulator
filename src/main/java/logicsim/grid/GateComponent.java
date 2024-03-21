@@ -21,11 +21,7 @@ public class GateComponent {
     }
 
     public boolean contains(Point relativePos) {
-        Point gatePos = gate.getTopLeft();
-        return relativePos.x >= gatePos.x
-                && relativePos.x <= gatePos.x + 4
-                && relativePos.y >= gatePos.y
-                && relativePos.y <= gatePos.y + 4;
+        return gate.contains(relativePos);
     }
 
     public boolean isHovered() { return gate.isHovered(); }
@@ -33,7 +29,7 @@ public class GateComponent {
     public void setHover(boolean val) { gate.setHovered(val); }
 
     public void draw(Graphics2D g, Point drawLocation, Color color) {
-        gate.drawScaled(g, drawLocation, color);
+        gate.draw(g, drawLocation, color);
     }
 
     public LogicGate getGate() {
