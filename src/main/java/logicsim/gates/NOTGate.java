@@ -39,6 +39,21 @@ public class NOTGate extends LogicGate{
     }
 
     @Override
+    public Point input1() {
+        return new Point(center.x - 1, center.y);
+    }
+
+    @Override
+    public Point input2() {
+        return null;
+    }
+
+    @Override
+    public Point output() {
+        return new Point(center.x + 1, center.y);
+    }
+
+    @Override
     public void setPosition(Point point) {
         center = new Point(point);
         topLeft = new Point(center.x - 1, center.y - 1);

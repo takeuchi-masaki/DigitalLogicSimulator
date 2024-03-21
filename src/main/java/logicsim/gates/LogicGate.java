@@ -121,13 +121,21 @@ public abstract class LogicGate implements Cloneable {
             && relativePos.y <= topLeft.y + 4;
     }
 
-    public static int getId_count() {
-        return id_count;
+    public Point input1() {
+        return new Point(topLeft.x, topLeft.y + 1);
     }
 
-    public static void setId_count(int cnt) {
-        id_count = cnt;
+    public Point input2() {
+        return new Point(topLeft.x, topLeft.y + 3);
     }
+
+    public Point output() {
+        return new Point(center.x + 2, center.y);
+    }
+
+    public static int getId_count() { return id_count; }
+
+    public static void setId_count(int cnt) { id_count = cnt; }
 
     public Point getTopLeft() { return topLeft; }
 

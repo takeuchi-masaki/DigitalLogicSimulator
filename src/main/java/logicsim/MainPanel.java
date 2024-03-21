@@ -135,14 +135,14 @@ public class MainPanel extends JPanel {
     }
 
     public void selectHovered() {
-        selectHoveredGateComponent();
-        if (selectedGateComponent == null) {
-            selectHoveredInOutComponent();
+        selectHoveredInOutComponent();
+        if (selectedInOutComponent == null) {
+            selectHoveredGateComponent();
         }
     }
 
-    private boolean dragSelectedGate(Point mousePosition) {
-        if (selectedGateComponent == null) return false;
+    private void dragSelectedGate(Point mousePosition) {
+        if (selectedGateComponent == null) return;
         if (selectedGateComponent.getID() != -1) {
             gridPanel.removeGateComponent(selectedGateComponent.getID());
         }
@@ -155,11 +155,10 @@ public class MainPanel extends JPanel {
         }
         selectedGateComponent.setHovered(true);
         repaint();
-        return true;
     }
 
-    private void dragSelectedInOut(Point mousePosition) {
-        if (selectedInOutComponent == null) return;
+    private boolean dragSelectedInOut(Point mousePosition) {
+        if (selectedInOutComponent == null) return false;
         if (selectedInOutComponent.getId() != -1) {
             gridPanel.removeInOutComponent(selectedInOutComponent.getId());
         }
@@ -170,11 +169,12 @@ public class MainPanel extends JPanel {
         }
         selectedInOutComponent.setHover(true);
         repaint();
+        return true;
     }
 
     public void dragSelectedComponent(Point mousePosition) {
-        if (!dragSelectedGate(mousePosition)) {
-            dragSelectedInOut(mousePosition);
+        if (!dragSelectedInOut(mousePosition)) {
+            dragSelectedGate(mousePosition);
         }
     }
 
