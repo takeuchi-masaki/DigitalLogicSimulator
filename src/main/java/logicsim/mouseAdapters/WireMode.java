@@ -26,6 +26,11 @@ public class WireMode extends MouseMode {
     }
 
     @Override
+    public void mouseDragged(MouseEvent e) {
+        mousePressed(e);
+    }
+
+    @Override
     public ModeEnum getMode() {
         return ModeEnum.WIRE_MODE;
     }

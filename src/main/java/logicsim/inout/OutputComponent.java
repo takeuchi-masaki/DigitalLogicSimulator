@@ -19,7 +19,12 @@ public class OutputComponent extends InputOutputComponent {
 
     @Override
     public void draw(Graphics2D g, Point absolutePosition, int gridSize) {
-        Color color = enabled ? Color.GREEN : Color.BLACK;
+        Color color;
+        if (hover) {
+            color = enabled ? new Color(48,104,68) : Color.DARK_GRAY;
+        } else {
+            color = enabled ? Color.GREEN : Color.BLACK;
+        }
         g.setColor(color);
         g.fillOval(absolutePosition.x - gridSize / 2, absolutePosition.y - gridSize / 2, gridSize, gridSize);
         g.setColor(Color.BLACK);

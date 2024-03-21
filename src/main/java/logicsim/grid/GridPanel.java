@@ -252,16 +252,20 @@ public class GridPanel {
             Point drawLocation = absolutePoint(component.gate.getTopLeft());
             Color color = null;
             if (component.isHovered()) {
-                if (currentMode == ModeEnum.DELETE_MODE) {
-                    color = Color.RED;
-                } else {
-                    color = Color.LIGHT_GRAY;
-                }
+                color = currentMode == ModeEnum.DELETE_MODE
+                        ? Color.RED
+                        : Color.LIGHT_GRAY;
             }
             component.draw(g, drawLocation, color);
         }
         for (InputOutputComponent component : inputOutputComponentMap.values()) {
             Point drawLocation = absolutePoint(component.position);
+            Color color = null;
+            if (component.isHovered()) {
+                color = currentMode == ModeEnum.DELETE_MODE
+                        ? Color.RED
+                        : Color.LIGHT_GRAY;
+            }
             component.draw(g, drawLocation, gridSize);
         }
         for (WireComponent wire : wireList) {

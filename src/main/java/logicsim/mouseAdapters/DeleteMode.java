@@ -31,6 +31,11 @@ public class DeleteMode extends MouseMode {
     }
 
     @Override
+    public void mouseDragged(MouseEvent e) {
+        mouseClicked(e);
+    }
+
+    @Override
     public ModeEnum getMode() {
         return ModeEnum.DELETE_MODE;
     }
